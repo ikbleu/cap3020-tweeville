@@ -9,6 +9,6 @@ package Control;
  *
  * @author spock
  */
-public class Control {
+public class FreeRoamMenuControl {
 
 }
