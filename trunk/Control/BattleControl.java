@@ -5,10 +5,12 @@
 
 package Control;
 
+
+
 /**
  *
  * @author spock
  */
-public class BattleControl {
+class BattleControl{
 
 }
