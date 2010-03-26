@@ -4,13 +4,12 @@
  */
 
 package Control;
-
 import java.awt.event.KeyEvent;
 
-/**
- *
+ /*
  * @author spock
  */
+
 class BattleControl extends GenAdapter{
     private boolean active = false;
 
