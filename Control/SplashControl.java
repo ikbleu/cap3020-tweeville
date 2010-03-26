@@ -4,14 +4,13 @@
  */
 
 package Control;
-
 import java.awt.event.KeyEvent;
 
 /**
  *
  * @author spock
  */
-public class SplashControl {
+public class SplashControl extends GenAdapter{
     private boolean active = false;
 
     SplashControl(){
