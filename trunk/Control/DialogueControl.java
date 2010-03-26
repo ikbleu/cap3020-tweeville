@@ -4,13 +4,12 @@
  */
 
 package Control;
-
 import java.awt.event.KeyEvent;
 /**
  *
  * @author spock
  */
-public class DialogueControl {
+public class DialogueControl extends GenAdapter{
     private boolean active = false;
 
     DialogueControl(){

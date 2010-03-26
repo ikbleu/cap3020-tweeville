@@ -4,14 +4,13 @@
  */
 
 package Control;
-
 import java.awt.event.KeyEvent;
 
 /**
  *
  * @author spock
  */
-public class FreeRoamMenuControl {
+public class FreeRoamMenuControl extends GenAdapter{
     private boolean active = false;
 
     FreeRoamMenuControl(){
