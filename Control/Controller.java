@@ -36,9 +36,10 @@ public class Controller extends GenAdapter{
         }
     }
 
+    @Override
     public void keyPressed(KeyEvent e){
         if(!canIDoIt(e)){
-
+            current.keyPressed(e);
         }
     }
 }
