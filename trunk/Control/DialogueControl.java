@@ -5,10 +5,26 @@
 
 package Control;
 
+import java.awt.event.KeyEvent;
 /**
  *
  * @author spock
  */
 public class DialogueControl {
+    private boolean active = false;
 
+    DialogueControl(){
+        active = false;
+
+    }
+
+    void turnOn(){
+        active = true;
+    }
+
+    public void keyPressed(KeyEvent e){
+        if (e.getKeyCode() == KeyEvent.VK_DOWN){
+            System.out.println("You pressed down!");
+        }
+    }
 }
