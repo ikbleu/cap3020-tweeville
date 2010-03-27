@@ -25,5 +25,13 @@ public class DialogueControl extends GenAdapter{
         if (e.getKeyCode() == KeyEvent.VK_DOWN){
             System.out.println("You pressed down!");
         }
+
+        else if (e.getKeyCode() == KeyEvent.VK_UP){
+            System.out.println("You pressed up!");
+        }
+
+        else if (e.getKeyCode() == KeyEvent.VK_ENTER){
+            System.out.println("You pressed enter!");
+        }
     }
 }
