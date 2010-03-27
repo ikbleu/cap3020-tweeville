@@ -23,8 +23,28 @@ public class FreeRoamControl extends GenAdapter{
     }
 
     public void keyPressed(KeyEvent e){
-        if (e.getKeyCode() == KeyEvent.VK_DOWN){
+        if (e.getKeyCode() == KeyEvent.VK_W){
+            System.out.println("You pressed up!");
+        }
+
+        else if (e.getKeyCode() == KeyEvent.VK_S){
             System.out.println("You pressed down!");
+        }
+
+        else if (e.getKeyCode() == KeyEvent.VK_D){
+            System.out.println("You pressed right!");
+        }
+
+        else if (e.getKeyCode() == KeyEvent.VK_A){
+            System.out.println("You pressed left!");
+        }
+
+        else if (e.getKeyCode() == KeyEvent.VK_E){
+            System.out.println("You pressed the interaction button!");
+        }
+
+        else if (e.getKeyCode() == KeyEvent.VK_ESCAPE){
+            System.out.println("You just escaped!");
         }
     }
 }
