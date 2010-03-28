@@ -5,12 +5,12 @@
 
 package View;
 
-//import src.model.TypeCode;
 
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.io.File;
 import javax.imageio.ImageIO;
+import Model.AllianceType;
 
 
 /**
@@ -19,19 +19,19 @@ import javax.imageio.ImageIO;
  */
 class GraphicsTableSingleton {
 
-    HashMap< String, BufferedImage > graphics;
+    HashMap< Enum, BufferedImage > graphics;
 
     private GraphicsTableSingleton(){
-        graphics = new HashMap<String, BufferedImage>();
+        graphics = new HashMap<Enum, BufferedImage>();
         try{
-
+            graphics.put( AllianceType.ENEMY, ImageIO.read(new File("blahblah.jpg")));
         }
         catch(Exception e){
             System.out.println("Image loading failed");
         }
     }
 
-    BufferedImage getGraphic(String key){
+    BufferedImage getGraphic(Enum key){
         return graphics.get(key);
     }
     private static class GraphicsTableSingletonHolder {
