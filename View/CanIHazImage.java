@@ -5,10 +5,18 @@
 
 package View;
 
+
+import java.awt.image.BufferedImage;
 /**
  *
  * @author spock
  */
-public class CanIHazImage {
+abstract class CanIHazImage {
+
+    BufferedImage imageBuffer;
+
+    abstract void refreshImage();
+
+    abstract BufferedImage image();
 
 }
