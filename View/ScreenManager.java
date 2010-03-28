@@ -101,6 +101,34 @@ class ScreenManager extends JFrame{
             GL gl = drawable.getGL();
             gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
             renderRice(gl);
+            renderBattleHUD(gl);
+
+        }
+
+        private void renderBattleHUD(GL gl) {
+
+            bHUD_tex.bind();
+
+            gl.glPushMatrix();
+
+            gl.glBegin(GL.GL_POLYGON);
+
+                gl.glTexCoord2d(0.0, 0.0);
+                gl.glVertex2d(0.1875,0.85625);
+
+                gl.glTexCoord2d(0.0, 1.0);
+                gl.glVertex2d(0.1875, 1.0);
+
+                gl.glTexCoord2d(1.0, 1.0);
+                gl.glVertex2d(.8125, 1.0);
+
+                gl.glTexCoord2d(1.0, 0.0);
+                gl.glVertex2d(.8125, 0.85625);
+
+
+             gl.glEnd();
+
+             gl.glPopMatrix();
 
         }
 
@@ -158,7 +186,7 @@ class ScreenManager extends JFrame{
                     bHUD_tex = TextureIO.newTexture(battleHUD.image(),true);
                 }
                 catch(Exception c){
-
+                    System.out.println("sm texture fail!");
                 }
             }
             catch (GLException e) {
