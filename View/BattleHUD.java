@@ -31,12 +31,12 @@ class BattleHUD extends SpecialImage {
     Line2D lines[] = new Line2D.Double[9];
 
     BattleHUD(){
-        font = new Font("Levenim MT", Font.PLAIN, 38);
-        g2.setFont( font );
         image = new BufferedImage( WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB );
         g2 = image.createGraphics();
         hint = new RenderingHints( RenderingHints.KEY_TEXT_ANTIALIASING,
             RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        font = new Font("Levenim MT", Font.PLAIN, 38);
+        g2.setFont( font );
         g2.setRenderingHints( hint );
         refreshImage();
     }
