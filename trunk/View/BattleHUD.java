@@ -54,26 +54,26 @@ class BattleHUD extends SpecialImage {
         //g2.drawImage( graphics.getGraphic(ViewableEnums.GUNDERSONHUDNAME), 650, 20, null );
 
         g2.setColor( Color.black );
-        g2.drawString( "HP:", 220, 100 );
-        g2.drawString( "HP:", 420, 100 );
-        g2.drawString( "HP:", 620, 100 );
-        g2.drawString( "Melee:", 220, 120 );
-        g2.drawString( "Melee:", 420, 120 );
-        g2.drawString( "Melee:", 620, 120 );
-        g2.drawString( "Ranged:", 220, 140 );
-        g2.drawString( "Ranged:", 420, 140 );
-        g2.drawString( "Ranged:", 620, 140 );
+        g2.drawString( "HP:", 220, 50 );
+        g2.drawString( "HP:", 420, 50 );
+        g2.drawString( "HP:", 620, 50 );
+        g2.drawString( "Melee:", 220, 70 );
+        g2.drawString( "Melee:", 420, 70 );
+        g2.drawString( "Melee:", 620, 70 );
+        g2.drawString( "Ranged:", 220, 90 );
+        g2.drawString( "Ranged:", 420, 90 );
+        g2.drawString( "Ranged:", 620, 90 );
 
         g2.setStroke( new BasicStroke( 1.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND ) );
-        lines[0].setLine( 225,100, 225 + health[0], 100 );
-        lines[1].setLine( 425,100, 425 + health[1], 100 );
-        lines[2].setLine( 625,100, 625 + health[2], 100 );
-        lines[3].setLine( 225,120, 225 + melee[0], 120 );
-        lines[4].setLine( 425,120, 425 + melee[1], 120 );
-        lines[5].setLine( 625,120, 625 + melee[2], 120 );
-        lines[6].setLine( 225,140, 225 + ranged[0], 140 );
-        lines[7].setLine( 425,140, 425 + ranged[1], 140 );
-        lines[8].setLine( 625,140, 625 + ranged[2], 140 );
+        lines[0].setLine( 225,50, 225 + health[0], 50 );
+        lines[1].setLine( 425,50, 425 + health[1], 50 );
+        lines[2].setLine( 625,50, 625 + health[2], 50 );
+        lines[3].setLine( 225,70, 225 + melee[0], 70 );
+        lines[4].setLine( 425,70, 425 + melee[1], 70 );
+        lines[5].setLine( 625,70, 625 + melee[2], 70 );
+        lines[6].setLine( 225,90, 225 + ranged[0], 90 );
+        lines[7].setLine( 425,90, 425 + ranged[1], 90 );
+        lines[8].setLine( 625,90, 625 + ranged[2], 90 );
 
         g2.setColor( Color.blue );
         for( int i = 0; i < lines.length; i++ ){
