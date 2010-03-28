@@ -45,7 +45,10 @@ class ScreenManager extends JFrame{
 
     private FPSAnimator animator;
 
+    private BattleHUD battleHUD;
+
     private Texture riceTest;
+    private Texture bHUD_tex;
 
     ScreenManager(String s, boolean fs){
         super(s);
@@ -53,6 +56,9 @@ class ScreenManager extends JFrame{
         scale = 1.0;
         panX = 0;
         panY = 0;
+
+        battleHUD = new BattleHUD();
+        battleHUD.refreshImage();
 
         if(fs){
             GraphicsEnvironment ge = GraphicsEnvironment
@@ -72,7 +78,6 @@ class ScreenManager extends JFrame{
             setSize(1280, 800);
         }
 
-        
         GraphicListener listener = new GraphicListener();
         GLCanvas canvas = new GLCanvas(new GLCapabilities());
         canvas.addGLEventListener(listener);
@@ -150,6 +155,7 @@ class ScreenManager extends JFrame{
 
                 try{
                     riceTest = TextureIO.newTexture(graphics.getGraphic(ViewableEnums.RICE),true);
+                    bHUD_tex = TextureIO.newTexture(battleHUD.image(),true);
                 }
                 catch(Exception c){
 

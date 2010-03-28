@@ -16,7 +16,7 @@ public class View {
 
 
     public View(KeyListener control){
-        screenManager = new ScreenManager("hello", false);
+        screenManager = new ScreenManager("hello", true);
         screenManager.addKeyListener(control);
         screenManager.start();
     }
