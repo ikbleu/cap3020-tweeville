@@ -12,6 +12,7 @@ package View;
 public enum ViewableEnums {
 
     BATTLESCREEN_VIEWPORT,
+    BATTLESCREEN_HUD
     
     RICE,
     GUNDERSONHUDFACE,
