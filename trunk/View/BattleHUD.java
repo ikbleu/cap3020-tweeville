@@ -20,7 +20,6 @@ import java.awt.BasicStroke;
 class BattleHUD extends SpecialImage {
     int WIDTH = 830;
     int HEIGHT = 115;
-    BufferedImage image = null;
     Graphics2D g2 = null;
     RenderingHints hint = null;
     Font font;
@@ -31,8 +30,8 @@ class BattleHUD extends SpecialImage {
     Line2D lines[] = new Line2D.Double[9];
 
     BattleHUD(){
-        image = new BufferedImage( WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB );
-        g2 = image.createGraphics();
+        imageBuffer = new BufferedImage( WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB );
+        g2 = imageBuffer.createGraphics();
         hint = new RenderingHints( RenderingHints.KEY_TEXT_ANTIALIASING,
             RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         font = new Font("Levenim MT", Font.PLAIN, 38);
