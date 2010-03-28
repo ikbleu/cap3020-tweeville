@@ -23,6 +23,7 @@ class GraphicsTableSingleton {
     private GraphicsTableSingleton(){
         graphics = new HashMap<Enum, BufferedImage>();
         try{
+            graphics.put( ViewableEnums.TESTHUDFACE, ImageIO.read(new File("Images/s17.JPG")));
             graphics.put(ViewableEnums.RICE, ImageIO.read(new File("Images/rice.jpg")));
         }
         catch(Exception e){
