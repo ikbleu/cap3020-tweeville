@@ -91,7 +91,8 @@ class ScreenManager extends JFrame{
     }
 
     void start(){
-            animator.start();
+        animator.start();
+        this.validate();
     }
 
     class GraphicListener implements GLEventListener {
