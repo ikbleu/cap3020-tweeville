@@ -202,17 +202,21 @@ class ScreenManager extends JFrame{
                 gl.glEnable(GL.GL_BLEND);
                 gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
 
+
                 try{
                     riceTest = TextureIO.newTexture(graphics.getGraphic(ViewableEnums.RICE),true);
                     battleScreen_tex = TextureIO.newTexture(battleScreen.image(),true);
                 }
                 catch(Exception c){
+		    System.out.print("Oh Noes!");
+
                     System.out.println("sm texture fail!");
+
                 }
             }
             catch (GLException e) {
                 e.printStackTrace();
-            }
+	    }
         }
     }
 }
