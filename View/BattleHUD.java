@@ -38,6 +38,9 @@ class BattleHUD extends SpecialImage {
         font = new Font("Levenim MT", Font.PLAIN, 38);
         g2.setFont( font );
         g2.setRenderingHints( hint );
+        for( int i = 0; i < lines.length; i++ ){
+            lines[i] = new Line2D.Double();
+        }
         refreshImage();
     }
 
