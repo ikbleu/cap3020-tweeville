@@ -9,6 +9,9 @@ package Model;
  *
  * @author spock
  */
-public class GambitType {
+public enum GambitType {
+    BALANCED,
+    OFFENSIVE,
+    DEFENSIVE
 
 }

@@ -15,11 +15,11 @@ class BattleControl extends GenAdapter{
 
     BattleControl(){
         active = false;
-
     }
 
     void turnOn(){
         active = true;
+        System.out.println("BattleMode entered");
     }
 
     public void keyPressed(KeyEvent e){

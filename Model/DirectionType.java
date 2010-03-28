@@ -9,6 +9,11 @@ package Model;
  *
  * @author spock
  */
-public class DirectionType {
+public enum DirectionType {
+
+    NORTH,
+    SOUTH,
+    EAST,
+    WEST
 
 }
