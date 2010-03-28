@@ -11,6 +11,10 @@ import java.awt.event.KeyListener;
  *
  * @author spock
  */
+
+// used this to disable DirectDraw for windows to get
+// fullscreen to display properly: -Dsun.java2d.noddraw=true 
+
 public class View {
     ScreenManager screenManager;
 
