@@ -52,10 +52,10 @@ class ScreenManager extends JFrame{
 
     private FPSAnimator animator;
 
-    private BattleHUD battleHUD;
+    private BattleScreen battleScreen;
 
     private Texture riceTest;
-    private Texture bHUD_tex;
+    private Texture battleScreen_tex;
 
     ScreenManager(String s, GenAdapter control, boolean fs){
         super(s);
@@ -66,8 +66,8 @@ class ScreenManager extends JFrame{
         panX = 0;
         panY = 0;
 
-        battleHUD = new BattleHUD();
-        battleHUD.refreshImage();
+        battleScreen = new BattleScreen();
+        battleScreen.refreshImage();
 
         if(fs){
             GraphicsEnvironment ge = GraphicsEnvironment
@@ -122,29 +122,29 @@ class ScreenManager extends JFrame{
             GL gl = drawable.getGL();
             gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
             renderRice(gl);
-            renderBattleHUD(gl);
+            renderBattleScreen(gl);
 
         }
 
-        private void renderBattleHUD(GL gl) {
+        private void renderBattleScreen(GL gl) {
 
-            bHUD_tex.bind();
+            battleScreen_tex.bind();
 
             gl.glPushMatrix();
 
             gl.glBegin(GL.GL_POLYGON);
 
                 gl.glTexCoord2d(0.0, 0.0);
-                gl.glVertex2d(0.1875,0.85625);
+                gl.glVertex2d(0.0,0.0);
 
                 gl.glTexCoord2d(0.0, 1.0);
-                gl.glVertex2d(0.1875, 1.0);
+                gl.glVertex2d(0.0, 1.0);
 
                 gl.glTexCoord2d(1.0, 1.0);
-                gl.glVertex2d(.8125, 1.0);
+                gl.glVertex2d(1.0, 1.0);
 
                 gl.glTexCoord2d(1.0, 0.0);
-                gl.glVertex2d(.8125, 0.85625);
+                gl.glVertex2d(1.0, 0.0);
 
 
              gl.glEnd();
@@ -204,7 +204,7 @@ class ScreenManager extends JFrame{
 
                 try{
                     riceTest = TextureIO.newTexture(graphics.getGraphic(ViewableEnums.RICE),true);
-                    bHUD_tex = TextureIO.newTexture(battleHUD.image(),true);
+                    battleScreen_tex = TextureIO.newTexture(battleScreen.image(),true);
                 }
                 catch(Exception c){
                     System.out.println("sm texture fail!");
