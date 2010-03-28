@@ -9,6 +9,10 @@ package Model;
  *
  * @author spock
  */
-public class ViewableType {
+public enum ViewableType {
+
+    GUNDERSON,
+    NASTIE,
+    TOILETYME
 
 }
