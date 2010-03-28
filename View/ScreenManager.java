@@ -2,6 +2,10 @@
 
 package View;
 
+import java.awt.event.KeyListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseListener;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +28,8 @@ import java.util.LinkedList;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.DisplayMode;
-
+import Control.Controller;
+import Control.GenAdapter;
 
 class ScreenManager extends JFrame{
 
@@ -32,6 +37,8 @@ class ScreenManager extends JFrame{
     private LinkedList<Point> selectedTiles = new LinkedList<Point>();
 
     private double screenRatio = 1.6;
+
+    private Controller controller;
 
     private double scale;
     private double panX;
@@ -50,8 +57,10 @@ class ScreenManager extends JFrame{
     private Texture riceTest;
     private Texture bHUD_tex;
 
-    ScreenManager(String s, boolean fs){
+    ScreenManager(String s, GenAdapter control, boolean fs){
         super(s);
+
+        control = controller;
 
         scale = 1.0;
         panX = 0;
@@ -76,6 +85,7 @@ class ScreenManager extends JFrame{
         }
         else{
             setSize(1280, 800);
+            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }
 
         GraphicListener listener = new GraphicListener();
@@ -93,6 +103,16 @@ class ScreenManager extends JFrame{
     void start(){
         animator.start();
         this.validate();
+    }
+
+    public void addCKeyListener(KeyListener control){
+        getContentPane().getComponents()[0].addKeyListener(control);
+    }
+    public void addCMouseListener(MouseListener control){
+        getContentPane().getComponents()[0].addMouseListener(control);
+    }
+    public void addCMouseMotionListener(MouseMotionListener control){
+        getContentPane().getComponents()[0].addMouseMotionListener(control);
     }
 
     class GraphicListener implements GLEventListener {

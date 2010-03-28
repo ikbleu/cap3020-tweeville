@@ -5,7 +5,7 @@
 
 package Control;
 import java.awt.event.KeyEvent;
-
+import java.awt.event.MouseEvent;
 /**
  *
  * @author spock
@@ -51,5 +51,9 @@ public class Controller extends GenAdapter{
                 System.out.println("Invalid Key!");
             }
         }
+    }
+    @Override
+    public void mousePressed(MouseEvent e){
+
     }
 }
