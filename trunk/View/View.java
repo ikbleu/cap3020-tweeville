@@ -5,7 +5,7 @@
 
 package View;
 
-import java.awt.event.KeyListener;
+import Control.GenAdapter;
 
 /**
  *
@@ -19,9 +19,14 @@ public class View {
     ScreenManager screenManager;
 
 
-    public View(KeyListener control){
-        screenManager = new ScreenManager("hello", true);
+    public View(GenAdapter control){
+        screenManager = new ScreenManager("hello", control, false);
         screenManager.addKeyListener(control);
+        screenManager.addMouseListener(control);
+        screenManager.addMouseMotionListener(control);
+        screenManager.addCKeyListener(control);
+        screenManager.addCMouseListener(control);
+        screenManager.addCMouseMotionListener(control);
         screenManager.start();
     }
     
