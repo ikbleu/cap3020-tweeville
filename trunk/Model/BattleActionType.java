@@ -9,6 +9,9 @@ package Model;
  *
  * @author spock
  */
-public class BattleActionType {
+public enum BattleActionType {
+
+    MELEE,
+    RANGED
 
 }

@@ -12,6 +12,7 @@ import java.awt.event.KeyEvent;
  */
 public class Controller extends GenAdapter{
     private int START_BATTLE_MODE = KeyEvent.VK_B;
+    private int GAME_EXIT = KeyEvent.VK_F9;
     BattleControl bc;
     BattleMenuControl bmc;
     DialogueControl dc;
@@ -21,7 +22,7 @@ public class Controller extends GenAdapter{
     GenAdapter current;
 
 
-    Controller(){
+    public Controller(){
         bc = new BattleControl();
     }
 
@@ -29,6 +30,10 @@ public class Controller extends GenAdapter{
         if(e.getKeyCode()==START_BATTLE_MODE){
             bc.turnOn();
             current = bc;
+            return true;
+        }
+        else if(e.getKeyCode()==GAME_EXIT){
+            System.exit(0);
             return true;
         }
         else{
@@ -39,7 +44,12 @@ public class Controller extends GenAdapter{
     @Override
     public void keyPressed(KeyEvent e){
         if(!canIDoIt(e)){
-            current.keyPressed(e);
+            try{
+                current.keyPressed(e);
+            }
+            catch(Exception ex){
+                System.out.println("Invalid Key!");
+            }
         }
     }
 }

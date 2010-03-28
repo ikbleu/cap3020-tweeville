@@ -9,6 +9,9 @@ package Model;
  *
  * @author spock
  */
-public class ModeType {
-
+public enum ModeType {
+    SPLASH,
+    FREEROAM,
+    BATTLE,
+    CUTSCENE
 }

@@ -9,6 +9,9 @@ package Model;
  *
  * @author spock
  */
-public class AllianceType {
-
+public enum AllianceType
+{
+	FRIENDLY,
+        ENEMY
+               
 }
