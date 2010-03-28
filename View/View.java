@@ -12,7 +12,7 @@ import Control.GenAdapter;
  * @author spock
  */
 
-// used this to disable DirectDraw for windows to get
+// used this VM argument to disable DirectDraw for windows to get
 // fullscreen to display properly: -Dsun.java2d.noddraw=true 
 
 public class View {
@@ -20,7 +20,7 @@ public class View {
 
 
     public View(GenAdapter control){
-        screenManager = new ScreenManager("hello", control, false);
+        screenManager = new ScreenManager("hello", control, true);
         screenManager.addKeyListener(control);
         screenManager.addMouseListener(control);
         screenManager.addMouseMotionListener(control);
