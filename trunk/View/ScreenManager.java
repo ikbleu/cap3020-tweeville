@@ -47,25 +47,32 @@ class ScreenManager extends JFrame{
 
     private Texture riceTest;
 
-    ScreenManager(){
+    ScreenManager(String s, boolean fs){
+        super(s);
 
         scale = 1.0;
         panX = 0;
         panY = 0;
 
-        GraphicsEnvironment ge = GraphicsEnvironment
-                            .getLocalGraphicsEnvironment();
-        final GraphicsDevice gs = ge.getDefaultScreenDevice();
-        this.setUndecorated(true);
-        this.setResizable(false);
+        if(fs){
+            GraphicsEnvironment ge = GraphicsEnvironment
+                                .getLocalGraphicsEnvironment();
+            final GraphicsDevice gs = ge.getDefaultScreenDevice();
+            this.setUndecorated(true);
+            this.setResizable(false);
 
-        DisplayMode dm = gs.getDisplayMode();
-        setSize(dm.getWidth(), dm.getHeight());
+            DisplayMode dm = gs.getDisplayMode();
+            setSize(dm.getWidth(), dm.getHeight());
 
-        if (gs.isFullScreenSupported()) {
-                gs.setFullScreenWindow(this);
+            if (gs.isFullScreenSupported()) {
+                    gs.setFullScreenWindow(this);
+            }
+        }
+        else{
+            setSize(1280, 800);
         }
 
+        
         GraphicListener listener = new GraphicListener();
         GLCanvas canvas = new GLCanvas(new GLCapabilities());
         canvas.addGLEventListener(listener);
@@ -73,6 +80,8 @@ class ScreenManager extends JFrame{
         getContentPane().add(canvas);
 
         animator = new FPSAnimator(canvas, 60);
+
+        setVisible(true);
         this.validate();
     }
 
