@@ -10,7 +10,6 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.io.File;
 import javax.imageio.ImageIO;
-import Model.AllianceType;
 
 
 /**
@@ -24,7 +23,7 @@ class GraphicsTableSingleton {
     private GraphicsTableSingleton(){
         graphics = new HashMap<Enum, BufferedImage>();
         try{
-            graphics.put( AllianceType.ENEMY, ImageIO.read(new File("blahblah.jpg")));
+            graphics.put(ViewableEnums.RICE, ImageIO.read(new File("Images/rice.jpg")));
         }
         catch(Exception e){
             System.out.println("Image loading failed");

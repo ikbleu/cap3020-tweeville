@@ -10,5 +10,7 @@ package Model;
  * @author spock
  */
 public class Unit {
+    AllianceType alliance;
+    int health;
 
 }

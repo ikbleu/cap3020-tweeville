@@ -9,6 +9,6 @@ package View;
  *
  * @author spock
  */
-public class BattleScreen {
+public class BattleScreen{
 
 }

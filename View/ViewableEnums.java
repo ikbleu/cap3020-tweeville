@@ -11,6 +11,7 @@ package View;
  */
 public enum ViewableEnums {
 
+    RICE,
     GUNDERSONHUDFACE,
     NASTIEHUDFACE
 

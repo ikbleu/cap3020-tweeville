@@ -9,6 +9,5 @@ package View;
  *
  * @author spock
  */
-public class BattleScreenViewPort {
-
+public class BattleScreenViewPort{
 }
