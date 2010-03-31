@@ -5,6 +5,8 @@
 
 package Model;
 
+import java.io.File;
+
 /**
  *
  * @author spock
@@ -14,10 +16,9 @@ public class BattleModel {
     BattleMap battleMap;
     Clock clock;
 
-    BattleModel(){
-        fightModel = new FightModel();
-        battleMap = new BattleMap();
+    BattleModel(File battleInfo, File map){
+        fightModel = new FightModel(battleInfo);
+        battleMap = new BattleMap(map);
         clock = new Clock();
     }
-
 }
