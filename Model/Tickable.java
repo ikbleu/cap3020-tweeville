@@ -5,16 +5,10 @@
 
 package Model;
 
-import java.io.File;
-
 /**
  *
  * @author spock
  */
-public class FightModel {
-    File battle;
-
-    FightModel(File model){
-        battle = model;
-    }
+public interface Tickable {
+    public abstract void onTick();
 }

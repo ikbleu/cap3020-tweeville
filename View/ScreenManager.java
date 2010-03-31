@@ -121,7 +121,7 @@ class ScreenManager extends JFrame{
 
             GL gl = drawable.getGL();
             gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
-            renderRice(gl);
+            //renderRice(gl);
             renderBattleScreen(gl);
 
         }
