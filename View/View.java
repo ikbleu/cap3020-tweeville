@@ -20,7 +20,7 @@ public class View {
 
 
     public View(GenAdapter control){
-        screenManager = new ScreenManager("hello", control, true);
+        screenManager = new ScreenManager("hello", control, false);
         screenManager.addKeyListener(control);
         screenManager.addMouseListener(control);
         screenManager.addMouseMotionListener(control);

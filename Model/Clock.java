@@ -18,18 +18,18 @@ public class Clock {
     Timer clock;
     long timePerTick;
     LinkedList<Tickable> listeners;
+    boolean ticking = false;
 
 
-    Clock(){
+    Clock(long timeBetw){
         clock = new Timer("Battle Clock");
         listeners = new LinkedList<Tickable>();
+        timePerTick = timeBetw;
     }
 
     void addListener(Tickable t){
         listeners.add(t);
     }
-
-    
 
     private class MyTask extends TimerTask{
         LinkedList<Tickable> listeners;
@@ -42,8 +42,23 @@ public class Clock {
             for(int i = 0; i < listeners.size(); ++i){
                 listeners.get(i).onTick();
             }
-            System.out.print("Tick");
+            if(ticking){
+                System.out.println("Tick");
+            }
+            else{
+                System.out.println("Tock");
+            }
+            ticking = !ticking;
         }
+    }
+
+    void start(){
+        clock.scheduleAtFixedRate( new MyTask(this.listeners),
+                                        timePerTick, timePerTick );
+    }
+
+    void stop(){
+        this.clock.cancel();
     }
 
 }
