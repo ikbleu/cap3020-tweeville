@@ -16,14 +16,17 @@ public class Model {
     FreeRoamModel freeRoamModel;
     File battleModelMap;
     File battleModelFight;
+    Clock clock;
     
     
     public Model(){
         mode = ModeType.SPLASH;
-        battleModelMap = new File("testBattleMap.jpg");
-        battleModelFight = new File("testBattleFight.txt");
-        freeRoamModel = new FreeRoamModel();
-        battleModel = new BattleModel(battleModelFight, battleModelMap);
+        //battleModelMap = new File("testBattleMap.jpg");
+        //battleModelFight = new File("testBattleFight.txt");
+        //freeRoamModel = new FreeRoamModel();
+        //battleModel = new BattleModel(battleModelFight, battleModelMap);
+        clock = new Clock(100);
+        clock.start();
     }
 
 }
