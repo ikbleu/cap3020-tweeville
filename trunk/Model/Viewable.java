@@ -5,10 +5,14 @@
 
 package Model;
 
+import java.awt.Point;
+
 /**
  *
  * @author spock
  */
 public interface Viewable {
-
+    public abstract UnitStatus getStatus();
+    public abstract Point getLocation();
+    public abstract String getCharacter();
 }
