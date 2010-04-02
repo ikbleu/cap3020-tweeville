@@ -19,12 +19,14 @@ public class Character implements Viewable{
     WeaponType melee;
     WeaponType ranged;
     WeaponType armor;
+    AllianceType alliance;
     //1130 x 650
 
-    Character(String name, Point location){
+    Character(String name, Point location, AllianceType alliance){
         this.name = name;
         this.location = location;
         this.status = UnitStatus.STANDING;
+        this.alliance = alliance;
     }
 
     public String getCharacter(){

@@ -18,8 +18,9 @@ public class BattleModel {
 
 
     BattleModel(File battleInfo, File map){
-        fightModel = new FightModel(battleInfo);
+        
         battleMap = new BattleMap(map);
+        fightModel = new FightModel(battleInfo, battleMap);
         clock = new Clock(100);
     }
 }
