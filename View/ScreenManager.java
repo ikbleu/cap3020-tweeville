@@ -106,6 +106,15 @@ class ScreenManager extends JFrame{
         this.validate();
     }
 
+    void updateBattleScreen(){
+        try{
+            battleScreen_tex = TextureIO.newTexture(battleScreen.image(),true);
+        }
+        catch (GLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void addCKeyListener(KeyListener control){
         getContentPane().getComponents()[0].addKeyListener(control);
     }
@@ -123,11 +132,14 @@ class ScreenManager extends JFrame{
             GL gl = drawable.getGL();
             gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
             //renderRice(gl);
+            drawable.getContext().makeCurrent();
             renderBattleScreen(gl);
+
 
         }
 
         private void renderBattleScreen(GL gl) {
+
 
             battleScreen_tex.bind();
 
@@ -202,6 +214,8 @@ class ScreenManager extends JFrame{
                 gl.glEnable(GL.GL_TEXTURE_2D);								//enable 2D textures
                 gl.glEnable(GL.GL_BLEND);
                 gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
+
+                drawable.getContext().makeCurrent();
 
 
                 try{

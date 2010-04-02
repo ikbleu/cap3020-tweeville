@@ -20,7 +20,7 @@ public class ControllerTest {
         Model model = new Model();
         Controller control = new Controller(model);
         View view = new View(control, model);
-        
+        model.register(view);        
         
     }
 }

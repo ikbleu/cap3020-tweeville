@@ -27,6 +27,9 @@ public class Model implements ViewHelper, LeashedModel{
         //freeRoamModel = new FreeRoamModel();
         battleModel = new BattleModel(battleModelFight, battleModelMap);
         clock = new Clock(100);
+    }
+
+    public void start(){
         clock.start();
     }
 
@@ -34,6 +37,10 @@ public class Model implements ViewHelper, LeashedModel{
         if(mode == ModeType.BATTLE){
             battleModel.charMove(d);
         }
+    }
+
+    public void register(Tickable t){
+        clock.addListener(t);
     }
 
     public List<Viewable> getUnits(){

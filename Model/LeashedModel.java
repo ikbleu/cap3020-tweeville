@@ -11,4 +11,5 @@ package Model;
  */
 public interface LeashedModel {
     public abstract void moveChar(DirectionType direction);
+    public abstract void start();
 }
