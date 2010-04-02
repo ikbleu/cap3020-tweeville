@@ -7,6 +7,7 @@ package View;
 
 import Control.GenAdapter;
 import Model.ViewHelper;
+import Model.Tickable;
 
 /**
  *
@@ -16,7 +17,7 @@ import Model.ViewHelper;
 // used this VM argument to disable DirectDraw for windows to get
 // fullscreen to display properly: -Dsun.java2d.noddraw=true 
 
-public class View {
+public class View implements Tickable{
     ScreenManager screenManager;
     ViewHelper model;
 
@@ -31,6 +32,10 @@ public class View {
         screenManager.addCMouseMotionListener(control);
         screenManager.start();
         this.model = model;
+    }
+
+    public void onTick(){
+
     }
     
 }

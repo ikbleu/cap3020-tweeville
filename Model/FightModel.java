@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.awt.Point;
+import java.util.List;
 
 /**
  *
@@ -20,6 +21,7 @@ public class FightModel {
     ArrayList<Character> good;
     ArrayList<Character> enemy;
     Character currentChar;
+    int currCharIndex = 0;
     boolean readGood;
 
 
@@ -49,14 +51,34 @@ public class FightModel {
                 System.out.println(locY);
 
                 if(readGood){
-                    good.add(new Character(name, locX, locY, AllianceType.FRIENDLY));
+                    good.add(new Character(name, locX, locY, AllianceType.FRIENDLY, map));
                 }
                 else{
-                    enemy.add(new Character(name, locX, locY, AllianceType.ENEMY));
+                    enemy.add(new Character(name, locX, locY, AllianceType.ENEMY, map));
                 }
             }
-
         }
+        currentChar = good.get(0);
+        currCharIndex = 0;
+    }
+
+    void move(DirectionType direction){
+        currentChar.move(direction);
+    }
+
+    void swapChar(){
+        currCharIndex++;
+        if(currCharIndex>=good.size()){
+            currCharIndex = 0;
+        }
+        currentChar = good.get(currCharIndex);
+    }
+
+    List<Viewable> getUnits(){
+        ArrayList<Viewable> yes = new ArrayList<Viewable>();
+        yes.addAll(good);
+        yes.addAll(enemy);
+        return yes;
     }
 
 }

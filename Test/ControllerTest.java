@@ -18,7 +18,7 @@ public class ControllerTest {
         System.out.println("Hello, I'm am the Controller tester");
 
         Model model = new Model();
-        Controller control = new Controller();
+        Controller control = new Controller(model);
         View view = new View(control, model);
         
         

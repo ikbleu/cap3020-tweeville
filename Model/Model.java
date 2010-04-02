@@ -5,12 +5,13 @@
 package Model;
 
 import java.io.File;
+import java.util.List;
 
 /**
  *
  * @author Mr. Wilmot
  */
-public class Model implements ViewHelper{
+public class Model implements ViewHelper, LeashedModel{
     private ModeType mode;
     BattleModel battleModel;
     FreeRoamModel freeRoamModel;
@@ -20,7 +21,7 @@ public class Model implements ViewHelper{
     
     
     public Model(){
-        mode = ModeType.SPLASH;
+        mode = ModeType.BATTLE;
         battleModelMap = new File("Images/BattleScreenColorMap.png");
         battleModelFight = new File("ConfigFiles/BattleInput.txt");
         //freeRoamModel = new FreeRoamModel();
@@ -29,7 +30,16 @@ public class Model implements ViewHelper{
         clock.start();
     }
 
-    public Viewable[] getUnits(){
+    public void moveChar(DirectionType d){
+        if(mode == ModeType.BATTLE){
+            battleModel.charMove(d);
+        }
+    }
+
+    public List<Viewable> getUnits(){
+        if(mode == ModeType.BATTLE){
+            return battleModel.getUnits();
+        }
         return null;
     }
     public WeaponType getBScurrentMelee(){

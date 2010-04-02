@@ -10,5 +10,5 @@ package Model;
  * @author spock
  */
 public interface LeashedModel {
-
+    public abstract void moveChar(DirectionType direction);
 }
