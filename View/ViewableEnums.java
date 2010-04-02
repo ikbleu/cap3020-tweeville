@@ -17,6 +17,8 @@ public enum ViewableEnums {
     RICE,
     GUNDERSONHUDFACE,
     NASTIEHUDFACE,
-    TESTHUDFACE
+    TESTHUDFACE,
+
+    NASTIE_STANDING
 
 }

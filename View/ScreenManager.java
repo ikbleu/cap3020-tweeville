@@ -30,6 +30,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.DisplayMode;
 import Control.Controller;
 import Control.GenAdapter;
+import Model.ViewHelper;
 
 class ScreenManager extends JFrame{
 
@@ -57,7 +58,7 @@ class ScreenManager extends JFrame{
     private Texture riceTest;
     private Texture battleScreen_tex;
 
-    ScreenManager(String s, GenAdapter control, boolean fs){
+    ScreenManager(String s, GenAdapter control, boolean fs, ViewHelper model){
         super(s);
 
         control = controller;
@@ -66,7 +67,7 @@ class ScreenManager extends JFrame{
         panX = 0;
         panY = 0;
 
-        battleScreen = new BattleScreen();
+        battleScreen = new BattleScreen( model );
         battleScreen.refreshImage();
 
         if(fs){
@@ -204,7 +205,7 @@ class ScreenManager extends JFrame{
 
 
                 try{
-                    riceTest = TextureIO.newTexture(graphics.getGraphic(ViewableEnums.RICE),true);
+                    riceTest = TextureIO.newTexture(graphics.getGraphic("Rice"),true);
                     battleScreen_tex = TextureIO.newTexture(battleScreen.image(),true);
                 }
                 catch(Exception c){

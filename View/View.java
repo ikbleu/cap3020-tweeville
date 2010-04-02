@@ -22,7 +22,7 @@ public class View {
 
 
     public View(GenAdapter control, ViewHelper model){
-        screenManager = new ScreenManager("hello", control, false);
+        screenManager = new ScreenManager("hello", control, false, model);
         screenManager.addKeyListener(control);
         screenManager.addMouseListener(control);
         screenManager.addMouseMotionListener(control);

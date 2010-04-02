@@ -11,6 +11,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.geom.Line2D;
 import java.awt.BasicStroke;
+
+import Model.ViewHelper;
 /**
  *
  * @author spock
@@ -18,8 +20,8 @@ import java.awt.BasicStroke;
 
 // The Elmer Fudd Hud.
 class BattleHUD extends SpecialImage {
-    int WIDTH = 830;
-    int HEIGHT = 115;
+    final static int WIDTH = 830;
+    final static int HEIGHT = 115;
     Graphics2D g2 = null;
     RenderingHints hint = null;
     Font font;
@@ -33,7 +35,11 @@ class BattleHUD extends SpecialImage {
     Color colors[] = { Color.green, Color.green, Color.green, Color.blue, Color.blue, Color.blue,
         Color.blue, Color.blue, Color.blue };
 
-    BattleHUD(){
+    private ViewHelper model;
+
+    BattleHUD( ViewHelper model ){
+	this.model = model;
+
         imageBuffer = new BufferedImage( WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB );
         g2 = imageBuffer.createGraphics();
         hint = new RenderingHints( RenderingHints.KEY_ANTIALIASING,
@@ -51,9 +57,9 @@ class BattleHUD extends SpecialImage {
         g2.setColor( new Color( 0xFFCDAA7D ) );
 	g2.fillRect( 0, 0, WIDTH, HEIGHT );
 
-        g2.drawImage( graphics.getGraphic(ViewableEnums.TESTHUDFACE), (int)(WIDTH/41.5), (int)(HEIGHT/6.76), null );
-        g2.drawImage( graphics.getGraphic(ViewableEnums.TESTHUDFACE), (int)(WIDTH/2.86), (int)(HEIGHT/6.76), null );
-        g2.drawImage( graphics.getGraphic(ViewableEnums.TESTHUDFACE), (int)(WIDTH/1.48), (int)(HEIGHT/6.76), null );
+        g2.drawImage( graphics.getGraphic("TestHUD"), (int)(WIDTH/41.5), (int)(HEIGHT/6.76), null );
+        g2.drawImage( graphics.getGraphic("TestHUD"), (int)(WIDTH/2.86), (int)(HEIGHT/6.76), null );
+        g2.drawImage( graphics.getGraphic("TestHUD"), (int)(WIDTH/1.48), (int)(HEIGHT/6.76), null );
         //g2.drawImage( graphics.getGraphic(ViewableEnums.TOITLETYMEHUDFACE), 20, 20, null );
         //g2.drawImage( graphics.getGraphic(ViewableEnums.NASTIEHUDFACE), 300, 20, null );
         //g2.drawImage( graphics.getGraphic(ViewableEnums.GUNDERSONHUDFACE), 600, 20, null );
