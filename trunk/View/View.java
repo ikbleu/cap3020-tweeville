@@ -6,6 +6,7 @@
 package View;
 
 import Control.GenAdapter;
+import Model.ViewHelper;
 
 /**
  *
@@ -17,9 +18,10 @@ import Control.GenAdapter;
 
 public class View {
     ScreenManager screenManager;
+    ViewHelper model;
 
 
-    public View(GenAdapter control){
+    public View(GenAdapter control, ViewHelper model){
         screenManager = new ScreenManager("hello", control, false);
         screenManager.addKeyListener(control);
         screenManager.addMouseListener(control);
@@ -28,6 +30,7 @@ public class View {
         screenManager.addCMouseListener(control);
         screenManager.addCMouseMotionListener(control);
         screenManager.start();
+        this.model = model;
     }
     
 }
