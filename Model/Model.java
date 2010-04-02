@@ -21,7 +21,7 @@ public class Model {
     
     public Model(){
         mode = ModeType.SPLASH;
-        //battleModelMap = new File("testBattleMap.jpg");
+        battleModelMap = new File("BattleScreenColorMap.png");
         //battleModelFight = new File("testBattleFight.txt");
         //freeRoamModel = new FreeRoamModel();
         //battleModel = new BattleModel(battleModelFight, battleModelMap);
