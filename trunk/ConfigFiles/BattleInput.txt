@@ -1,3 +1,1 @@
-Nastie 565 600
-Gunderson 565 620
-Toitletyme 565 640
+Nastie 565 600 

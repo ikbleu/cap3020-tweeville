@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 import Model.ViewHelper;
 import Model.Viewable;
+import java.util.List;
 
 class BattleScreenViewPort extends SpecialImage
 {
@@ -39,12 +40,12 @@ class BattleScreenViewPort extends SpecialImage
 
     private void updateEntities()
     {
-	Viewable[] units = model.getUnits();
+	List<Viewable> units = model.getUnits();
 	
-	for(int i = 0; i != units.length; ++i )
+	for(int i = 0; i != units.size(); ++i )
 	{
-	    g2d.drawImage( checkOutImage(), (int)units[i].getLocation().getX(),
-		    (int)units[i].getLocation().getY(), null );
+	    g2d.drawImage( checkOutImage(), (int)units.get(i).getLocation().getX(),
+		    (int)units.get(i).getLocation().getY(), null );
 	}
     }
 
