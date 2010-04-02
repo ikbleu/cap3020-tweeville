@@ -18,23 +18,25 @@ import javax.imageio.ImageIO;
  */
 class GraphicsTableSingleton {
 
-    HashMap< Enum, BufferedImage > graphics;
+    HashMap< String, BufferedImage > graphics;
 
     private GraphicsTableSingleton(){
-        graphics = new HashMap<Enum, BufferedImage>();
+        graphics = new HashMap<String, BufferedImage>();
         try{
-	    graphics.put( ViewableEnums.BATTLESCREEN, ImageIO.read(new File("Images/BattleScreen.png")));
-            graphics.put( ViewableEnums.BATTLESCREEN_VIEWPORT, ImageIO.read(new File("Images/BattleScreenViewPort.png")));
-	    graphics.put( ViewableEnums.BATTLESCREEN_HUD, ImageIO.read(new File("Images/BattleScreenHUD.png")));
-            graphics.put( ViewableEnums.TESTHUDFACE, ImageIO.read(new File("Images/s17.JPG")));
-            graphics.put(ViewableEnums.RICE, ImageIO.read(new File("Images/rice.jpg")));
+	    graphics.put( "BattleScreen", ImageIO.read(new File("Images/BattleScreen.png")));
+            graphics.put( "BattleScreenViewPort", ImageIO.read(new File("Images/BattleScreenViewPort.png")));
+	    graphics.put( "BattleScreenHUD", ImageIO.read(new File("Images/BattleScreenHUD.png")));
+            graphics.put( "TestHUD", ImageIO.read(new File("Images/s17.JPG")));
+            graphics.put( "Rice", ImageIO.read(new File("Images/rice.jpg")));
+
+	    graphics.put( "NastieS", ImageIO.read(new File("Images/NastieS.png"))); //Nastie standing facing south
         }
         catch(Exception e){
             System.out.println("Image loading failed");
         }
     }
 
-    BufferedImage getGraphic(Enum key){
+    BufferedImage getGraphic(String key){
         return graphics.get(key);
     }
     private static class GraphicsTableSingletonHolder {

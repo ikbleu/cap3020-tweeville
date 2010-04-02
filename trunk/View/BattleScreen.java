@@ -10,10 +10,9 @@ package View;
  * @author chris
  */
 
-// this comment is completely irrelevant; it's for Corey to test update!
-
 import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
+import Model.ViewHelper;
 
 public class BattleScreen extends SpecialImage
 {
@@ -23,7 +22,7 @@ public class BattleScreen extends SpecialImage
     private BattleHUD hud;
     private BattleScreenViewPort viewPort;
 
-    BattleScreen()
+    BattleScreen( ViewHelper model )
     {
 	imageWidth = 1280;
 	imageHeight = 800;
@@ -33,14 +32,14 @@ public class BattleScreen extends SpecialImage
 	viewPortPosY = (int) ( 0.09375 * imageHeight );
 	imageBuffer = new BufferedImage( imageWidth, imageHeight, BufferedImage.TYPE_INT_ARGB );
 
-	hud = new BattleHUD();
-	viewPort = new BattleScreenViewPort();
+	hud = new BattleHUD( model );
+	viewPort = new BattleScreenViewPort( model );
     }
 
     void refreshImage()
     {
 	Graphics2D g2d = (Graphics2D) imageBuffer.getGraphics();
-	g2d.drawImage( graphics.getGraphic( ViewableEnums.BATTLESCREEN ), 0, 0, null );
+	g2d.drawImage( graphics.getGraphic( "BattleScreen" ), 0, 0, null );
 
 	viewPort.refreshImage();
 	g2d.drawImage( viewPort.image(), viewPortPosX, viewPortPosY, null );
