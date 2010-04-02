@@ -53,7 +53,7 @@ class ScreenManager extends JFrame{
 
     private FPSAnimator animator;
 
-    private BattleScreen battleScreen;
+    BattleScreen battleScreen;
 
     private Texture riceTest;
     private Texture battleScreen_tex;
