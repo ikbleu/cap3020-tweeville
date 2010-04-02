@@ -22,7 +22,7 @@ public class Model implements ViewHelper{
     public Model(){
         mode = ModeType.SPLASH;
         battleModelMap = new File("Images/BattleScreenColorMap.png");
-        battleModelFight = new File("ConfigFiles/testBattleFight.txt");
+        battleModelFight = new File("ConfigFiles/BattleInput.txt");
         //freeRoamModel = new FreeRoamModel();
         battleModel = new BattleModel(battleModelFight, battleModelMap);
         clock = new Clock(100);
