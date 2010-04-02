@@ -16,11 +16,15 @@ public class Character implements Viewable{
     Point location;
     UnitStatus status;
     DirectionType direction;
+    WeaponType melee;
+    WeaponType ranged;
+    WeaponType armor;
+    //1130 x 650
 
-    Character(String name, Point location, UnitStatus status){
+    Character(String name, Point location){
         this.name = name;
         this.location = location;
-        this.status = status;
+        this.status = UnitStatus.STANDING;
     }
 
     public String getCharacter(){
