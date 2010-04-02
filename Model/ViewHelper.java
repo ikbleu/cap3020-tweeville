@@ -15,5 +15,5 @@ public interface ViewHelper {
     public abstract WeaponType getBScurrentRanged();
     public abstract WeaponType getBScurrentArmor();
     public abstract int[] getHPs();
-    //public abstract ViewCooldown[] getCoolDowns();
+    public abstract ViewCooldown[][] getCoolDowns();
 }
