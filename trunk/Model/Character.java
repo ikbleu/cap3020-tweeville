@@ -22,9 +22,9 @@ public class Character implements Viewable{
     AllianceType alliance;
     //1130 x 650
 
-    Character(String name, Point location, AllianceType alliance){
+    Character(String name, int locX, int locY, AllianceType alliance){
         this.name = name;
-        this.location = location;
+        this.location = new Point(locX, locY);
         this.status = UnitStatus.STANDING;
         this.alliance = alliance;
     }

@@ -27,24 +27,32 @@ public class FightModel {
     FightModel(File model, BattleMap map){
         battle = model;
         readGood = true;
+        good = new ArrayList<Character>();
+        enemy = new ArrayList<Character>();
         try{
             s = new Scanner(battle);
         }
         catch(Exception c){
             System.out.println("Couldn't find Fight Model Loader Fail!");
-            //System.exit(0);
+            System.exit(0);
         }
         while(s.hasNext()){
             String name = s.next();
+            System.out.println(name);
             if(name.equals("evil")){
                 readGood = false;
             }
             else{
                 int locX = s.nextInt();
+                System.out.println(locX);
                 int locY = s.nextInt();
+                System.out.println(locY);
 
                 if(readGood){
-                    good.add(new Character(name, new Point(locX, locY), AllianceType.FRIENDLY));
+                    good.add(new Character(name, locX, locY, AllianceType.FRIENDLY));
+                }
+                else{
+                    enemy.add(new Character(name, locX, locY, AllianceType.ENEMY));
                 }
             }
 
