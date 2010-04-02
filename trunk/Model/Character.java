@@ -15,6 +15,7 @@ public class Character implements Viewable{
     String name;
     Point location;
     UnitStatus status;
+    DirectionType direction;
 
     Character(String name, Point location, UnitStatus status){
         this.name = name;
@@ -32,6 +33,10 @@ public class Character implements Viewable{
 
     public UnitStatus getStatus(){
         return status;
+    }
+
+    public DirectionType getDirection(){
+        return direction;
     }
     
 }
