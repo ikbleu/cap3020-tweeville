@@ -6,6 +6,7 @@
 package Model;
 
 import java.io.File;
+import java.util.Scanner;
 
 /**
  *
@@ -13,8 +14,24 @@ import java.io.File;
  */
 public class FightModel {
     File battle;
+    Scanner s;
+    Character[] good;
+    Character[] enemy;
+
+
 
     FightModel(File model){
         battle = model;
+        try{
+            s = new Scanner(battle);
+        }
+        catch(Exception c){
+            System.out.println("Couldn't find Fight Model Loader Fail!");
+            System.exit(0);
+        }
+        while(s.hasNext()){
+
+        }
     }
+
 }
