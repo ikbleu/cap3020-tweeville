@@ -57,6 +57,14 @@ public class Character implements Viewable{
         System.out.print(name + " moved to " + locX + ", " + locY);
     }
 
+    void setMelee(WeaponType melee){
+        this.melee = melee;
+    }
+
+    void setRanged(WeaponType ranged){
+        this.ranged = ranged;
+    }
+
     public String getCharacter(){
         return name;
     }
