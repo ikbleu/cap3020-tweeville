@@ -15,4 +15,5 @@ public interface Viewable {
     public abstract UnitStatus getStatus();
     public abstract Point getLocation();
     public abstract String getCharacter();
+    public abstract DirectionType getDirection();
 }
