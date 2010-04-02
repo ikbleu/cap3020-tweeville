@@ -17,9 +17,10 @@ public class ControllerTest {
     public static void main(String args[]){
         System.out.println("Hello, I'm am the Controller tester");
 
-        Controller control = new Controller();
-        View view = new View(control);
         Model model = new Model();
+        Controller control = new Controller();
+        View view = new View(control, model);
+        
         
     }
 }
