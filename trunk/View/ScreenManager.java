@@ -17,6 +17,8 @@ import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLCapabilities;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.GLException;
+import javax.media.opengl.GLContext;
+import javax.media.opengl.GLDrawableFactory;
 import javax.swing.JFrame;
 import com.sun.opengl.util.FPSAnimator;
 import com.sun.opengl.util.ImageUtil;
@@ -58,6 +60,11 @@ class ScreenManager extends JFrame{
     private Texture riceTest;
     private Texture battleScreen_tex;
 
+    public static GL gl;
+    public static GLContext context;
+    GraphicListener listener;
+    public int updateNum = 0;
+
     ScreenManager(String s, GenAdapter control, boolean fs, ViewHelper model){
         super(s);
 
@@ -89,7 +96,7 @@ class ScreenManager extends JFrame{
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }
 
-        GraphicListener listener = new GraphicListener();
+        listener = new GraphicListener();
         GLCanvas canvas = new GLCanvas(new GLCapabilities());
         canvas.addGLEventListener(listener);
 
@@ -107,12 +114,14 @@ class ScreenManager extends JFrame{
     }
 
     void updateBattleScreen(){
-        try{
+        /*try{
             battleScreen_tex = TextureIO.newTexture(battleScreen.image(),true);
         }
         catch (GLException e) {
             e.printStackTrace();
-        }
+        }*/
+        //listener.updateBattleScreen(battleScreen.image());
+        updateNum = 1;
     }
 
     public void addCKeyListener(KeyListener control){
@@ -129,17 +138,35 @@ class ScreenManager extends JFrame{
 
         public void display(GLAutoDrawable drawable) {
 
+            //GLContext context = GLDrawableFactory.getFactory().createExternalGLContext();
+            //GL gl = context.getGL();
             GL gl = drawable.getGL();
             gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
             //renderRice(gl);
-            drawable.getContext().makeCurrent();
             renderBattleScreen(gl);
 
+        }
 
+        void updateBattleScreen(BufferedImage image){
+            try{
+                //context.makeCurrent();
+                battleScreen_tex = TextureIO.newTexture(image,true);
+            }
+            catch (GLException e) {
+                e.printStackTrace();
+            }
         }
 
         private void renderBattleScreen(GL gl) {
 
+            if(updateNum ==1){
+                try{
+                    battleScreen_tex = TextureIO.newTexture(battleScreen.image(),true);
+                }
+                catch (GLException e) {
+                    e.printStackTrace();
+                }
+            }
 
             battleScreen_tex.bind();
 
@@ -199,6 +226,8 @@ class ScreenManager extends JFrame{
         public void reshape(GLAutoDrawable drawable, int x, int y, int w, int h) {
 
             GL gl = drawable.getGL();
+            //GLContext context = GLDrawableFactory.getFactory().createExternalGLContext();
+            //GL gl = context.getGL();
             gl.glViewport(0, 0, w, h);
             gl.glMatrixMode(GL.GL_PROJECTION);
             gl.glLoadIdentity();
@@ -210,12 +239,16 @@ class ScreenManager extends JFrame{
         public void init(GLAutoDrawable drawable) {
 
             try {
-                GL gl = drawable.getGL();									//get GL pipeline
+                GL gl = drawable.getGL();
+                //context = GLDrawableFactory.getFactory().createExternalGLContext();
+                //gl = context.getGL();
+                //context.makeCurrent();
+                //get GL pipeline
                 gl.glEnable(GL.GL_TEXTURE_2D);								//enable 2D textures
                 gl.glEnable(GL.GL_BLEND);
                 gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
 
-                drawable.getContext().makeCurrent();
+                //drawable.getContext().makeCurrent();
 
 
                 try{
