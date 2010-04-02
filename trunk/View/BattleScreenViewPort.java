@@ -40,7 +40,11 @@ class BattleScreenViewPort extends SpecialImage
 
     private void updateEntities()
     {
+        System.out.println("I'm getting refreshed");
 	List<Viewable> units = model.getUnits();
+        int a = (int)units.get(0).getLocation().getX();
+        int b = (int)units.get(0).getLocation().getY();
+        System.out.println("I'm at " + a + " " + b);
 	
 	for(int i = 0; i != units.size(); ++i )
 	{

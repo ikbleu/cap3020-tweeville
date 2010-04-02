@@ -36,6 +36,7 @@ public class Controller extends GenAdapter {
         if(suppression(e)) return true;
         if(e.getKeyCode()==START_BATTLE_MODE){
             bc.turnOn();
+            model.start();
             current = bc;
             return true;
         }
