@@ -24,7 +24,7 @@ public class Controller extends GenAdapter {
     GenAdapter current;
     LeashedModel model;
 
-    private int MIN_ENTRY = 100;
+    private int MIN_ENTRY = 30;
 
 
     public Controller(LeashedModel model){

@@ -35,8 +35,7 @@ public class View implements Tickable{
     }
 
     public void onTick(){
-	screenManager.battleScreen.refreshImage();
-        screenManager.updateBattleScreen();
+        screenManager.battleScreenViewPort.updateEntities();
     }
     
 }

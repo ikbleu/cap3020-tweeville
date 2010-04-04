@@ -33,7 +33,7 @@ public class BattleScreen extends SpecialImage
 	imageBuffer = new BufferedImage( imageWidth, imageHeight, BufferedImage.TYPE_INT_ARGB );
 
 	hud = new BattleHUD( model );
-	viewPort = new BattleScreenViewPort( model );
+	//viewPort = new BattleScreenViewPort( model, gl );
     }
 
     void refreshImage()

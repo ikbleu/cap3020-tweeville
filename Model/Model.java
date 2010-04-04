@@ -26,7 +26,7 @@ public class Model implements ViewHelper, LeashedModel{
         battleModelFight = new File("ConfigFiles/BattleInput.txt");
         //freeRoamModel = new FreeRoamModel();
         battleModel = new BattleModel(battleModelFight, battleModelMap);
-        clock = new Clock(100);
+        clock = new Clock(30);
     }
 
     public void start(){

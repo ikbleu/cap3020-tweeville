@@ -23,7 +23,7 @@ public class Character implements Viewable{
     AllianceType alliance;
     BattleMap map;
     int hp;
-    int movementInc = 2;
+    int movementInc = 20;
     //1130 x 650
     //36 x 80
 
