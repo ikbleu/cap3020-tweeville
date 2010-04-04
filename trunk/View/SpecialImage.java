@@ -11,4 +11,5 @@ package View;
  */
 abstract class SpecialImage extends CanIHazImage{
     GraphicsTableSingleton graphics = GraphicsTableSingleton.getInstance();
+    OpenGraphicsTable ographics = OpenGraphicsTable.getInstance();
 }

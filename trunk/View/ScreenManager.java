@@ -22,6 +22,7 @@ import javax.media.opengl.GLDrawableFactory;
 import javax.swing.JFrame;
 import com.sun.opengl.util.FPSAnimator;
 import com.sun.opengl.util.ImageUtil;
+
 import com.sun.opengl.util.texture.Texture;
 import com.sun.opengl.util.texture.TextureIO;
 
@@ -57,8 +58,12 @@ class ScreenManager extends JFrame{
 
     BattleScreen battleScreen;
 
+    BattleScreenViewPort battleScreenViewPort;
+
+    ViewHelper model;
+
     private Texture riceTest;
-    private Texture battleScreen_tex;
+    //private Texture battleScreen_tex;
 
     public static GL gl;
     public static GLContext context;
@@ -74,8 +79,10 @@ class ScreenManager extends JFrame{
         panX = 0;
         panY = 0;
 
-        battleScreen = new BattleScreen( model );
-        battleScreen.refreshImage();
+        this.model = model;
+
+        //battleScreen = new BattleScreen( model );
+        //battleScreen.refreshImage();
 
         if(fs){
             GraphicsEnvironment ge = GraphicsEnvironment
@@ -102,7 +109,7 @@ class ScreenManager extends JFrame{
 
         getContentPane().add(canvas);
 
-        animator = new FPSAnimator(canvas, 60);
+        animator = new FPSAnimator(canvas, 65);
 
         setVisible(true);
         this.validate();
@@ -143,32 +150,20 @@ class ScreenManager extends JFrame{
             GL gl = drawable.getGL();
             gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
             //renderRice(gl);
-            renderBattleScreen(gl);
+            //renderBattleScreen(gl);
+            battleScreenViewPort.render();
 
         }
 
         void updateBattleScreen(BufferedImage image){
-            try{
-                //context.makeCurrent();
-                battleScreen_tex = TextureIO.newTexture(image,true);
-            }
-            catch (GLException e) {
-                e.printStackTrace();
-            }
+            battleScreenViewPort.updateEntities();
         }
 
         private void renderBattleScreen(GL gl) {
 
-            if(updateNum ==1){
-                try{
-                    battleScreen_tex = TextureIO.newTexture(battleScreen.image(),true);
-                }
-                catch (GLException e) {
-                    e.printStackTrace();
-                }
-            }
+           
 
-            battleScreen_tex.bind();
+            /*battleScreen_tex.bind();
 
             gl.glPushMatrix();
 
@@ -189,7 +184,7 @@ class ScreenManager extends JFrame{
 
              gl.glEnd();
 
-             gl.glPopMatrix();
+             gl.glPopMatrix();*/
 
         }
 
@@ -250,10 +245,12 @@ class ScreenManager extends JFrame{
 
                 //drawable.getContext().makeCurrent();
 
+                battleScreenViewPort = new BattleScreenViewPort(model, gl);
+
 
                 try{
                     riceTest = TextureIO.newTexture(graphics.getGraphic("Rice"),true);
-                    battleScreen_tex = TextureIO.newTexture(battleScreen.image(),true);
+                   //battleScreen_tex = TextureIO.newTexture(battleScreen.image(),true);
                 }
                 catch(Exception c){
 		    System.out.print("Oh Noes!");
