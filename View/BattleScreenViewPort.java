@@ -130,8 +130,8 @@ class BattleScreenViewPort extends SpecialImage
 
 	for(int i = 0; i != units.size(); ++i )
         {
-            nasPoi = new Point.Float((((float)(units.get(i).getLocation().getX()))/((float)imageWidth)),
-                            (((float)(units.get(i).getLocation().getY()))/((float)imageWidth)));
+            nasPoi = new Point.Float((((float)(units.get(i).getLocation().getX()))/((float)1280)),
+                            (((float)(units.get(i).getLocation().getY()))/((float)800)));
 	}
     }
 
