@@ -32,6 +32,8 @@ abstract class SpecialImage extends CanIHazImage{
 
         Texture current = texture;
 
+        current.bind();
+
         gl.glPushMatrix();
 
             gl.glBegin(GL.GL_POLYGON);
