@@ -1,1 +1,3 @@
-human Nastie 500 400 40 80
+human NastieS 500 400 40 80
+human NastieS 500 500 40 80
+human NastieS 500 600 40 80

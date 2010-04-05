@@ -42,13 +42,6 @@ public class Clock {
             for(int i = 0; i < listeners.size(); ++i){
                 listeners.get(i).onTick();
             }
-            if(ticking){
-                System.out.println("Tick");
-            }
-            else{
-                System.out.println("Tock");
-            }
-            ticking = !ticking;
         }
     }
 

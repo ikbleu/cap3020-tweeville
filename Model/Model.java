@@ -30,22 +30,27 @@ public class Model implements ViewHelper, LeashedModel{
     
     public Model(){
         mode = ModeType.FREEROAM;
-        //battleModelMap = new File("Images/BattleScreenColorMap.png");
-        //battleModelFight = new File("ConfigFiles/BattleInput.txt");
+        battleModelMap = new File("Images/BattleScreenColorMap.png");
+        battleModelFight = new File("ConfigFiles/BattleInput.txt");
         freeRoamModelInfo = new File ("ConfigFiles/FRInput.txt");
         freeRoamModelMap = new File ("Images/ZoneTest.JPG");
-        //battleModel = new BattleModel(battleModelFight, battleModelMap);
+        battleModel = new BattleModel(battleModelFight, battleModelMap);
         freeRoamModel = new FreeRoamModel(freeRoamModelInfo, freeRoamModelMap);
         clock = new Clock(30);
     }
 
     public void start(){
         clock.start();
+        modeUpdate(mode);
     }
 
     public void modeUpdateRegister(View v, Controller c){
         view = v;
         controller = c;
+    }
+
+    public void setMode(ModeType mode){
+        this.mode = mode;
     }
 
     public void modeUpdate(ModeType mode){
@@ -56,6 +61,9 @@ public class Model implements ViewHelper, LeashedModel{
     public void moveChar(DirectionType d){
         if(mode == ModeType.BATTLE){
             battleModel.charMove(d);
+        }
+        if(mode == ModeType.FREEROAM){
+            freeRoamModel.charMove(d);
         }
     }
 

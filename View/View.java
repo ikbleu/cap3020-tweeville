@@ -23,7 +23,7 @@ public class View implements Tickable{
 
 
     public View(GenAdapter control, ViewHelper model){
-        screenManager = new ScreenManager("hello", control, false, model);
+        screenManager = new ScreenManager("hello", control, true, model);
         screenManager.addKeyListener(control);
         screenManager.addMouseListener(control);
         screenManager.addMouseMotionListener(control);
@@ -39,7 +39,7 @@ public class View implements Tickable{
             screenManager.battleScreenViewPort.updateEntities();
         }
         if(screenManager.currentMode == ModeType.FREEROAM){
-            //update the free roam view
+            screenManager.freeRoamScreenViewPort.updateEntities();
         }
     }
 
