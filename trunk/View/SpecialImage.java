@@ -27,6 +27,9 @@ abstract class SpecialImage extends CanIHazImage{
     GraphicsTableSingleton graphics = GraphicsTableSingleton.getInstance();
     OpenGraphicsTable ographics = OpenGraphicsTable.getInstance();
 
+   int wid = 1280;
+   int hei = 800;
+
 
     void drawMe(GL gl, Texture texture, float x, float y){
 
@@ -42,13 +45,13 @@ abstract class SpecialImage extends CanIHazImage{
                 gl.glVertex2d(x,y);
 
                 gl.glTexCoord2d(0.0, 1.0);
-                gl.glVertex2d(x, y + ((float)(current.getHeight())/(float)800));
+                gl.glVertex2d(x, y + ((float)(current.getHeight())/(float)hei));
 
                 gl.glTexCoord2d(1.0, 1.0);
-                gl.glVertex2d(x + ((float)(current.getWidth())/(float)1280), y + ((float)(current.getHeight())/(float)800));
+                gl.glVertex2d(x + ((float)(current.getWidth())/(float)wid), y + ((float)(current.getHeight())/(float)hei));
 
                 gl.glTexCoord2d(1.0, 0.0);
-                gl.glVertex2d(x + ((float)(current.getWidth())/(float)1280), y);
+                gl.glVertex2d(x + ((float)(current.getWidth())/(float)wid), y);
 
 
              gl.glEnd();

@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 
 import Model.LeashedModel;
 import Model.ModeType;
+import View.View;
 /**
  *
  * @author spock
@@ -23,10 +24,11 @@ public class Controller extends GenAdapter {
     FreeRoamControl frc;
     FreeRoamMenuControl frmc;
     SplashControl sc;
-    GenAdapter current;
+    GenAdapter current = new SplashControl();
     LeashedModel model;
+    View view;
 
-    ModeType currentMode;
+    ModeType currentMode = ModeType.SPLASH;
 
     private int MIN_ENTRY = 30;
 
@@ -34,6 +36,7 @@ public class Controller extends GenAdapter {
     public Controller(LeashedModel model){
         this.model = model;
         bc = new BattleControl(model);
+        frc = new FreeRoamControl(model);
     }
     
     public void turnOn(){
@@ -49,21 +52,37 @@ public class Controller extends GenAdapter {
         currentMode = mode;
     }
 
+    public void register(View view){
+        this.view = view;
+    }
+
 
     boolean canIDoIt( KeyEvent e){
         if(suppression(e)) return true;
-        if(e.getKeyCode()==START_BATTLE_MODE){
+        if(e.getKeyCode()==START_BATTLE_MODE && currentMode == ModeType.SPLASH){
+            current.turnOff();
             bc.turnOn();
-            model.start();
             current = bc;
+            currentMode = ModeType.BATTLE;
+            view.setMode(ModeType.BATTLE);
+            model.setMode(ModeType.BATTLE);
+            model.start();
             return true;
         }
-        if(e.getKeyCode()==START_FR_MODE){
+        else if(e.getKeyCode()==START_FR_MODE && currentMode == ModeType.SPLASH){
+            current.turnOff();
+            frc.turnOn();
+            model.start();
+            current = frc;
+            currentMode = ModeType.FREEROAM;
+            view.setMode(ModeType.FREEROAM);
+            model.setMode(ModeType.FREEROAM);
+            model.start();
+            return true;
+        }
+        /*else if (){
 
-            model.start();
-            current = bc;
-            return true;
-        }
+        }*/
         else if(e.getKeyCode()==GAME_EXIT){
             System.exit(0);
             return true;

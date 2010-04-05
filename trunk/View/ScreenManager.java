@@ -217,7 +217,6 @@ class ScreenManager extends JFrame{
 
 
                 try{
-                   //battleScreen_tex = TextureIO.newTexture(battleScreen.image(),true);
                 }
                 catch(Exception c){
 		    System.out.print("Oh Noes!");

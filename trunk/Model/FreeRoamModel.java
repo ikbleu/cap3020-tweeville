@@ -55,7 +55,7 @@ public class FreeRoamModel {
         currCharIndex = 0;
     }
 
-    void move(DirectionType direction){
+    void charMove(DirectionType direction){
         currentChar.move(direction);
     }
 

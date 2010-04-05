@@ -6,16 +6,21 @@
 package Control;
 import java.awt.event.KeyEvent;
 
+import Model.LeashedModel;
+import Model.DirectionType;
+
+
 /**
  *
  * @author spock
  */
 public class FreeRoamControl extends GenAdapter{
     private boolean active = false;
+    LeashedModel model;
 
-    FreeRoamControl(){
+    FreeRoamControl(LeashedModel model){
         active = false;
-
+        this.model = model;
     }
 
     public void turnOn(){
@@ -28,21 +33,22 @@ public class FreeRoamControl extends GenAdapter{
         System.out.println("FreeRoamControl exited");
     }
 
+    @Override
     public void keyPressed(KeyEvent e){
         if (e.getKeyCode() == KeyEvent.VK_W){
-            System.out.println("You pressed up!");
+            model.moveChar(DirectionType.NORTH);
         }
 
         else if (e.getKeyCode() == KeyEvent.VK_S){
-            System.out.println("You pressed down!");
+            model.moveChar(DirectionType.SOUTH);
         }
 
         else if (e.getKeyCode() == KeyEvent.VK_D){
-            System.out.println("You pressed right!");
+            model.moveChar(DirectionType.EAST);
         }
 
         else if (e.getKeyCode() == KeyEvent.VK_A){
-            System.out.println("You pressed left!");
+            model.moveChar(DirectionType.WEST);
         }
 
         else if (e.getKeyCode() == KeyEvent.VK_E){

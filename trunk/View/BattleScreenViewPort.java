@@ -44,11 +44,13 @@ class BattleScreenViewPort extends SpecialImage
     Point.Float nasPoi;
 
 
-    BattleScreenViewPort( ViewHelper model, GL gl )
+    BattleScreenViewPort( ViewHelper model, GL gl, int wid, int hei )
     {
 	this.model = model;
 	imageWidth = 1130;
 	imageHeight = 650;
+        this.wid = wid;
+        this.hei = hei;
         this.gl = gl;
 
         updateEntities();
