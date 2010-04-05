@@ -75,6 +75,9 @@ class ScreenManager extends JFrame{
     GraphicListener listener;
     public int updateNum = 0;
 
+    public int dfWidth = 800;
+    public int dfHeight = 1280;
+
     ScreenManager(String s, GenAdapter control, boolean fs, ViewHelper model){
         super(s);
 
@@ -88,8 +91,6 @@ class ScreenManager extends JFrame{
 
         this.model = model;
 
-        //battleScreen = new BattleScreen( model );
-        //battleScreen.refreshImage();
 
         if(fs){
             GraphicsEnvironment ge = GraphicsEnvironment
@@ -100,6 +101,9 @@ class ScreenManager extends JFrame{
 
             DisplayMode dm = gs.getDisplayMode();
             setSize(dm.getWidth(), dm.getHeight());
+
+            dfWidth = dm.getWidth();
+            dfHeight = dm.getHeight();
 
             if (gs.isFullScreenSupported()) {
                     gs.setFullScreenWindow(this);
@@ -165,10 +169,17 @@ class ScreenManager extends JFrame{
             if(currentMode == ModeType.BATTLE){
                 battleScreenViewPort.render();
             }
+            if(currentMode == ModeType.FREEROAM){
+                freeRoamScreenViewPort.render();
+            }
 
         }
 
         void updateBattleScreen(BufferedImage image){
+            battleScreenViewPort.updateEntities();
+        }
+
+        void updateFreeRoamScreen(BufferedImage image){
             battleScreenViewPort.updateEntities();
         }
 
@@ -200,11 +211,12 @@ class ScreenManager extends JFrame{
 
                 //drawable.getContext().makeCurrent();
 
-                battleScreenViewPort = new BattleScreenViewPort(model, gl);
+                battleScreenViewPort = new BattleScreenViewPort(model, gl, dfWidth, dfHeight);
+
+                freeRoamScreenViewPort = new FreeRoamScreenViewPort(model, gl, dfWidth, dfHeight);
 
 
                 try{
-                    riceTest = TextureIO.newTexture(graphics.getGraphic("Rice"),true);
                    //battleScreen_tex = TextureIO.newTexture(battleScreen.image(),true);
                 }
                 catch(Exception c){
