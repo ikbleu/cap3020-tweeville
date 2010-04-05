@@ -14,7 +14,7 @@ import java.awt.Color;
  *
  * @author spock
  */
-public class BattleMap {
+public class BattleMap implements GameMap{
     BufferedImage image;
     int okay = (Color.BLUE).getRGB();
 
@@ -28,8 +28,16 @@ public class BattleMap {
         }
     }
 
-    boolean passable(double x, double y){
-        return image.getRGB((int)x, (int)y) == okay;
+    public boolean passable(double x, double y, Character c){
+
+        if(image.getRGB((int)x, (int)y) == okay &&
+           image.getRGB((int)x, (int)y + c.cheight) == okay &&
+           image.getRGB((int)x + c.cwidth, (int)y + c.cheight) == okay &&
+           image.getRGB((int)x + c.cwidth, (int)y) == okay )
+            return true;
+        else{
+            return false;
+        }
     }
 
 }

@@ -19,8 +19,14 @@ public class FreeRoamMenuControl extends GenAdapter{
         active = false;
     }
 
-    void turnOn(){
+    public void turnOn(){
         active = true;
+        System.out.println("FreeRoamMenuControl entered");
+    }
+
+    public void turnOff(){
+        active = false;
+        System.out.println("FreeRoamMenuControl exited");
     }
 
     @Override

@@ -13,5 +13,6 @@ public enum ModeType {
     SPLASH,
     FREEROAM,
     BATTLE,
+    DIALOGUE,
     CUTSCENE
 }

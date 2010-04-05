@@ -21,16 +21,21 @@ class BattleControl extends GenAdapter{
         this.model = model;
     }
 
-    void turnOn(){
+    public void turnOn(){
         active = true;
         System.out.println("BattleMode entered");
     }
 
+    public void turnOff(){
+        active = false;
+        System.out.println("BattleMode exited");
+    }
+
+    @Override
     public void keyPressed(KeyEvent e){
         if (e.getKeyCode() == KeyEvent.VK_W){
             System.out.println("You pressed up!");
             model.moveChar(DirectionType.NORTH);
-
         }
 
         else if (e.getKeyCode() == KeyEvent.VK_S){

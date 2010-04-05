@@ -17,8 +17,14 @@ public class DialogueControl extends GenAdapter{
 
     }
 
-    void turnOn(){
+    public void turnOn(){
         active = true;
+        System.out.println("DialogueControl entered");
+    }
+
+    public void turnOff(){
+        active = false;
+        System.out.println("DialogueControl exited");
     }
 
     public void keyPressed(KeyEvent e){

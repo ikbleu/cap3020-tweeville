@@ -18,6 +18,16 @@ public class BattleMenuControl extends GenAdapter{
 
     }
 
+    public void turnOn(){
+        active = true;
+        System.out.println("BattleMenuMode entered");
+    }
+
+    public void turnOff(){
+        active = false;
+        System.out.println("BattleMenuMode exited");
+    }
+
     @Override
     public void keyPressed(KeyEvent e){
         if (e.getKeyCode() == KeyEvent.VK_DOWN){

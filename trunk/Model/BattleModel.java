@@ -18,11 +18,13 @@ public class BattleModel {
     Clock clock;
 
 
+
+
     BattleModel(File battleInfo, File map){
         
         battleMap = new BattleMap(map);
         fightModel = new FightModel(battleInfo, battleMap);
-        clock = new Clock(100);
+
     }
 
     List<Viewable> getUnits(){
