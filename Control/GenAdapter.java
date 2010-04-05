@@ -14,7 +14,7 @@ import java.awt.event.MouseMotionListener;
  *
  * @author spock
  */
-public class GenAdapter extends KeyAdapter implements MouseListener, MouseMotionListener{
+public abstract class GenAdapter extends KeyAdapter implements MouseListener, MouseMotionListener{
 
     public void mouseClicked(MouseEvent e){
 
@@ -43,4 +43,7 @@ public class GenAdapter extends KeyAdapter implements MouseListener, MouseMotion
     public void mouseDragged(MouseEvent e){
 
     }
+
+    public abstract void turnOff();
+    public abstract void turnOn();
 }

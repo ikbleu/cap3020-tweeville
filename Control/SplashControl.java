@@ -19,8 +19,14 @@ public class SplashControl extends GenAdapter{
         active = false;
     }
 
-    void turnOn(){
+    public void turnOn(){
         active = true;
+        System.out.println("SplashControl entered");
+    }
+
+    public void turnOff(){
+        active = false;
+        System.out.println("SplashControl exited");
     }
 
     public void keyPressed(KeyEvent e){

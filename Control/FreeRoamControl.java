@@ -18,8 +18,14 @@ public class FreeRoamControl extends GenAdapter{
 
     }
 
-    void turnOn(){
+    public void turnOn(){
         active = true;
+        System.out.println("FreeRoamControl entered");
+    }
+
+    public void turnOff(){
+        active = false;
+        System.out.println("FreeRoamControl exited");
     }
 
     public void keyPressed(KeyEvent e){

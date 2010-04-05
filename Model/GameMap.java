@@ -9,8 +9,6 @@ package Model;
  *
  * @author spock
  */
-public enum GambitType {
-    BALANCED,
-    OFFENSIVE,
-    DEFENSIVE
+interface GameMap {
+    abstract boolean passable(double x, double y, Character c);
 }

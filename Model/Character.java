@@ -21,16 +21,20 @@ public class Character implements Viewable{
     WeaponType ranged;
     WeaponType armor;
     AllianceType alliance;
-    BattleMap map;
+    GameMap map;
+    int cwidth;
+    int cheight;
     int hp;
     int movementInc = 20;
     //1130 x 650
     //36 x 80
 
-    Character(String name, int locX, int locY, AllianceType alliance, BattleMap map){
+    Character(String name, int locX, int locY, int cwidth, int cheight, AllianceType alliance, GameMap map){
         this.name = name;
         this.locX = locX;
         this.locY = locY;
+        this.cwidth = cwidth;
+        this.cheight = cheight;
         this.status = UnitStatus.STANDING;
         this.alliance = alliance;
         this.map = map;
@@ -39,19 +43,19 @@ public class Character implements Viewable{
 
     void move(DirectionType direction){
         if(direction == DirectionType.EAST){
-            if(map.passable((double)locX+movementInc, (double)locY))
+            if(map.passable((double)locX+movementInc, (double)locY, this))
                 locX+=movementInc;
         }
         else if(direction == DirectionType.NORTH){
-            if(map.passable((double)locX, (double)locY-movementInc))
+            if(map.passable((double)locX, (double)locY-movementInc, this))
                 locY-=movementInc;
         }
         else if(direction == DirectionType.WEST){
-            if(map.passable((double)locX-movementInc, (double)locY))
+            if(map.passable((double)locX-movementInc, (double)locY, this))
                 locX-=movementInc;
         }
         else if(direction == DirectionType.SOUTH){
-            if(map.passable((double)locX, (double)locY+movementInc))
+            if(map.passable((double)locX, (double)locY+movementInc, this))
                 locY+=movementInc;
         }
         System.out.print(name + " moved to " + locX + ", " + locY);

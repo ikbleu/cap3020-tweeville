@@ -8,7 +8,7 @@ package View;
 import Control.GenAdapter;
 import Model.ViewHelper;
 import Model.Tickable;
-
+import Model.ModeType;
 /**
  *
  * @author spock
@@ -35,7 +35,16 @@ public class View implements Tickable{
     }
 
     public void onTick(){
-        screenManager.battleScreenViewPort.updateEntities();
+        if(screenManager.currentMode == ModeType.BATTLE){
+            screenManager.battleScreenViewPort.updateEntities();
+        }
+        if(screenManager.currentMode == ModeType.FREEROAM){
+            //update the free roam view
+        }
+    }
+
+    public void setMode(ModeType mode){
+        screenManager.setMode(mode);
     }
     
 }

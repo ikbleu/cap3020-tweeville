@@ -8,12 +8,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import Model.LeashedModel;
+import Model.ModeType;
 /**
  *
  * @author spock
  */
 public class Controller extends GenAdapter {
     private int START_BATTLE_MODE = KeyEvent.VK_B;
+    private int START_FR_MODE = KeyEvent.VK_F;
     private int GAME_EXIT = KeyEvent.VK_F9;
     BattleControl bc;
     BattleMenuControl bmc;
@@ -24,6 +26,8 @@ public class Controller extends GenAdapter {
     GenAdapter current;
     LeashedModel model;
 
+    ModeType currentMode;
+
     private int MIN_ENTRY = 30;
 
 
@@ -31,11 +35,31 @@ public class Controller extends GenAdapter {
         this.model = model;
         bc = new BattleControl(model);
     }
+    
+    public void turnOn(){
+        System.out.println("Controller entered");
+    }
+
+    public void turnOff(){
+        System.out.println("Controller exited");
+    }
+
+
+    public void setMode(ModeType mode){
+        currentMode = mode;
+    }
+
 
     boolean canIDoIt( KeyEvent e){
         if(suppression(e)) return true;
         if(e.getKeyCode()==START_BATTLE_MODE){
             bc.turnOn();
+            model.start();
+            current = bc;
+            return true;
+        }
+        if(e.getKeyCode()==START_FR_MODE){
+
             model.start();
             current = bc;
             return true;

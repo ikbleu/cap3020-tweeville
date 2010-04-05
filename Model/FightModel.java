@@ -49,12 +49,14 @@ public class FightModel {
                 System.out.println(locX);
                 int locY = s.nextInt();
                 System.out.println(locY);
+                int cwidth = s.nextInt();
+                int cheight = s.nextInt();
 
                 if(readGood){
-                    good.add(new Character(name, locX, locY, AllianceType.FRIENDLY, map));
+                    good.add(new Character(name, locX, locY, cwidth, cheight, AllianceType.FRIENDLY, map));
                 }
                 else{
-                    enemy.add(new Character(name, locX, locY, AllianceType.ENEMY, map));
+                    enemy.add(new Character(name, locX, locY, cwidth, cheight, AllianceType.ENEMY, map));
                 }
             }
         }

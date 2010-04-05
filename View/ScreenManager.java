@@ -34,11 +34,13 @@ import java.awt.DisplayMode;
 import Control.Controller;
 import Control.GenAdapter;
 import Model.ViewHelper;
+import Model.ModeType;
 
 class ScreenManager extends JFrame{
 
     private static final long serialVersionUID = 1212121212;
-    private LinkedList<Point> selectedTiles = new LinkedList<Point>();
+
+    public ModeType currentMode;
 
     private double screenRatio = 1.6;
 
@@ -57,8 +59,11 @@ class ScreenManager extends JFrame{
     private FPSAnimator animator;
 
     BattleScreen battleScreen;
-
     BattleScreenViewPort battleScreenViewPort;
+    BattleHUD battleHUD;
+
+    FreeRoamScreenViewPort freeRoamScreenViewPort;
+    FreeRoamHUD freeRoamHUD;
 
     ViewHelper model;
 
@@ -78,6 +83,8 @@ class ScreenManager extends JFrame{
         scale = 1.0;
         panX = 0;
         panY = 0;
+
+        currentMode = ModeType.SPLASH;
 
         this.model = model;
 
@@ -113,6 +120,10 @@ class ScreenManager extends JFrame{
 
         setVisible(true);
         this.validate();
+    }
+
+    void setMode(ModeType mode){
+        this.currentMode = mode;
     }
 
     void start(){
@@ -151,68 +162,14 @@ class ScreenManager extends JFrame{
             gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
             //renderRice(gl);
             //renderBattleScreen(gl);
-            battleScreenViewPort.render();
+            if(currentMode == ModeType.BATTLE){
+                battleScreenViewPort.render();
+            }
 
         }
 
         void updateBattleScreen(BufferedImage image){
             battleScreenViewPort.updateEntities();
-        }
-
-        private void renderBattleScreen(GL gl) {
-
-           
-
-            /*battleScreen_tex.bind();
-
-            gl.glPushMatrix();
-
-            gl.glBegin(GL.GL_POLYGON);
-
-                gl.glTexCoord2d(0.0, 0.0);
-                gl.glVertex2d(0.0,0.0);
-
-                gl.glTexCoord2d(0.0, 1.0);
-                gl.glVertex2d(0.0, 1.0);
-
-                gl.glTexCoord2d(1.0, 1.0);
-                gl.glVertex2d(1.0, 1.0);
-
-                gl.glTexCoord2d(1.0, 0.0);
-                gl.glVertex2d(1.0, 0.0);
-
-
-             gl.glEnd();
-
-             gl.glPopMatrix();*/
-
-        }
-
-        private void renderRice(GL gl) {
-
-            riceTest.bind();
-
-            gl.glPushMatrix();
-
-            gl.glBegin(GL.GL_POLYGON);
-
-                gl.glTexCoord2d(0.0, 0.0);
-                gl.glVertex2d(0.0,0.0);
-
-                gl.glTexCoord2d(0.0, 1.0);
-                gl.glVertex2d(0.0, 1.0);
-
-                gl.glTexCoord2d(1.0, 1.0);
-                gl.glVertex2d(1.0, 1.0);
-
-                gl.glTexCoord2d(1.0, 0.0);
-                gl.glVertex2d(1.0, 0.0);
-
-
-             gl.glEnd();
-
-             gl.glPopMatrix();
-
         }
 
         public void displayChanged(GLAutoDrawable drawable, boolean arg1, boolean arg2) {
@@ -221,8 +178,6 @@ class ScreenManager extends JFrame{
         public void reshape(GLAutoDrawable drawable, int x, int y, int w, int h) {
 
             GL gl = drawable.getGL();
-            //GLContext context = GLDrawableFactory.getFactory().createExternalGLContext();
-            //GL gl = context.getGL();
             gl.glViewport(0, 0, w, h);
             gl.glMatrixMode(GL.GL_PROJECTION);
             gl.glLoadIdentity();

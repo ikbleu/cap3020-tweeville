@@ -7,6 +7,9 @@ package Model;
 import java.io.File;
 import java.util.List;
 
+import Control.Controller;
+import View.View;
+
 /**
  *
  * @author Mr. Wilmot
@@ -17,20 +20,37 @@ public class Model implements ViewHelper, LeashedModel{
     FreeRoamModel freeRoamModel;
     File battleModelMap;
     File battleModelFight;
+    File freeRoamModelMap;
+    File freeRoamModelInfo;
     Clock clock;
+
+    View view;
+    Controller controller;
     
     
     public Model(){
-        mode = ModeType.BATTLE;
-        battleModelMap = new File("Images/BattleScreenColorMap.png");
-        battleModelFight = new File("ConfigFiles/BattleInput.txt");
-        //freeRoamModel = new FreeRoamModel();
-        battleModel = new BattleModel(battleModelFight, battleModelMap);
+        mode = ModeType.FREEROAM;
+        //battleModelMap = new File("Images/BattleScreenColorMap.png");
+        //battleModelFight = new File("ConfigFiles/BattleInput.txt");
+        freeRoamModelInfo = new File ("ConfigFiles/FRInput.txt");
+        freeRoamModelMap = new File ("Images/ZoneTest.JPG");
+        //battleModel = new BattleModel(battleModelFight, battleModelMap);
+        freeRoamModel = new FreeRoamModel(freeRoamModelInfo, freeRoamModelMap);
         clock = new Clock(30);
     }
 
     public void start(){
         clock.start();
+    }
+
+    public void modeUpdateRegister(View v, Controller c){
+        view = v;
+        controller = c;
+    }
+
+    public void modeUpdate(ModeType mode){
+        view.setMode(mode);
+        controller.setMode(mode);
     }
 
     public void moveChar(DirectionType d){
@@ -46,6 +66,9 @@ public class Model implements ViewHelper, LeashedModel{
     public List<Viewable> getUnits(){
         if(mode == ModeType.BATTLE){
             return battleModel.getUnits();
+        }
+        if(mode == ModeType.FREEROAM){
+            return freeRoamModel.getUnits();
         }
         return null;
     }
