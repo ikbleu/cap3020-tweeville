@@ -27,13 +27,19 @@ abstract class SpecialImage extends CanIHazImage{
     GraphicsTableSingleton graphics = GraphicsTableSingleton.getInstance();
     OpenGraphicsTable ographics = OpenGraphicsTable.getInstance();
 
-   int wid = 1280;
-   int hei = 800;
+   int wid;
+   int hei;
+
+   float widRat;
+   float heiRat;
 
 
     void drawMe(GL gl, Texture texture, float x, float y){
 
         Texture current = texture;
+
+        widRat = ((float)(wid))/1280F;
+        heiRat = ((float)(hei))/800F;
 
         current.bind();
 
@@ -42,16 +48,16 @@ abstract class SpecialImage extends CanIHazImage{
             gl.glBegin(GL.GL_POLYGON);
 
                 gl.glTexCoord2d(0.0, 0.0);
-                gl.glVertex2d(x,y);
+                gl.glVertex2d(x * widRat,y * heiRat);
 
                 gl.glTexCoord2d(0.0, 1.0);
-                gl.glVertex2d(x, y + ((float)(current.getHeight())/(float)hei));
+                gl.glVertex2d(x * widRat, (y + ((float)(current.getHeight())/(float)hei)) * heiRat);
 
                 gl.glTexCoord2d(1.0, 1.0);
-                gl.glVertex2d(x + ((float)(current.getWidth())/(float)wid), y + ((float)(current.getHeight())/(float)hei));
+                gl.glVertex2d((x + ((float)(current.getWidth())/(float)wid)) * widRat, (y + ((float)(current.getHeight())/(float)hei)) * heiRat);
 
                 gl.glTexCoord2d(1.0, 0.0);
-                gl.glVertex2d(x + ((float)(current.getWidth())/(float)wid), y);
+                gl.glVertex2d((x + ((float)(current.getWidth())/(float)wid)) * widRat, y * heiRat);
 
 
              gl.glEnd();
