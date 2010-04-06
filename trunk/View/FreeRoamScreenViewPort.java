@@ -53,8 +53,8 @@ public class FreeRoamScreenViewPort extends SpecialImage{
         this.wid = wid;
         this.hei = hei;
 	this.model = model;
-	imageWidth = 1130;
-	imageHeight = 650;
+	imageWidth = 1280;
+	imageHeight = 800;
         this.gl = gl;
 
         updateEntities();
