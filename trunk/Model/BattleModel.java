@@ -27,7 +27,7 @@ public class BattleModel {
 
     }
 
-    List<Viewable> getUnits(){
+    List<Character> getUnits(){
         return fightModel.getUnits();
     }
 

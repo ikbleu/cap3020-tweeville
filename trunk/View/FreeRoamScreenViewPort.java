@@ -27,6 +27,8 @@ import com.sun.opengl.util.texture.TextureIO;
 
 import Model.Viewable;
 import java.util.LinkedList;
+import java.util.Collections;
+import Model.Character;
 
 /**
  *
@@ -43,7 +45,7 @@ public class FreeRoamScreenViewPort extends SpecialImage{
     //LinkedList<Point.Float> unitPoints;
     Point.Float[] unitPoints;
 
-    List<Viewable> units;
+    List<Character> units;
 
 
     FreeRoamScreenViewPort( ViewHelper model, GL gl, int wid, int hei )
@@ -60,9 +62,11 @@ public class FreeRoamScreenViewPort extends SpecialImage{
     }
 
     void render(){
+        drawMe(gl, ographics.getGraphic("colormap"), 0, 0);
         for(int i = 0; i < units.size();++i){
             String h = units.get(i).getCharacter();
             //float g = unitPoints.get(i-1).x;
+            
             drawMe(gl, ographics.getGraphic(units.get(i).getCharacter()), (((float)(units.get(i).getLocation().getX()))/((float)wid)), (((float)(units.get(i).getLocation().getY()))/((float)hei)));
         }
     }
@@ -74,5 +78,6 @@ public class FreeRoamScreenViewPort extends SpecialImage{
     void updateEntities()
     {
 	units = model.getUnits();
+        Collections.sort((List)units);
     }
 }

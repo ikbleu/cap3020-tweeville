@@ -56,7 +56,10 @@ public class FreeRoamModel {
     }
 
     void charMove(DirectionType direction){
-        currentChar.move(direction);
+        ArrayList<Character> yes = new ArrayList<Character>();
+        yes.addAll(controlled);
+        yes.addAll(npcs);
+        currentChar.move(direction, yes, controlled, currentChar);
     }
 
     void swapChar(){
@@ -67,10 +70,32 @@ public class FreeRoamModel {
         currentChar = controlled.get(currCharIndex);
     }
 
-    List<Viewable> getUnits(){
-        ArrayList<Viewable> yes = new ArrayList<Viewable>();
+    List<Character> getUnits(){
+        ArrayList<Character> yes = new ArrayList<Character>();
         yes.addAll(controlled);
         yes.addAll(npcs);
+        for(int i = 0; i < controlled.size()-1; ++ i){
+            double x1 = controlled.get(currCharIndex + 1 + i).centerX;
+            double x2 = controlled.get(currCharIndex).centerX;
+            double y1 = controlled.get(currCharIndex + 1 + i).centerY;
+            double y2 = controlled.get(currCharIndex).centerY;
+            if ( Math.abs(x1 - x2) > Math.abs(y1 - y2)){
+                if(x1 < x2){
+                    controlled.get(currCharIndex + 1 + i).move(DirectionType.EAST, yes, controlled, currentChar);
+                }
+                else{
+                    controlled.get(currCharIndex + 1 + i).move(DirectionType.WEST, yes, controlled, currentChar);
+                }
+            }
+            else{
+                if(y1 < y2){
+                    controlled.get(currCharIndex + 1 + i).move(DirectionType.SOUTH, yes, controlled, currentChar);
+                }
+                else{
+                    controlled.get(currCharIndex + 1 + i).move(DirectionType.NORTH, yes, controlled, currentChar);
+                }
+            }
+        }
         return yes;
     }
 

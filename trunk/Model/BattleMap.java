@@ -30,10 +30,10 @@ public class BattleMap implements GameMap{
 
     public boolean passable(double x, double y, Character c){
 
-        if(image.getRGB((int)x, (int)y) == okay &&
+        if(image.getRGB((int)x, (int)y + c.cheight * 3 / 4) == okay &&
            image.getRGB((int)x, (int)y + c.cheight) == okay &&
            image.getRGB((int)x + c.cwidth, (int)y + c.cheight) == okay &&
-           image.getRGB((int)x + c.cwidth, (int)y) == okay )
+           image.getRGB((int)x + c.cwidth, (int)y + c.cheight * 3 / 4) == okay )
             return true;
         else{
             return false;
