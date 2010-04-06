@@ -65,7 +65,10 @@ public class FightModel {
     }
 
     void move(DirectionType direction){
-        currentChar.move(direction);
+        ArrayList<Character> yes = new ArrayList<Character>();
+        yes.addAll(good);
+        yes.addAll(enemy);
+        currentChar.move(direction, yes, good, currentChar);
     }
 
     void swapChar(){
@@ -76,8 +79,8 @@ public class FightModel {
         currentChar = good.get(currCharIndex);
     }
 
-    List<Viewable> getUnits(){
-        ArrayList<Viewable> yes = new ArrayList<Viewable>();
+    List<Character> getUnits(){
+        ArrayList<Character> yes = new ArrayList<Character>();
         yes.addAll(good);
         yes.addAll(enemy);
         return yes;

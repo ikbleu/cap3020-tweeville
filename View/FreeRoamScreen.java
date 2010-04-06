@@ -32,50 +32,7 @@ import java.util.LinkedList;
  *
  * @author spock
  */
-public class FreeRoamScreen extends SpecialImage{
+public class FreeRoamScreen{
 
-    private int imageWidth, imageHeight;
-    private ViewHelper model;
-    GL gl;
-
-    Texture current;
-
-    LinkedList<Point.Float> unitPoints;
-
-    List<Viewable> units;
-
-
-    FreeRoamScreen( ViewHelper model, GL gl )
-    {
-	this.model = model;
-	imageWidth = 1130;
-	imageHeight = 650;
-        this.gl = gl;
-
-        updateEntities();
-
-    }
-
-    void render(){
-        for(int i =0; i < units.size();++i){
-            drawMe(gl, ographics.getGraphic(units.get(i).getCharacter()), unitPoints.get(i).x, unitPoints.get(i).x);
-        }
-    }
-
-    void refreshImage(){
-        
-    }
-
-    void updateEntities()
-    {
-        System.out.println("I'm getting refreshed, I'm the Free Roam Screen!");
-	units = model.getUnits();
-        unitPoints = new LinkedList<Point.Float>();
-
-	for(int i = 0; i != units.size(); ++i )
-        {
-            unitPoints.add( new Point.Float((((float)(units.get(i).getLocation().getX()))/((float)1280)),
-                            (((float)(units.get(i).getLocation().getY()))/((float)800))) );
-	}
-    }
+  
 }

@@ -12,7 +12,7 @@ import java.util.List;
  * @author spock
  */
 public interface ViewHelper {
-    public abstract List<Viewable> getUnits();
+    public abstract List<Character> getUnits();
     public abstract WeaponType getBScurrentMelee();
     public abstract WeaponType getBScurrentRanged();
     public abstract WeaponType getBScurrentArmor();

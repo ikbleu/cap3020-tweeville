@@ -33,7 +33,7 @@ public class Model implements ViewHelper, LeashedModel{
         battleModelMap = new File("Images/BattleScreenColorMap.png");
         battleModelFight = new File("ConfigFiles/BattleInput.txt");
         freeRoamModelInfo = new File ("ConfigFiles/FRInput.txt");
-        freeRoamModelMap = new File ("Images/ZoneTest.JPG");
+        freeRoamModelMap = new File ("Images/BattleScreenColorMap.png");
         battleModel = new BattleModel(battleModelFight, battleModelMap);
         freeRoamModel = new FreeRoamModel(freeRoamModelInfo, freeRoamModelMap);
         clock = new Clock(30);
@@ -71,7 +71,7 @@ public class Model implements ViewHelper, LeashedModel{
         clock.addListener(t);
     }
 
-    public List<Viewable> getUnits(){
+    public List<Character> getUnits(){
         if(mode == ModeType.BATTLE){
             return battleModel.getUnits();
         }

@@ -30,6 +30,7 @@ public class OpenGraphicsTable {
             graphics.put( "TestHUD", TextureIO.newTexture(ImageIO.read(new File("Images/s17.JPG")), true));
             graphics.put( "Rice", TextureIO.newTexture(ImageIO.read(new File("Images/s17.JPG")), true));
             graphics.put( "NastieS", TextureIO.newTexture(ImageIO.read(new File("Images/NastieS.png")), true));
+            graphics.put( "colormap", TextureIO.newTexture(ImageIO.read(new File("Images/BattleScreenColorMap.png")), true));
 
         }
         catch(Exception e){

@@ -14,6 +14,7 @@ import java.awt.Graphics2D;
 import Model.ViewHelper;
 import Model.Viewable;
 import java.util.List;
+import Model.Character;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
@@ -124,7 +125,7 @@ class BattleScreenViewPort extends SpecialImage
     void updateEntities()
     {
         System.out.println("I'm getting refreshed");
-	List<Viewable> units = model.getUnits();
+	List<Character> units = model.getUnits();
         int a = (int)units.get(0).getLocation().getX();
         int b = (int)units.get(0).getLocation().getY();
         System.out.println("I'm at " + a + " " + b);
