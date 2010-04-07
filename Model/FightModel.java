@@ -64,7 +64,7 @@ public class FightModel {
         currCharIndex = 0;
     }
 
-    void move(DirectionType direction){
+    /*void move(DirectionType direction){
         ArrayList<Character> yes = new ArrayList<Character>();
         yes.addAll(good);
         yes.addAll(enemy);
@@ -83,6 +83,54 @@ public class FightModel {
         ArrayList<Character> yes = new ArrayList<Character>();
         yes.addAll(good);
         yes.addAll(enemy);
+        return yes;
+    }*/
+
+    void move(DirectionType direction){
+        ArrayList<Character> yes = new ArrayList<Character>();
+        yes.addAll(good);
+        yes.addAll(enemy);
+        currentChar.move(direction, yes, good, currentChar);
+    }
+
+    void swapChar(){
+        currCharIndex++;
+        if(currCharIndex>=good.size()){
+            currCharIndex = 0;
+        }
+        currentChar = good.get(currCharIndex);
+    }
+
+    public void onTick(){
+
+    }
+
+    List<Character> getUnits(){
+        ArrayList<Character> yes = new ArrayList<Character>();
+        yes.addAll(good);
+        yes.addAll(enemy);
+        for(int i = 0; i < good.size()-1; ++ i){
+            double x1 = good.get(currCharIndex + 1 + i).centerX;
+            double x2 = good.get(currCharIndex).centerX;
+            double y1 = good.get(currCharIndex + 1 + i).centerY;
+            double y2 = good.get(currCharIndex).centerY;
+            if ( Math.abs(x1 - x2) > Math.abs(y1 - y2)){
+                if(x1 < x2){
+                    good.get(currCharIndex + 1 + i).move(DirectionType.EAST, yes, good, currentChar);
+                }
+                else{
+                    good.get(currCharIndex + 1 + i).move(DirectionType.WEST, yes, good, currentChar);
+                }
+            }
+            else{
+                if(y1 < y2){
+                    good.get(currCharIndex + 1 + i).move(DirectionType.SOUTH, yes, good, currentChar);
+                }
+                else{
+                    good.get(currCharIndex + 1 + i).move(DirectionType.NORTH, yes, good, currentChar);
+                }
+            }
+        }
         return yes;
     }
 

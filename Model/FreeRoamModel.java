@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author spock
  */
-public class FreeRoamModel {
+public class FreeRoamModel implements Tickable{
 
     FreeRoamMap freeRoamMap;
     Scanner s;
@@ -25,12 +25,16 @@ public class FreeRoamModel {
     Character currentChar;
     int currCharIndex = 0;
     boolean readGood;
+    ArrayList<TriggerBox> triggers;
+    Model m;
 
 
-    FreeRoamModel(File freeRoamInfo, File map){
+    FreeRoamModel(File freeRoamInfo, File map, Model model){
+        m = model;
         freeRoamMap = new FreeRoamMap(map);
         controlled = new ArrayList<Character>();
         npcs = new ArrayList<Character>();
+        triggers = new ArrayList<TriggerBox>();
         try{
             s = new Scanner(freeRoamInfo);
         }
@@ -43,12 +47,20 @@ public class FreeRoamModel {
             if(type.equals("human")){
                 String name = s.next();
                 int locX = s.nextInt();
-                System.out.println(locX);
                 int locY = s.nextInt();
-                System.out.println(locY);
                 int cwidth = s.nextInt();
                 int cheight = s.nextInt();
                 controlled.add(new Character(name, locX, locY, cwidth, cheight, AllianceType.FRIENDLY, freeRoamMap));
+            }
+            if(type.equals("trigger")){
+                double x1 = s.nextDouble();
+                double x2 = s.nextDouble();
+                double y1 = s.nextDouble();
+                double y2 = s.nextDouble();
+                String newType = s.next();
+                String newInfo = s.next();
+                String newMap = s.next();
+                triggers.add(new TriggerBox(x1, x2, y1, y2, newType, newInfo, newMap));
             }
         }
         currentChar = controlled.get(0);
@@ -68,6 +80,10 @@ public class FreeRoamModel {
             currCharIndex = 0;
         }
         currentChar = controlled.get(currCharIndex);
+    }
+
+    public void onTick(){
+        
     }
 
     List<Character> getUnits(){
