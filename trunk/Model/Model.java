@@ -35,8 +35,14 @@ public class Model implements ViewHelper, LeashedModel{
         freeRoamModelInfo = new File ("ConfigFiles/FRInput.txt");
         freeRoamModelMap = new File ("Images/BattleScreenColorMap.png");
         battleModel = new BattleModel(battleModelFight, battleModelMap);
-        freeRoamModel = new FreeRoamModel(freeRoamModelInfo, freeRoamModelMap);
+        freeRoamModel = new FreeRoamModel(freeRoamModelInfo, freeRoamModelMap, this);
         clock = new Clock(30);
+    }
+
+    public void setNewFreeRoam(String infoFile, String mapFile){
+        freeRoamModelInfo = new File(infoFile);
+        freeRoamModelMap = new File(mapFile);
+        freeRoamModel = new FreeRoamModel(freeRoamModelInfo, freeRoamModelMap, this);
     }
 
     public void start(){

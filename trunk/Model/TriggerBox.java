@@ -10,24 +10,43 @@ package Model;
  * @author spock
  */
 class TriggerBox {
-    int xMin;
-    int xMax;
-    int yMin;
-    int yMax;
+    double xMin;
+    double xMax;
+    double yMin;
+    double yMax;
+    String triggerType;
+    String loadingInfoFile;
+    String loadingMapFile;
 
-    TriggerBox(int x1, int x2, int y1, int y2){
+
+    TriggerBox(double x1, double x2, double y1, double y2, String triggerType, String loadingInfoFile, String loadingMapFile){
         xMin = x1;
         xMax = x2;
         yMin = y1;
         yMax = y2;
+        this.triggerType = triggerType;
+        this.loadingInfoFile = loadingInfoFile;
+        this.loadingMapFile = loadingMapFile;
     }
 
-    boolean inside( int x, int y ){
+    boolean inside( double x, double y ){
 
         if(x >= xMin && x <= xMax && y >= yMin && y <= yMax){
             return true;
         }
         return false;
+    }
+
+    String getTriggerType(){
+        return triggerType;
+    }
+
+    String getLoadingInfoFile(){
+        return loadingInfoFile;
+    }
+
+    String getLoadingMapFile(){
+        return loadingMapFile;
     }
 
 }
