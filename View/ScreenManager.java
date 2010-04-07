@@ -57,13 +57,14 @@ class ScreenManager extends JFrame{
     private static final double scaleFactor = 0.8;
 
     private FPSAnimator animator;
-
-    BattleScreen battleScreen;
+    
     BattleScreenViewPort battleScreenViewPort;
     BattleHUD battleHUD;
 
     FreeRoamScreenViewPort freeRoamScreenViewPort;
     FreeRoamHUD freeRoamHUD;
+
+    SplashScreen splashScreen;
 
     ViewHelper model;
 
@@ -172,6 +173,9 @@ class ScreenManager extends JFrame{
             if(currentMode == ModeType.FREEROAM){
                 freeRoamScreenViewPort.render();
             }
+	    if(currentMode == ModeType.SPLASH) {
+		splashScreen.render();
+	    }
 
         }
 
@@ -215,7 +219,8 @@ class ScreenManager extends JFrame{
 
                 freeRoamScreenViewPort = new FreeRoamScreenViewPort(model, gl, dfWidth, dfHeight);
 
-
+		splashScreen = new SplashScreen( model, gl, dfWidth, dfHeight );
+		
                 try{
                 }
                 catch(Exception c){
