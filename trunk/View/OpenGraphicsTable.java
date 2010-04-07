@@ -24,13 +24,15 @@ public class OpenGraphicsTable {
     private OpenGraphicsTable(){
         graphics = new HashMap<String, Texture>();
         try{
-            graphics.put( "BattleScreen", TextureIO.newTexture(ImageIO.read(new File("Images/BattleScreen.png")), true));
-            graphics.put( "BattleScreenViewPort", TextureIO.newTexture(ImageIO.read(new File("Images/BattleScreenViewPort.png")), true));
-            graphics.put( "BattleScreenHUD", TextureIO.newTexture(ImageIO.read(new File("Images/BattleScreenHUD.png")), true));
+            graphics.put( "BattleViewPort", TextureIO.newTexture(ImageIO.read(new File("Images/BattleViewPort.png")), true));
+            graphics.put( "BattleHUDBackground", TextureIO.newTexture(ImageIO.read(new File("Images/BattleScreenHUD.png")), true));
+	    graphics.put( "BattleHUDBarCapsule", TextureIO.newTexture(ImageIO.read(new File("Images/BattleHUDBarCapsule.png")), true));
+	    graphics.put( "BattleBarCapsuleOverlay", TextureIO.newTexture(ImageIO.read(new File("Images/BattleBarCapsuleOverlay.png")), true));
             graphics.put( "TestHUD", TextureIO.newTexture(ImageIO.read(new File("Images/s17.JPG")), true));
             graphics.put( "Rice", TextureIO.newTexture(ImageIO.read(new File("Images/s17.JPG")), true));
             graphics.put( "NastieS", TextureIO.newTexture(ImageIO.read(new File("Images/NastieS.png")), true));
-            graphics.put( "colormap", TextureIO.newTexture(ImageIO.read(new File("Images/BattleScreenColorMap.png")), true));
+	    graphics.put( "colormap", TextureIO.newTexture(ImageIO.read(new File("Images/BattleScreenColorMap.png")), true));
+	    graphics.put( "SplashScreen", TextureIO.newTexture(ImageIO.read(new File("Images/SplashScreen.png")), true));
 
         }
         catch(Exception e){

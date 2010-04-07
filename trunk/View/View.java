@@ -23,7 +23,7 @@ public class View implements Tickable{
 
 
     public View(GenAdapter control, ViewHelper model){
-        screenManager = new ScreenManager("hello", control, true, model);
+        screenManager = new ScreenManager("hello", control, false, model);
         screenManager.addKeyListener(control);
         screenManager.addMouseListener(control);
         screenManager.addMouseMotionListener(control);

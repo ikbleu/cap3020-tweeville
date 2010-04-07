@@ -35,15 +35,16 @@ import java.awt.Point;
 
 class BattleScreenViewPort extends SpecialImage
 {
+    final static private float BSViewPortXOffset = 0.05859375f;
+    final static private float BSViewPortYOffset = 0.0975f;
+
     private int imageWidth, imageHeight;
     private ViewHelper model;
-    Graphics2D g2d;
     GL gl;
+    List<Character> units;
 
     Texture current;
-
     Point.Float nasPoi;
-
 
     BattleScreenViewPort( ViewHelper model, GL gl, int wid, int hei )
     {
@@ -54,93 +55,32 @@ class BattleScreenViewPort extends SpecialImage
         this.hei = hei;
         this.gl = gl;
 
-        updateEntities();
-	//imageBuffer = new BufferedImage( imageWidth, imageHeight, BufferedImage.TYPE_INT_ARGB );
-	//g2d = (Graphics2D) imageBuffer.getGraphics();
-
-    }
-
-
-    void render(){
-
-        ographics.getGraphic("BattleScreen").bind();
-
-
-
-        gl.glPushMatrix();
-
-            gl.glBegin(GL.GL_POLYGON);
-
-                gl.glTexCoord2d(0.0, 0.0);
-                gl.glVertex2d(0.0,0.0);
-
-                gl.glTexCoord2d(0.0, 1.0);
-                gl.glVertex2d(0.0, 1.0);
-
-                gl.glTexCoord2d(1.0, 1.0);
-                gl.glVertex2d(1.0, 1.0);
-
-                gl.glTexCoord2d(1.0, 0.0);
-                gl.glVertex2d(1.0, 0.0);
-
-
-             gl.glEnd();
-
-        gl.glPopMatrix();
-
-        current = ographics.getGraphic("NastieS");
-
-        current.bind();
-
-        gl.glPushMatrix();
-
-            gl.glBegin(GL.GL_POLYGON);
-
-                gl.glTexCoord2d(0.0, 0.0);
-                gl.glVertex2d(nasPoi.x,nasPoi.y);
-
-                gl.glTexCoord2d(0.0, 1.0);
-                gl.glVertex2d(nasPoi.x, nasPoi.y + ((float)(current.getHeight())/(float)imageHeight));
-
-                gl.glTexCoord2d(1.0, 1.0);
-                gl.glVertex2d(nasPoi.x + ((float)(current.getWidth())/(float)imageWidth), nasPoi.y + ((float)(current.getHeight())/(float)imageHeight));
-
-                gl.glTexCoord2d(1.0, 0.0);
-                gl.glVertex2d(nasPoi.x + ((float)(current.getWidth())/(float)imageWidth), nasPoi.y);
-
-
-             gl.glEnd();
-
-        gl.glPopMatrix();
-    }
-
-    void refreshImage()
-    {
-	// drawing the background
-	g2d.drawImage( graphics.getGraphic( "BattleScreenViewPort" ), 0, 0, null );
-
 	updateEntities();
+    }
+
+
+	
+    void render()
+    {
+	// drawing the BattleScreen's background (the border around the BattleScreenViewPort's)
+	drawMe( gl, ographics.getGraphic( "BattleViewPort" ), 0, 0 );
+
+	// drawing Nastie
+	drawMe( gl, ographics.getGraphic( "NastieS" ), (((float)(units.get(0).getLocation().getX()))/((float)wid)), (((float)(units.get(0).getLocation().getY()))/((float)hei)));
     }
 
     void updateEntities()
     {
         System.out.println("I'm getting refreshed");
-	List<Character> units = model.getUnits();
+	units = model.getUnits();
         int a = (int)units.get(0).getLocation().getX();
         int b = (int)units.get(0).getLocation().getY();
         System.out.println("I'm at " + a + " " + b);
-
 
 	for(int i = 0; i != units.size(); ++i )
         {
             nasPoi = new Point.Float((((float)(units.get(i).getLocation().getX()))/((float)1280)),
                             (((float)(units.get(i).getLocation().getY()))/((float)800)));
 	}
-    }
-
-    private BufferedImage checkOutImage()
-    {
-	
-	return graphics.getGraphic( "NastieS" );
     }
 }

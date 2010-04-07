@@ -15,8 +15,6 @@ abstract class CanIHazImage {
 
     BufferedImage imageBuffer;
 
-    abstract void refreshImage();
-
     BufferedImage image(){
         return imageBuffer;
     }
