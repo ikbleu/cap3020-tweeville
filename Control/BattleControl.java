@@ -7,18 +7,20 @@ package Control;
 import Model.DirectionType;
 import java.awt.event.KeyEvent;
 import Model.LeashedModel;
+import Model.Tickable;
 
  /*
  * @author spock
  */
 
-class BattleControl extends GenAdapter{
+class BattleControl extends GenAdapter implements Tickable {
     private boolean active = false;
     LeashedModel model;
 
     BattleControl(LeashedModel model){
         active = false;
         this.model = model;
+	model.chrisWantsToRegister( this );
     }
 
     public void turnOn(){
@@ -68,5 +70,9 @@ class BattleControl extends GenAdapter{
         else if (e.getKeyCode() == KeyEvent.VK_ESCAPE){
             System.out.println("You just escaped!");
         }
+    }
+    public void onTick()
+    {
+
     }
 }

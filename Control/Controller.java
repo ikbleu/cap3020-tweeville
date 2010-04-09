@@ -103,6 +103,14 @@ public class Controller extends GenAdapter {
             }
         }
     }
+
+    @Override
+    public void keyReleased(KeyEvent e)
+    {
+	current.keyReleased(e);
+    }
+
+
     @Override
     public void mousePressed(MouseEvent e){
 

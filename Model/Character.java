@@ -112,7 +112,7 @@ public class Character implements Viewable, Comparable{
                 }
             }
         }
-        System.out.println(name + " moved to " + locX + ", " + locY);
+        //System.out.println(name + " moved to " + locX + ", " + locY);
         return move;
     }
 

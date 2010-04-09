@@ -101,4 +101,9 @@ public class Model implements ViewHelper, LeashedModel{
     public ViewCooldown[][] getCoolDowns(){
         return null;
     }
+
+    public void chrisWantsToRegister( Tickable t )
+    {
+	register( t );
+    }
 }
