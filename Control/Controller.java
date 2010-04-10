@@ -37,6 +37,7 @@ public class Controller extends GenAdapter {
         this.model = model;
         bc = new BattleControl(model);
         frc = new FreeRoamControl(model);
+        dc = new DialogueControl(model);
     }
     
     public void turnOn(){
@@ -50,6 +51,21 @@ public class Controller extends GenAdapter {
 
     public void setMode(ModeType mode){
         currentMode = mode;
+        if(mode == ModeType.DIALOGUE){
+            current.turnOff();
+            dc.turnOn();
+            current = dc;
+        }
+        if(mode == ModeType.FREEROAM){
+            current.turnOff();
+            frc.turnOn();
+            current = frc;
+        }
+        if(mode == ModeType.BATTLE){
+            current.turnOff();
+            bc.turnOn();
+            current = bc;
+        }
     }
 
     public void register(View view){

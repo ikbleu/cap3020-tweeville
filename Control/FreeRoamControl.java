@@ -78,6 +78,7 @@ public class FreeRoamControl extends GenAdapter implements Tickable {
         }
 
         else if (e.getKeyCode() == KeyEvent.VK_E){
+            model.action();
             System.out.println("You pressed the interaction button!");
         }
 
@@ -125,7 +126,7 @@ public class FreeRoamControl extends GenAdapter implements Tickable {
 
     public void onTick()
     {
-	System.out.println(moveKeysPressed); //test code
+	//System.out.println(moveKeysPressed); //test code
 	//movement keys
 	if( suppression() )
 	{

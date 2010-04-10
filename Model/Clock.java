@@ -31,6 +31,10 @@ public class Clock {
         listeners.add(t);
     }
 
+    void removeListener(Tickable t){
+        listeners.remove(t);
+    }
+
     private class MyTask extends TimerTask{
         LinkedList<Tickable> listeners;
 
