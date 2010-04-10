@@ -37,12 +37,14 @@ public class Model implements ViewHelper, LeashedModel{
         battleModel = new BattleModel(battleModelFight, battleModelMap);
         freeRoamModel = new FreeRoamModel(freeRoamModelInfo, freeRoamModelMap, this);
         clock = new Clock(30);
+        register(freeRoamModel);
     }
 
     public void setNewFreeRoam(String infoFile, String mapFile){
         freeRoamModelInfo = new File(infoFile);
         freeRoamModelMap = new File(mapFile);
         freeRoamModel = new FreeRoamModel(freeRoamModelInfo, freeRoamModelMap, this);
+        register(freeRoamModel);
     }
 
     public void start(){
@@ -55,8 +57,41 @@ public class Model implements ViewHelper, LeashedModel{
         controller = c;
     }
 
+    public void unregister(Tickable t){
+        clock.removeListener(t);
+    }
+
     public void setMode(ModeType mode){
         this.mode = mode;
+        if(mode == ModeType.DIALOGUE){
+            controller.setMode(ModeType.DIALOGUE);
+            view.setMode(ModeType.DIALOGUE);
+        }
+        if(mode == ModeType.FREEROAM){
+            controller.setMode(ModeType.FREEROAM);
+            view.setMode(ModeType.FREEROAM);
+        }
+    }
+
+    public void action(){
+        freeRoamModel.action();
+    }
+
+    public void scroll(int di){
+        freeRoamModel.scroll(di);
+    }
+
+    public void nextDialogue(){
+        freeRoamModel.nextDialogue();
+    }
+
+
+    public List<String> getDialogue(){
+        return freeRoamModel.getDialogue();
+    }
+
+    public int getDialogueSelection(){
+        return freeRoamModel.getDialogueSelection();
     }
 
     public void modeUpdate(ModeType mode){

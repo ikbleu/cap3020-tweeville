@@ -173,6 +173,9 @@ class ScreenManager extends JFrame{
             if(currentMode == ModeType.FREEROAM){
                 freeRoamScreenViewPort.render();
             }
+            if(currentMode == ModeType.DIALOGUE){
+                freeRoamScreenViewPort.render();
+            }
 	    if(currentMode == ModeType.SPLASH) {
 		splashScreen.render();
 	    }
