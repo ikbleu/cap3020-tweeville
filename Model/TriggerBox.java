@@ -17,6 +17,7 @@ class TriggerBox {
     String triggerType;
     String loadingInfoFile;
     String loadingMapFile;
+    String imageMap;
 
 
     TriggerBox(double x1, double x2, double y1, double y2, String triggerType, String loadingInfoFile, String loadingMapFile){
@@ -27,6 +28,7 @@ class TriggerBox {
         this.triggerType = triggerType;
         this.loadingInfoFile = loadingInfoFile;
         this.loadingMapFile = loadingMapFile;
+
     }
 
     boolean inside( double x, double y ){
@@ -47,6 +49,10 @@ class TriggerBox {
 
     String getLoadingMapFile(){
         return loadingMapFile;
+    }
+
+    String getImageMap(){
+        return imageMap;
     }
 
 }

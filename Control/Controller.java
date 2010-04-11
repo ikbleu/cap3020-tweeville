@@ -17,6 +17,7 @@ import View.View;
 public class Controller extends GenAdapter {
     private int START_BATTLE_MODE = KeyEvent.VK_B;
     private int START_FR_MODE = KeyEvent.VK_F;
+    private int MUSIC = KeyEvent.VK_M;
     private int GAME_EXIT = KeyEvent.VK_F9;
     BattleControl bc;
     BattleMenuControl bmc;
@@ -94,6 +95,10 @@ public class Controller extends GenAdapter {
             view.setMode(ModeType.FREEROAM);
             model.setMode(ModeType.FREEROAM);
             model.start();
+            return true;
+        }
+        else if(e.getKeyCode()==MUSIC){
+            view.startMusic();
             return true;
         }
         /*else if (){
