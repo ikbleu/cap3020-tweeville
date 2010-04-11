@@ -9,6 +9,8 @@ import java.util.List;
 
 import Control.Controller;
 import View.View;
+import java.io.FileInputStream;
+import javazoom.jl.player.Player;
 
 /**
  *
@@ -24,6 +26,9 @@ public class Model implements ViewHelper, LeashedModel{
     File freeRoamModelInfo;
     Clock clock;
 
+    FileInputStream ifs;
+    Player player;
+
     View view;
     Controller controller;
     
@@ -38,6 +43,15 @@ public class Model implements ViewHelper, LeashedModel{
         freeRoamModel = new FreeRoamModel(freeRoamModelInfo, freeRoamModelMap, this);
         clock = new Clock(30);
         register(freeRoamModel);
+        /*try{
+            ifs = new FileInputStream(new File("Images/AA.mp3"));
+            player = new Player(ifs);
+            player.play();
+            System.out.println("I can do things after i play too!");
+        }
+        catch(Exception c){
+            System.out.println("Oh nos!");
+        }*/
     }
 
     public void setNewFreeRoam(String infoFile, String mapFile){
@@ -92,6 +106,10 @@ public class Model implements ViewHelper, LeashedModel{
 
     public int getDialogueSelection(){
         return freeRoamModel.getDialogueSelection();
+    }
+
+    public Character getCurrChar(){
+        return freeRoamModel.currentChar;
     }
 
     public void modeUpdate(ModeType mode){
