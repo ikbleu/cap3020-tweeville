@@ -69,21 +69,21 @@ public class FreeRoamScreenViewPort extends SpecialImage{
         //gl.glPushMatrix();
         //gl.glTranslated(.1, 0, 0);
 
-        drawMe(gl, ographics.getGraphic("map1"), (float)((0-currChar.getLocation().getX())/(float)wid)+.5F, (float)((0-currChar.getLocation().getY())/(float)hei)+ .5F);
-        drawMe(gl, ographics.getGraphic("map2"), (float)((1280-currChar.getLocation().getX())/(float)wid)+.5F, (float)((0-currChar.getLocation().getY())/(float)hei)+ .5F);
-        drawMe(gl, ographics.getGraphic("map3"), (float)((2560-currChar.getLocation().getX())/(float)wid)+.5F, (float)((0-currChar.getLocation().getY())/(float)hei)+ .5F);
-        drawMe(gl, ographics.getGraphic("map4"), (float)((0-currChar.getLocation().getX())/(float)wid)+.5F, (float)((800-currChar.getLocation().getY())/(float)hei)+ .5F);
-        drawMe(gl, ographics.getGraphic("map5"), (float)((1280-currChar.getLocation().getX())/(float)wid)+.5F, (float)((800-currChar.getLocation().getY())/(float)hei)+ .5F);
-        drawMe(gl, ographics.getGraphic("map6"), (float)((2560-currChar.getLocation().getX())/(float)wid)+.5F, (float)((800-currChar.getLocation().getY())/(float)hei)+ .5F);
-        drawMe(gl, ographics.getGraphic("map7"), (float)((0-currChar.getLocation().getX())/(float)wid)+.5F, (float)((1600-currChar.getLocation().getY())/(float)hei)+ .5F);
-        drawMe(gl, ographics.getGraphic("map8"), (float)((1280-currChar.getLocation().getX())/(float)wid)+.5F, (float)((1600-currChar.getLocation().getY())/(float)hei)+ .5F);
-        drawMe(gl, ographics.getGraphic("map9"), (float)((2560-currChar.getLocation().getX())/(float)wid)+.5F, (float)((1600-currChar.getLocation().getY())/(float)hei)+ .5F);
+        specdrawMe(gl, ographics.getGraphic("map1"), (float)((0-currChar.getLocation().getX())/(float)wid), (float)((0-currChar.getLocation().getY())/(float)hei));
+        specdrawMe(gl, ographics.getGraphic("map2"), (float)((1280-currChar.getLocation().getX())/(float)wid), (float)((0-currChar.getLocation().getY())/(float)hei));
+        specdrawMe(gl, ographics.getGraphic("map3"), (float)((2560-currChar.getLocation().getX())/(float)wid), (float)((0-currChar.getLocation().getY())/(float)hei));
+        specdrawMe(gl, ographics.getGraphic("map4"), (float)((0-currChar.getLocation().getX())/(float)wid), (float)((800-currChar.getLocation().getY())/(float)hei));
+        specdrawMe(gl, ographics.getGraphic("map5"), (float)((1280-currChar.getLocation().getX())/(float)wid), (float)((800-currChar.getLocation().getY())/(float)hei));
+        specdrawMe(gl, ographics.getGraphic("map6"), (float)((2560-currChar.getLocation().getX())/(float)wid), (float)((800-currChar.getLocation().getY())/(float)hei));
+        specdrawMe(gl, ographics.getGraphic("map7"), (float)((0-currChar.getLocation().getX())/(float)wid), (float)((1600-currChar.getLocation().getY())/(float)hei));
+        specdrawMe(gl, ographics.getGraphic("map8"), (float)((1280-currChar.getLocation().getX())/(float)wid), (float)((1600-currChar.getLocation().getY())/(float)hei));
+        specdrawMe(gl, ographics.getGraphic("map9"), (float)((2560-currChar.getLocation().getX())/(float)wid), (float)((1600-currChar.getLocation().getY())/(float)hei));
         for(int i = 0; i < units.size();++i){
             String h = units.get(i).getCharacter();
             //float g = unitPoints.get(i-1).x;
             //if(units.get(i)!= currChar){
                 //drawMe(gl, ographics.getGraphic(units.get(i).getCharacter()), (((float)(units.get(i).getLocation().getX()))/((float)wid)), (((float)(units.get(i).getLocation().getY()))/((float)hei)));
-                drawMe(gl, ographics.getGraphic(units.get(i).getCharacter()), (float)((units.get(i).getLocation().getX()-currChar.getLocation().getX())/(float)wid)+ .5F, (float)((units.get(i).getLocation().getY()-currChar.getLocation().getY())/(float)hei)+ .5F);
+                specdrawMe(gl, ographics.getGraphic(units.get(i).getCharacter()), (float)((units.get(i).getLocation().getX()-currChar.getLocation().getX())/(float)wid), (float)((units.get(i).getLocation().getY()-currChar.getLocation().getY())/(float)hei));
         }   //}
 
 
