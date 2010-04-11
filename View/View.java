@@ -14,7 +14,7 @@ import Model.ModeType;
  * @author spock
  */
 
-// used this VM argument to disable DirectDraw for windows to get
+// used this VM argument to disable DirectDraw for Windows to get
 // fullscreen to display properly: -Dsun.java2d.noddraw=true 
 
 public class View implements Tickable{

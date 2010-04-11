@@ -27,9 +27,10 @@ import javax.media.opengl.GLDrawableFactory;
 import javax.swing.JFrame;
 import com.sun.opengl.util.FPSAnimator;
 import com.sun.opengl.util.ImageUtil;
-
 import com.sun.opengl.util.texture.Texture;
 import com.sun.opengl.util.texture.TextureIO;
+import com.sun.opengl.util.j2d.TextRenderer;
+import javax.media.opengl.GLAutoDrawable;
 
 import java.awt.Point;
 
@@ -60,7 +61,7 @@ class BattleScreenViewPort extends SpecialImage
 
 
 	
-    void render()
+    void render( GLAutoDrawable drawable, TextRenderer textRenderer )
     {
 	// drawing the BattleScreen's background (the border around the BattleScreenViewPort's)
 	drawMe( gl, ographics.getGraphic( "BattleViewPort" ), 0, 0 );

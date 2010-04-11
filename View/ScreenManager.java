@@ -5,6 +5,7 @@ package View;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseListener;
+import java.awt.Font;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -22,9 +23,10 @@ import javax.media.opengl.GLDrawableFactory;
 import javax.swing.JFrame;
 import com.sun.opengl.util.FPSAnimator;
 import com.sun.opengl.util.ImageUtil;
-
 import com.sun.opengl.util.texture.Texture;
 import com.sun.opengl.util.texture.TextureIO;
+import com.sun.opengl.util.j2d.TextRenderer;
+
 
 import java.awt.Point;
 import java.util.LinkedList;
@@ -35,6 +37,7 @@ import Control.Controller;
 import Control.GenAdapter;
 import Model.ViewHelper;
 import Model.ModeType;
+import java.awt.Color;
 
 class ScreenManager extends JFrame{
 
@@ -165,6 +168,7 @@ class ScreenManager extends JFrame{
 
     class GraphicListener implements GLEventListener {
 
+	TextRenderer textRenderer;
         public void display(GLAutoDrawable drawable) {
 
             //GLContext context = GLDrawableFactory.getFactory().createExternalGLContext();
@@ -174,18 +178,17 @@ class ScreenManager extends JFrame{
             //renderRice(gl);
             //renderBattleScreen(gl);
             if(currentMode == ModeType.BATTLE){
-                battleScreenViewPort.render();
+                battleScreenViewPort.render( drawable, textRenderer );
             }
             if(currentMode == ModeType.FREEROAM){
-                freeRoamScreenViewPort.render();
+                freeRoamScreenViewPort.render( drawable, textRenderer, false );
             }
             if(currentMode == ModeType.DIALOGUE){
-                freeRoamScreenViewPort.render();
+                freeRoamScreenViewPort.render( drawable, textRenderer, true );
             }
 	    if(currentMode == ModeType.SPLASH) {
-		splashScreen.render();
+		splashScreen.render( drawable, textRenderer );
 	    }
-
         }
 
         void updateBattleScreen(BufferedImage image){
@@ -222,12 +225,11 @@ class ScreenManager extends JFrame{
                 gl.glEnable(GL.GL_BLEND);
                 gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
 
+		textRenderer = new TextRenderer(new Font("Monospaced", Font.BOLD, 24));
                 //drawable.getContext().makeCurrent();
 
                 battleScreenViewPort = new BattleScreenViewPort(model, gl, dfWidth, dfHeight);
-
                 freeRoamScreenViewPort = new FreeRoamScreenViewPort(model, gl, dfWidth, dfHeight, 1280, 800);
-
 		splashScreen = new SplashScreen( model, gl, dfWidth, dfHeight );
 
                 audioThread = new Thread(new Audio());
