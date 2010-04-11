@@ -43,6 +43,10 @@ public class View implements Tickable{
         }
     }
 
+    public void startMusic(){
+        screenManager.startMusic();
+    }
+
     public void setMode(ModeType mode){
         screenManager.setMode(mode);
     }

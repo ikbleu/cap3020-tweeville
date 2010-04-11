@@ -9,8 +9,6 @@ import java.util.List;
 
 import Control.Controller;
 import View.View;
-import java.io.FileInputStream;
-import javazoom.jl.player.Player;
 
 /**
  *
@@ -26,8 +24,7 @@ public class Model implements ViewHelper, LeashedModel{
     File freeRoamModelInfo;
     Clock clock;
 
-    FileInputStream ifs;
-    Player player;
+   
 
     View view;
     Controller controller;
@@ -38,7 +35,7 @@ public class Model implements ViewHelper, LeashedModel{
         battleModelMap = new File("Images/BattleScreenColorMap.png");
         battleModelFight = new File("ConfigFiles/BattleInput.txt");
         freeRoamModelInfo = new File ("ConfigFiles/FRInput.txt");
-        freeRoamModelMap = new File ("Images/BattleScreenColorMap.png");
+        freeRoamModelMap = new File ("Images/TestMap.png");
         battleModel = new BattleModel(battleModelFight, battleModelMap);
         freeRoamModel = new FreeRoamModel(freeRoamModelInfo, freeRoamModelMap, this);
         clock = new Clock(30);

@@ -66,6 +66,8 @@ class ScreenManager extends JFrame{
 
     SplashScreen splashScreen;
 
+    Thread audioThread;
+
     ViewHelper model;
 
     private Texture riceTest;
@@ -76,8 +78,8 @@ class ScreenManager extends JFrame{
     GraphicListener listener;
     public int updateNum = 0;
 
-    public int dfWidth = 800;
-    public int dfHeight = 1280;
+    public int dfWidth = 1280;
+    public int dfHeight = 800;
 
     ScreenManager(String s, GenAdapter control, boolean fs, ViewHelper model){
         super(s);
@@ -134,6 +136,10 @@ class ScreenManager extends JFrame{
     void start(){
         animator.start();
         this.validate();
+    }
+
+    void startMusic(){
+        audioThread.start();
     }
 
     void updateBattleScreen(){
@@ -223,7 +229,9 @@ class ScreenManager extends JFrame{
                 freeRoamScreenViewPort = new FreeRoamScreenViewPort(model, gl, dfWidth, dfHeight, 1280, 800);
 
 		splashScreen = new SplashScreen( model, gl, dfWidth, dfHeight );
-		
+
+                audioThread = new Thread(new Audio());
+
                 try{
                 }
                 catch(Exception c){
