@@ -19,4 +19,6 @@ public interface ViewHelper {
     public abstract WeaponType getBScurrentArmor();
     public abstract int[] getHPs();
     public abstract ViewCooldown[][] getCoolDowns();
+    public abstract List<String> getDialogue();
+    public abstract int getDialogueSelection();
 }
