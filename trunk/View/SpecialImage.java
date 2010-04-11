@@ -34,7 +34,7 @@ abstract class SpecialImage extends CanIHazImage{
    float widRat;
    float heiRat;
 
-
+    //drawMe that draws the entire image
     void drawMe(GL gl, Texture texture, float x, float y){
 
         Texture current = texture;
@@ -60,13 +60,47 @@ abstract class SpecialImage extends CanIHazImage{
                 gl.glTexCoord2d(1.0, 0.0);
                 gl.glVertex2d((x + ((float)(current.getWidth())/(float)wid)) * widRat, y * heiRat);
 
+             gl.glEnd();
+
+        gl.glPopMatrix();
+    }
+
+	// drawMe that draws pieces of an image
+    void drawMe(GL gl, Texture texture, float x, float y, float selectionX, float selectionY){
+
+        Texture current = texture;
+
+	
+        widRat = ((float)(wid))/1280F; //subtract or add to this to scale overall texture
+        heiRat = ((float)(hei))/800F; //subtract or add to this to scale overall texture
+	
+	float selectionLeft = current.getWidth() * selectionX;
+	float selectionRight = current.getWidth() * selectionX;
+	float selectionBottom = current.getHeight() * selectionY;
+	float selectionTop = current.getHeight() * selectionY;
+	
+        current.bind();
+
+        gl.glPushMatrix();
+
+            gl.glBegin(GL.GL_POLYGON);
+
+                gl.glTexCoord2d(0.0 + selectionX, 0.0 + selectionY);
+                gl.glVertex2d((x + selectionLeft/(float)wid) * widRat, (y + selectionTop/(float)hei) * heiRat);
+
+                gl.glTexCoord2d(0.0 + selectionX, 1.0 - selectionY);
+                gl.glVertex2d((x + selectionLeft/(float)wid) * widRat, (y + ((float)(current.getHeight() - selectionBottom)/(float)hei) ) * heiRat);
+
+                gl.glTexCoord2d(1.0 - selectionX, 1.0 - selectionY);
+                gl.glVertex2d((x + ((float)(current.getWidth() - selectionRight)/(float)wid)) * widRat, (y + ((float)(current.getHeight() - selectionBottom)/(float)hei)) * heiRat);
+
+                gl.glTexCoord2d(1.0 - selectionX, 0.0 + selectionY);
+                gl.glVertex2d((x + ((float)(current.getWidth() - selectionRight)/(float)wid)) * widRat, (y + selectionTop/(float)hei) * heiRat);
 
              gl.glEnd();
 
         gl.glPopMatrix();
-
     }
-
     void specdrawMe(GL gl, Texture texture, float x, float y){
 
         Texture current = texture;

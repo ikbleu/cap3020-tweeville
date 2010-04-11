@@ -32,6 +32,7 @@ public class OpenGraphicsTable {
             graphics.put( "NastieS", TextureIO.newTexture(ImageIO.read(new File("Images/NastieS.png")), true));
             graphics.put( "Friend", TextureIO.newTexture(ImageIO.read(new File("Images/NastieS.png")), true));
 	    graphics.put( "colormap", TextureIO.newTexture(ImageIO.read(new File("Images/BattleScreenColorMap.png")), true));
+	    graphics.put( "DialogueBox", TextureIO.newTexture(ImageIO.read(new File("Images/DialogueBox.png")), true));
 
             graphics.put( "SplashScreen", TextureIO.newTexture(ImageIO.read(new File("Images/SplashScreen.png")), true));
             
