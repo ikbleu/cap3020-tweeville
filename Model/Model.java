@@ -100,7 +100,6 @@ public class Model implements ViewHelper, LeashedModel{
         freeRoamModel.nextDialogue();
     }
 
-
     public List<String> getDialogue(){
         return freeRoamModel.getDialogue();
     }
