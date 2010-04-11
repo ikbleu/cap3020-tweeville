@@ -220,7 +220,7 @@ class ScreenManager extends JFrame{
 
                 battleScreenViewPort = new BattleScreenViewPort(model, gl, dfWidth, dfHeight);
 
-                freeRoamScreenViewPort = new FreeRoamScreenViewPort(model, gl, dfWidth, dfHeight);
+                freeRoamScreenViewPort = new FreeRoamScreenViewPort(model, gl, dfWidth, dfHeight, 1280, 800);
 
 		splashScreen = new SplashScreen( model, gl, dfWidth, dfHeight );
 		

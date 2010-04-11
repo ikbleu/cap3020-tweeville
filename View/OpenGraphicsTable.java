@@ -29,10 +29,10 @@ public class OpenGraphicsTable {
 	    graphics.put( "BattleHUDBarCapsule", TextureIO.newTexture(ImageIO.read(new File("Images/BattleHUDBarCapsule.png")), true));
 	    graphics.put( "BattleBarCapsuleOverlay", TextureIO.newTexture(ImageIO.read(new File("Images/BattleBarCapsuleOverlay.png")), true));
             graphics.put( "TestHUD", TextureIO.newTexture(ImageIO.read(new File("Images/s17.JPG")), true));
-            graphics.put( "Rice", TextureIO.newTexture(ImageIO.read(new File("Images/s17.JPG")), true));
             graphics.put( "NastieS", TextureIO.newTexture(ImageIO.read(new File("Images/NastieS.png")), true));
             graphics.put( "Friend", TextureIO.newTexture(ImageIO.read(new File("Images/NastieS.png")), true));
 	    graphics.put( "colormap", TextureIO.newTexture(ImageIO.read(new File("Images/BattleScreenColorMap.png")), true));
+            //graphics.put( "bigmap", TextureIO.newTexture(ImageIO.read(new File("Images/TestMap.png")), true));
 	    graphics.put( "SplashScreen", TextureIO.newTexture(ImageIO.read(new File("Images/SplashScreen.png")), true));
 
         }

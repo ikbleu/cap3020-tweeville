@@ -46,9 +46,11 @@ public class FreeRoamScreenViewPort extends SpecialImage{
     Point.Float[] unitPoints;
 
     List<Character> units;
+    Character currChar;
+    String frImage;
 
 
-    FreeRoamScreenViewPort( ViewHelper model, GL gl, int wid, int hei )
+    FreeRoamScreenViewPort( ViewHelper model, GL gl, int wid, int hei, int iwid, int ihei )
     {
         this.wid = wid;
         this.hei = hei;
@@ -57,18 +59,30 @@ public class FreeRoamScreenViewPort extends SpecialImage{
 	imageHeight = 800;
         this.gl = gl;
 
+        frImage = "colormap";
+
         updateEntities();
 
     }
 
     void render(){
-        drawMe(gl, ographics.getGraphic("colormap"), 0, 0);
+        //gl.glPushMatrix();
+        //gl.glTranslated(.1, 0, 0);
+
+        drawMe(gl, ographics.getGraphic("colormap"), (float)((0-currChar.getLocation().getX())/(float)wid)+.75F, (float)((0-currChar.getLocation().getY())/(float)hei)+ .25F);
         for(int i = 0; i < units.size();++i){
             String h = units.get(i).getCharacter();
             //float g = unitPoints.get(i-1).x;
-            
-            drawMe(gl, ographics.getGraphic(units.get(i).getCharacter()), (((float)(units.get(i).getLocation().getX()))/((float)wid)), (((float)(units.get(i).getLocation().getY()))/((float)hei)));
-        }
+            //if(units.get(i)!= currChar){
+                //drawMe(gl, ographics.getGraphic(units.get(i).getCharacter()), (((float)(units.get(i).getLocation().getX()))/((float)wid)), (((float)(units.get(i).getLocation().getY()))/((float)hei)));
+                drawMe(gl, ographics.getGraphic(units.get(i).getCharacter()), (float)((units.get(i).getLocation().getX()-currChar.getLocation().getX())/(float)wid)+ .75F, (float)((units.get(i).getLocation().getY()-currChar.getLocation().getY())/(float)hei)+ .25F);
+        }   //}
+
+
+        //gl.glPopMatrix();
+    }
+
+    void setNewFRImage(){
     }
 
     void refreshImage(){
@@ -78,6 +92,7 @@ public class FreeRoamScreenViewPort extends SpecialImage{
     void updateEntities()
     {
 	units = model.getUnits();
+        currChar = model.getCurrChar();
         Collections.sort((List)units);
     }
 }

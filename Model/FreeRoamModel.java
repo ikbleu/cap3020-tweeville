@@ -124,7 +124,7 @@ public class FreeRoamModel implements Tickable{
             dHandler.next();
         }
     }
-
+ 
     List<String> getDialogue(){
         return dHandler.getDialogue();
     }
