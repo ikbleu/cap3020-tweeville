@@ -17,4 +17,5 @@ public interface LeashedModel {
     public abstract void start();
     public abstract void setMode(ModeType mode);
     public abstract void chrisWantsToRegister( Tickable t );
+    public abstract void swapChar();
 }

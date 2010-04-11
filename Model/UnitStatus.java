@@ -10,6 +10,16 @@ package Model;
  * @author spock
  */
 public enum UnitStatus {
-    WALKING,
-    STANDING
+    WEAST,
+    SEAST,
+    WWEST,
+    SWEST,
+    SSOUTH,
+    WSOUTH1,
+    WSOUTH2,
+    SNORTH,
+    WNORTH1,
+    WNORTH2
+
+    
 }

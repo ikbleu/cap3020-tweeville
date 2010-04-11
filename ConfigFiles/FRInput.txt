@@ -1,6 +1,6 @@
-human NastieS 500 400 40 80
-human NastieS 500 500 40 80
-human NastieS 500 600 40 80
-npc Friend 800 600 40 80
-dialogue Friend ConfigFiles/DialogueTest.txt
-trigger 900 1000 300 400 FreeRoam ConfigFiles/FRInput.txt Images/BattleScreenColorMap.png
+human Gunderson 500 400 58 90
+human Nast 500 500 42 100
+human Gunderson 500 600 58 90
+npc Nast 800 600 42 100
+dialogue Nast ConfigFiles/DialogueTest.txt
+trigger 900 1000 300 400 FreeRoam ConfigFiles/FRInput.txt Images/TestMap.png

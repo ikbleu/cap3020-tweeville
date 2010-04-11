@@ -38,7 +38,7 @@ public class Model implements ViewHelper, LeashedModel{
         freeRoamModelMap = new File ("Images/TestMap.png");
         battleModel = new BattleModel(battleModelFight, battleModelMap);
         freeRoamModel = new FreeRoamModel(freeRoamModelInfo, freeRoamModelMap, this);
-        clock = new Clock(30);
+        clock = new Clock(60);
         register(freeRoamModel);
         /*try{
             ifs = new FileInputStream(new File("Images/AA.mp3"));
@@ -82,6 +82,10 @@ public class Model implements ViewHelper, LeashedModel{
             controller.setMode(ModeType.FREEROAM);
             view.setMode(ModeType.FREEROAM);
         }
+    }
+
+    public void swapChar(){
+        freeRoamModel.swapChar();
     }
 
     public void action(){

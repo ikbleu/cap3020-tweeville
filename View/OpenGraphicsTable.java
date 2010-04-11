@@ -45,6 +45,28 @@ public class OpenGraphicsTable {
             graphics.put( "map8", TextureIO.newTexture(ImageIO.read(new File("Images/TestMap/S.png")), true));
             graphics.put( "map9", TextureIO.newTexture(ImageIO.read(new File("Images/TestMap/SE.png")), true));
 
+            graphics.put( "Nast01", TextureIO.newTexture(ImageIO.read(new File("Images/Nast01.png")), true));
+            graphics.put( "Nast02", TextureIO.newTexture(ImageIO.read(new File("Images/Nast02.png")), true));
+            graphics.put( "Nast03", TextureIO.newTexture(ImageIO.read(new File("Images/Nast03.png")), true));
+            graphics.put( "Nast04", TextureIO.newTexture(ImageIO.read(new File("Images/Nast04.png")), true));
+            graphics.put( "Nast05", TextureIO.newTexture(ImageIO.read(new File("Images/Nast05.png")), true));
+            graphics.put( "Nast06", TextureIO.newTexture(ImageIO.read(new File("Images/Nast06.png")), true));
+            graphics.put( "Nast07", TextureIO.newTexture(ImageIO.read(new File("Images/Nast07.png")), true));
+            graphics.put( "Nast08", TextureIO.newTexture(ImageIO.read(new File("Images/Nast08.png")), true));
+            graphics.put( "Nast09", TextureIO.newTexture(ImageIO.read(new File("Images/Nast09.png")), true));
+            graphics.put( "Nast10", TextureIO.newTexture(ImageIO.read(new File("Images/Nast10.png")), true));
+
+            graphics.put( "Gunderson01", TextureIO.newTexture(ImageIO.read(new File("Images/Gunderson01.png")), true));
+            graphics.put( "Gunderson02", TextureIO.newTexture(ImageIO.read(new File("Images/Gunderson02.png")), true));
+            graphics.put( "Gunderson03", TextureIO.newTexture(ImageIO.read(new File("Images/Gunderson03.png")), true));
+            graphics.put( "Gunderson04", TextureIO.newTexture(ImageIO.read(new File("Images/Gunderson04.png")), true));
+            graphics.put( "Gunderson05", TextureIO.newTexture(ImageIO.read(new File("Images/Gunderson05.png")), true));
+            graphics.put( "Gunderson06", TextureIO.newTexture(ImageIO.read(new File("Images/Gunderson06.png")), true));
+            graphics.put( "Gunderson07", TextureIO.newTexture(ImageIO.read(new File("Images/Gunderson07.png")), true));
+            graphics.put( "Gunderson08", TextureIO.newTexture(ImageIO.read(new File("Images/Gunderson08.png")), true));
+            graphics.put( "Gunderson09", TextureIO.newTexture(ImageIO.read(new File("Images/Gunderson09.png")), true));
+            graphics.put( "Gunderson10", TextureIO.newTexture(ImageIO.read(new File("Images/Gunderson10.png")), true));
+
 
         }
         catch(Exception e){
