@@ -29,6 +29,7 @@ import Model.Viewable;
 import java.util.LinkedList;
 import java.util.Collections;
 import Model.Character;
+import Model.UnitStatus;
 
 /**
  *
@@ -42,7 +43,6 @@ public class FreeRoamScreenViewPort extends SpecialImage{
 
     Texture current;
 
-    //LinkedList<Point.Float> unitPoints;
     Point.Float[] unitPoints;
 
     List<Character> units;
@@ -83,7 +83,7 @@ public class FreeRoamScreenViewPort extends SpecialImage{
             //float g = unitPoints.get(i-1).x;
             //if(units.get(i)!= currChar){
                 //drawMe(gl, ographics.getGraphic(units.get(i).getCharacter()), (((float)(units.get(i).getLocation().getX()))/((float)wid)), (((float)(units.get(i).getLocation().getY()))/((float)hei)));
-                specdrawMe(gl, ographics.getGraphic(units.get(i).getCharacter()), (float)((units.get(i).getLocation().getX()-currChar.getLocation().getX())/(float)wid), (float)((units.get(i).getLocation().getY()-currChar.getLocation().getY())/(float)hei));
+                specdrawMe(gl, ographics.getGraphic(units.get(i).getCharacter() + sanim.getStatus(units.get(i).getStatus())), (float)((units.get(i).getLocation().getX()-currChar.getLocation().getX())/(float)wid), (float)((units.get(i).getLocation().getY()-currChar.getLocation().getY())/(float)hei));
         }   //}
 
 

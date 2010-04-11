@@ -82,6 +82,11 @@ public class FreeRoamControl extends GenAdapter implements Tickable {
             System.out.println("You pressed the interaction button!");
         }
 
+        else if (e.getKeyCode() == KeyEvent.VK_X){
+            model.swapChar();
+            System.out.println("You just cycled to another character with this button!");
+        }
+
         else if (e.getKeyCode() == KeyEvent.VK_ESCAPE){
             System.out.println("You just escaped!");
         }

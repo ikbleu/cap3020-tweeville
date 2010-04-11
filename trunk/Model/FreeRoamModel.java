@@ -141,6 +141,11 @@ public class FreeRoamModel implements Tickable{
         ArrayList<Character> yes = new ArrayList<Character>();
         yes.addAll(controlled);
         yes.addAll(npcs);
+        
+        for(int i = 0; i < yes.size();++i){
+            yes.get(i).tickCheck();
+        }
+
         for(int i = 0; i < triggers.size(); ++i){
             for(int j = 0; j < controlled.size(); ++j){
                 if(triggers.get(i).inside(controlled.get(j).centerX, controlled.get(j).centerY)){
@@ -148,35 +153,37 @@ public class FreeRoamModel implements Tickable{
                         m.unregister(this);
                         m.setNewFreeRoam(triggers.get(i).loadingInfoFile, triggers.get(i).loadingMapFile);
                     }
-                    /*if(triggers.get(i).triggerType.equals("Dialogue")){
-                        dHandler = new DialogueHandler(triggers.get(i).loadingInfoFile);
-                        dialogueOn = true;
-
-                    }*/
+                    if(triggers.get(i).triggerType.equals("Event")){
+                        //move
+                        //dialogue
+                        Eventer e = new Eventer(triggers.get(i).loadingInfoFile, m);
+                    }
                 }
             }
         }
 
 
-        for(int i = 0; i < controlled.size()-1; ++ i){
-            double x1 = controlled.get(currCharIndex + 1 + i).centerX;
-            double x2 = controlled.get(currCharIndex).centerX;
-            double y1 = controlled.get(currCharIndex + 1 + i).centerY;
-            double y2 = controlled.get(currCharIndex).centerY;
-            if ( Math.abs(x1 - x2) > Math.abs(y1 - y2)){
-                if(x1 < x2){
-                    controlled.get(currCharIndex + 1 + i).move(DirectionType.EAST, yes, controlled, currentChar);
+        for(int i = 0; i < controlled.size(); ++ i){
+            if(i!= currCharIndex){
+                double x1 = controlled.get(i).centerX;
+                double x2 = controlled.get(currCharIndex).centerX;
+                double y1 = controlled.get(i).centerY;
+                double y2 = controlled.get(currCharIndex).centerY;
+                if ( Math.abs(x1 - x2) > Math.abs(y1 - y2)){
+                    if(x1 < x2){
+                        controlled.get(i).move(DirectionType.EAST, yes, controlled, currentChar);
+                    }
+                    else{
+                        controlled.get(i).move(DirectionType.WEST, yes, controlled, currentChar);
+                    }
                 }
                 else{
-                    controlled.get(currCharIndex + 1 + i).move(DirectionType.WEST, yes, controlled, currentChar);
-                }
-            }
-            else{
-                if(y1 < y2){
-                    controlled.get(currCharIndex + 1 + i).move(DirectionType.SOUTH, yes, controlled, currentChar);
-                }
-                else{
-                    controlled.get(currCharIndex + 1 + i).move(DirectionType.NORTH, yes, controlled, currentChar);
+                    if(y1 < y2){
+                        controlled.get(i).move(DirectionType.SOUTH, yes, controlled, currentChar);
+                    }
+                    else{
+                        controlled.get(i).move(DirectionType.NORTH, yes, controlled, currentChar);
+                    }
                 }
             }
         }

@@ -26,10 +26,12 @@ public class Character implements Viewable, Comparable{
     int cwidth;
     int cheight;
     int hp;
-    int movementInc = 20;
+    int movementInc = 15;
     double centerX;
     double centerY;
     double bubble;
+    boolean moveCheck;
+    int checkCount;
     //1130 x 650
     //36 x 80
 
@@ -39,7 +41,8 @@ public class Character implements Viewable, Comparable{
         this.locY = locY;
         this.cwidth = cwidth;
         this.cheight = cheight;
-        this.status = UnitStatus.STANDING;
+        this.status = UnitStatus.SSOUTH;
+        this.direction = DirectionType.SOUTH;
         this.alliance = alliance;
         this.map = map;
         this.centerX = locX + cwidth/2;
@@ -48,6 +51,8 @@ public class Character implements Viewable, Comparable{
                                 + (this.centerY - (locY + this.cheight)) * (this.centerY - (locY + this.cheight)) );
 
         hp = 100;
+        this.moveCheck = false;
+        this.checkCount = 0;
     }
 
     boolean move(DirectionType direction, ArrayList<Character> units, ArrayList<Character> accept, Character curr){
@@ -64,6 +69,15 @@ public class Character implements Viewable, Comparable{
                     locX+=movementInc;
                     this.centerX = locX + cwidth/2;
                     this.centerY = locY + cheight * 7 / 8;
+                    moveCheck = true;
+                    if(status == UnitStatus.WEAST){
+                        status = UnitStatus.SEAST;
+                        this.direction = DirectionType.EAST;
+                    }
+                    else{
+                        status = UnitStatus.WEAST;
+                        this.direction = DirectionType.EAST;
+                    }
                 }
             }
         }
@@ -79,6 +93,23 @@ public class Character implements Viewable, Comparable{
                     locY-=movementInc;
                     this.centerX = locX + cwidth/2;
                     this.centerY = locY + cheight * 7 / 8;
+                    moveCheck = true;
+                    if(status == UnitStatus.SNORTH){
+                        status = UnitStatus.WNORTH1;
+                        this.direction = DirectionType.NORTH;
+                    }
+                    else if(status == UnitStatus.WNORTH1){
+                        status = UnitStatus.WNORTH2;
+                        this.direction = DirectionType.NORTH;
+                    }
+                    else if(status == UnitStatus.WNORTH2){
+                        status = UnitStatus.WNORTH1;
+                        this.direction = DirectionType.NORTH;
+                    }
+                    else{
+                        status = UnitStatus.WNORTH1;
+                        this.direction = DirectionType.NORTH;
+                    }
                 }
             }
         }
@@ -94,6 +125,15 @@ public class Character implements Viewable, Comparable{
                     locX-=movementInc;
                     this.centerX = locX + cwidth/2;
                     this.centerY = locY + cheight * 7 / 8;
+                    moveCheck = true;
+                    if(status == UnitStatus.WWEST){
+                        status = UnitStatus.SWEST;
+                        this.direction = DirectionType.WEST;
+                    }
+                    else{
+                        status = UnitStatus.WWEST;
+                        this.direction = DirectionType.WEST;
+                    }
                 }
             }
         }
@@ -109,6 +149,23 @@ public class Character implements Viewable, Comparable{
                     locY+=movementInc;
                     this.centerX = locX + cwidth/2;
                     this.centerY = locY + cheight * 7 / 8;
+                    moveCheck = true;
+                    if(status == UnitStatus.SSOUTH){
+                        status = UnitStatus.WSOUTH1;
+                        this.direction = DirectionType.SOUTH;
+                    }
+                    else if(status == UnitStatus.WSOUTH1){
+                        status = UnitStatus.WSOUTH2;
+                        this.direction = DirectionType.SOUTH;
+                    }
+                    else if(status == UnitStatus.WSOUTH2){
+                        status = UnitStatus.WSOUTH1;
+                        this.direction = DirectionType.SOUTH;
+                    }
+                    else{
+                        status = UnitStatus.WSOUTH1;
+                        this.direction = DirectionType.SOUTH;
+                    }
                 }
             }
         }
@@ -170,6 +227,36 @@ public class Character implements Viewable, Comparable{
             return 0;
         }
         return -500;
+    }
+
+    public boolean tickCheck(){
+        if(!moveCheck){
+            checkCount++;
+        }
+        else{
+            checkCount = 0;
+        }
+
+        moveCheck = false;
+
+        if(checkCount == 5){
+            checkCount = 0;
+            if(direction == DirectionType.SOUTH){
+                status = UnitStatus.SSOUTH;
+            }
+            else if(direction == DirectionType.WEST){
+                status = UnitStatus.SWEST;
+            }
+            else if(direction == DirectionType.NORTH){
+                status = UnitStatus.SNORTH;
+            }
+            else if(direction == DirectionType.EAST){
+                status = UnitStatus.SEAST;
+            }
+            return moveCheck;
+        }
+
+        return true;
     }
 
 
