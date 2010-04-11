@@ -66,4 +66,36 @@ abstract class SpecialImage extends CanIHazImage{
 
     }
 
+    void specdrawMe(GL gl, Texture texture, float x, float y){
+
+        Texture current = texture;
+
+        widRat = ((float)(wid))/1280F;
+        heiRat = ((float)(hei))/800F;
+
+        current.bind();
+
+        gl.glPushMatrix();
+
+            gl.glBegin(GL.GL_POLYGON);
+
+                gl.glTexCoord2d(0.0, 0.0);
+                gl.glVertex2d(x * widRat + .5,y * heiRat + .5);
+
+                gl.glTexCoord2d(0.0, 1.0);
+                gl.glVertex2d(x * widRat + .5, (y + ((float)(current.getHeight())/(float)hei)) * heiRat + .5);
+
+                gl.glTexCoord2d(1.0, 1.0);
+                gl.glVertex2d((x + ((float)(current.getWidth())/(float)wid)) * widRat + .5, (y + ((float)(current.getHeight())/(float)hei)) * heiRat + .5);
+
+                gl.glTexCoord2d(1.0, 0.0);
+                gl.glVertex2d((x + ((float)(current.getWidth())/(float)wid)) * widRat + .5, y * heiRat + .5);
+
+
+             gl.glEnd();
+
+        gl.glPopMatrix();
+
+    }
+
 }
