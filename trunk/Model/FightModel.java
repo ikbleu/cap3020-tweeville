@@ -88,11 +88,11 @@ public class FightModel implements Tickable{
         currCharIndex = 0;
     }
 
-    void move(DirectionType direction){
+    void move(DirectionType direction, boolean b){
         ArrayList<Character> yes = new ArrayList<Character>();
         yes.addAll(good);
         yes.addAll(enemy);
-        currentChar.move(direction, yes, good, currentChar);
+        currentChar.move(direction, yes, good, currentChar, b);
     }
 
     void swapChar(){
@@ -108,7 +108,7 @@ public class FightModel implements Tickable{
         ArrayList<Character> yes = new ArrayList<Character>();
         yes.addAll(good);
         yes.addAll(enemy);
-        return c.move(direction, yes, good, c);
+        return c.move(direction, yes, good, c, false);
     }
 
     void goodAttack(Character c){
@@ -215,18 +215,18 @@ public class FightModel implements Tickable{
                     boolean moved = false;
                     if ( Math.abs(x1 - x2) > Math.abs(y1 - y2)){
                         if(x1 < x2){
-                            moved = good.get(i).move(DirectionType.EAST, yes, good, currentChar);
+                            moved = good.get(i).move(DirectionType.EAST, yes, good, currentChar, false);
                         }
                         else{
-                            moved = good.get(i).move(DirectionType.WEST, yes, good, currentChar);
+                            moved = good.get(i).move(DirectionType.WEST, yes, good, currentChar, false);
                         }
                     }
                     if(!moved){
                         if(y1 < y2){
-                            moved = good.get(i).move(DirectionType.SOUTH, yes, good, currentChar);
+                            moved = good.get(i).move(DirectionType.SOUTH, yes, good, currentChar, false);
                         }
                         else{
-                            moved = good.get(i).move(DirectionType.NORTH, yes, good, currentChar);
+                            moved = good.get(i).move(DirectionType.NORTH, yes, good, currentChar, false);
                         }
                     }
                 }

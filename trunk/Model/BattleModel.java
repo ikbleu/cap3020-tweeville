@@ -31,7 +31,7 @@ public class BattleModel {
         return fightModel.getUnits();
     }
 
-    void charMove(DirectionType d){
-        fightModel.move(d);
+    void charMove(DirectionType d, boolean b){
+        fightModel.move(d, b);
     }
 }

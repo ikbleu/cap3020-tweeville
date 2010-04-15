@@ -33,25 +33,27 @@ public class Model implements ViewHelper, LeashedModel{
     public Model(){
         mode = ModeType.FREEROAM;
         freeRoamModelInfo = new File ("ConfigFiles/FRInput.txt");
-        freeRoamModelMap = new File ("Images/TestMap.png");
+        freeRoamModelMap = new File ("Images/2ndFloorCorWalk.png");
         //battleModel = new BattleModel(battleModelFight, battleModelMap);
         freeRoamModel = new FreeRoamModel(freeRoamModelInfo, freeRoamModelMap, this);
         clock = new Clock(60);
         register(freeRoamModel);
     }
 
-    public void setNewBattle(String infoFile, String mapFile){
+    public void setNewBattle(String infoFile, String mapFile, String viewInfo){
         battleModelFight = new File(infoFile);
         battleModelMap = new File(mapFile);
         battleModel = new BattleModel(battleModelFight, battleModelMap, this);
         setMode(ModeType.BATTLE);
+        view.setBMap(viewInfo);
         register(battleModel.fightModel);
     }
 
-    public void setNewFreeRoam(String infoFile, String mapFile){
+    public void setNewFreeRoam(String infoFile, String mapFile, String viewInfo){
         freeRoamModelInfo = new File(infoFile);
         freeRoamModelMap = new File(mapFile);
         freeRoamModel = new FreeRoamModel(freeRoamModelInfo, freeRoamModelMap, this);
+        view.setFRMap(viewInfo);
         register(freeRoamModel);
     }
 
@@ -137,12 +139,12 @@ public class Model implements ViewHelper, LeashedModel{
         controller.setMode(mode);
     }
 
-    public void moveChar(DirectionType d){
+    public void moveChar(DirectionType d, boolean b){
         if(mode == ModeType.BATTLE){
-            battleModel.charMove(d);
+            battleModel.charMove(d, b);
         }
         if(mode == ModeType.FREEROAM || mode == ModeType.CUTSCENE){
-            freeRoamModel.charMove(d);
+            freeRoamModel.charMove(d, b);
         }
     }
 

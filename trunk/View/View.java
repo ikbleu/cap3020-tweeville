@@ -47,6 +47,14 @@ public class View implements Tickable{
         screenManager.startMusic();
     }
 
+    public void setFRMap(String loc){
+        screenManager.freeRoamScreenViewPort.setNewFRImage(loc);
+    }
+
+    public void setBMap(String loc){
+        screenManager.battleScreenViewPort.setNewBImage(loc);
+    }
+
     public void setMode(ModeType mode){
         screenManager.setMode(mode);
     }

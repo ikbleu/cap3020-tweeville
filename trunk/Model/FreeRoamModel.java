@@ -81,7 +81,8 @@ public class FreeRoamModel implements Tickable{
                 String newType = s.next();
                 String newInfo = s.next();
                 String newMap = s.next();
-                triggers.add(new TriggerBox(x1, x2, y1, y2, newType, newInfo, newMap));
+                String viewInfo = s.next();
+                triggers.add(new TriggerBox(x1, x2, y1, y2, newType, newInfo, newMap, viewInfo));
             }
             if(type.equals("dialogue")){
                 String name = s.next();
@@ -93,18 +94,18 @@ public class FreeRoamModel implements Tickable{
         currCharIndex = 0;
     }
 
-    boolean charMove(DirectionType direction){
+    boolean charMove(DirectionType direction, boolean b){
         ArrayList<Character> yes = new ArrayList<Character>();
         yes.addAll(controlled);
         yes.addAll(npcs);
-        return currentChar.move(direction, yes, controlled, currentChar);
+        return currentChar.move(direction, yes, controlled, currentChar, b);
     }
 
     boolean specMove(DirectionType direction, Character c){
         ArrayList<Character> yes = new ArrayList<Character>();
         yes.addAll(controlled);
         yes.addAll(npcs);
-        return c.move(direction, yes, controlled, c);
+        return c.move(direction, yes, controlled, c, false);
     }
 
     Character StringToChar(String name){
@@ -187,7 +188,7 @@ public class FreeRoamModel implements Tickable{
             if(triggers.get(i).inside(controlled.get(currCharIndex).centerX, controlled.get(currCharIndex).centerY)){
                 if(triggers.get(i).triggerType.equals("FreeRoam")){
                     m.unregister(this);
-                    m.setNewFreeRoam(triggers.get(i).loadingInfoFile, triggers.get(i).loadingMapFile);
+                    m.setNewFreeRoam(triggers.get(i).loadingInfoFile, triggers.get(i).loadingMapFile, triggers.get(i).viewInfo);
                 }
                 if(triggers.get(i).triggerType.equals("Event")){
                     //move
@@ -199,7 +200,7 @@ public class FreeRoamModel implements Tickable{
                     triggerRemoval = i;
                 }
                 if(triggers.get(i).triggerType.equals("Battle")){
-                    m.setNewBattle( triggers.get(i).loadingInfoFile, triggers.get(i).loadingMapFile);
+                    m.setNewBattle( triggers.get(i).loadingInfoFile, triggers.get(i).loadingMapFile, triggers.get(i).viewInfo);
                     triggerRemoval = i;
                 }
             }
@@ -219,18 +220,18 @@ public class FreeRoamModel implements Tickable{
                 boolean moved = false;
                 if ( Math.abs(x1 - x2) > Math.abs(y1 - y2)){
                     if(x1 < x2){
-                        moved = controlled.get(i).move(DirectionType.EAST, yes, controlled, currentChar);
+                        moved = controlled.get(i).move(DirectionType.EAST, yes, controlled, currentChar, false);
                     }
                     else{
-                        moved = controlled.get(i).move(DirectionType.WEST, yes, controlled, currentChar);
+                        moved = controlled.get(i).move(DirectionType.WEST, yes, controlled, currentChar, false);
                     }
                 }
                 if(!moved){
                     if(y1 < y2){
-                        moved = controlled.get(i).move(DirectionType.SOUTH, yes, controlled, currentChar);
+                        moved = controlled.get(i).move(DirectionType.SOUTH, yes, controlled, currentChar, false);
                     }
                     else{
-                        moved = controlled.get(i).move(DirectionType.NORTH, yes, controlled, currentChar);
+                        moved = controlled.get(i).move(DirectionType.NORTH, yes, controlled, currentChar, false);
                     }
                 }
             }
