@@ -50,6 +50,8 @@ class BattleScreenViewPort extends SpecialImage
     Texture current;
     Point.Float nasPoi;
 
+    String mapName;
+
     BattleScreenViewPort( ViewHelper model, GL gl, int wid, int hei )
     {
 	this.model = model;
@@ -58,10 +60,15 @@ class BattleScreenViewPort extends SpecialImage
         this.wid = wid;
         this.hei = hei;
         this.gl = gl;
+        mapName = "BattleViewPort";
 
 	updateEntities();
     }
 
+
+    void setNewBImage(String loc){
+        mapName = loc;
+    }
 
 	
     void render( GLAutoDrawable drawable, TextRenderer textRenderer )

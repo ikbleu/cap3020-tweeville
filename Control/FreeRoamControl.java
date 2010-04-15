@@ -145,19 +145,19 @@ public class FreeRoamControl extends GenAdapter implements Tickable {
 	{
 	    if( anotherDirection[KeyEvent.VK_W] )
 	    {
-		    model.moveChar(DirectionType.NORTH);
+		    model.moveChar(DirectionType.NORTH, moveKeysPressed>1);
 	    }
 	    if( anotherDirection[KeyEvent.VK_S] )
 	    {
-		    model.moveChar(DirectionType.SOUTH);
+		    model.moveChar(DirectionType.SOUTH, moveKeysPressed>1);
 	    }
 	    if( anotherDirection[KeyEvent.VK_D] )
 	    {
-		    model.moveChar(DirectionType.EAST);
+		    model.moveChar(DirectionType.EAST, moveKeysPressed>1);
 	    }
 	    if( anotherDirection[KeyEvent.VK_A] )
 	    {
-		    model.moveChar(DirectionType.WEST);
+		    model.moveChar(DirectionType.WEST, moveKeysPressed>1);
 	    }
 	}
     }

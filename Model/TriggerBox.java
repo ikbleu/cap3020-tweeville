@@ -17,10 +17,10 @@ class TriggerBox {
     String triggerType;
     String loadingInfoFile;
     String loadingMapFile;
-    String imageMap;
+    String viewInfo;
 
 
-    TriggerBox(double x1, double x2, double y1, double y2, String triggerType, String loadingInfoFile, String loadingMapFile){
+    TriggerBox(double x1, double x2, double y1, double y2, String triggerType, String loadingInfoFile, String loadingMapFile, String viewInfo){
         xMin = x1;
         xMax = x2;
         yMin = y1;
@@ -28,6 +28,7 @@ class TriggerBox {
         this.triggerType = triggerType;
         this.loadingInfoFile = loadingInfoFile;
         this.loadingMapFile = loadingMapFile;
+        this.viewInfo = viewInfo;
 
     }
 
@@ -51,8 +52,8 @@ class TriggerBox {
         return loadingMapFile;
     }
 
-    String getImageMap(){
-        return imageMap;
+    String getViewInfo(){
+        return viewInfo;
     }
 
 }

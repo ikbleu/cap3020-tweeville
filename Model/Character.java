@@ -55,7 +55,7 @@ public class Character implements Viewable, Comparable{
         this.checkCount = 0;
     }
 
-    boolean move(DirectionType direction, ArrayList<Character> units, ArrayList<Character> accept, Character curr){
+    boolean move(DirectionType direction, ArrayList<Character> units, ArrayList<Character> accept, Character curr, boolean mul){
         boolean move = true;
         if(direction == DirectionType.EAST){
             if(map.passable((double)locX+movementInc, (double)locY, this)){
@@ -70,13 +70,15 @@ public class Character implements Viewable, Comparable{
                     this.centerX = locX + cwidth/2;
                     this.centerY = locY + cheight * 7 / 8;
                     moveCheck = true;
-                    if(status == UnitStatus.WEAST){
-                        status = UnitStatus.SEAST;
-                        this.direction = DirectionType.EAST;
-                    }
-                    else{
-                        status = UnitStatus.WEAST;
-                        this.direction = DirectionType.EAST;
+                    if(!mul){
+                        if(status == UnitStatus.WEAST){
+                            status = UnitStatus.SEAST;
+                            this.direction = DirectionType.EAST;
+                        }
+                        else{
+                            status = UnitStatus.WEAST;
+                            this.direction = DirectionType.EAST;
+                        }
                     }
                 }
             }
@@ -126,13 +128,15 @@ public class Character implements Viewable, Comparable{
                     this.centerX = locX + cwidth/2;
                     this.centerY = locY + cheight * 7 / 8;
                     moveCheck = true;
-                    if(status == UnitStatus.WWEST){
-                        status = UnitStatus.SWEST;
-                        this.direction = DirectionType.WEST;
-                    }
-                    else{
-                        status = UnitStatus.WWEST;
-                        this.direction = DirectionType.WEST;
+                    if(!mul){
+                        if(status == UnitStatus.WWEST){
+                            status = UnitStatus.SWEST;
+                            this.direction = DirectionType.WEST;
+                        }
+                        else{
+                            status = UnitStatus.WWEST;
+                            this.direction = DirectionType.WEST;
+                        }
                     }
                 }
             }

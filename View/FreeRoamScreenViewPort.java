@@ -62,6 +62,7 @@ public class FreeRoamScreenViewPort extends SpecialImage{
     boolean lineFlag0 = false;
     boolean lineFlag1 = false;
     boolean lineFlag2 = false;
+    String mapName;
 
     FreeRoamScreenViewPort( ViewHelper model, GL gl, int wid, int hei, int iwid, int ihei )
     {
@@ -72,7 +73,7 @@ public class FreeRoamScreenViewPort extends SpecialImage{
 	imageHeight = 800;
         this.gl = gl;
 
-        frImage = "colormap";
+        mapName = "corridor";
 
         updateEntities();
 
@@ -83,15 +84,15 @@ public class FreeRoamScreenViewPort extends SpecialImage{
         //gl.glPushMatrix();
         //gl.glTranslated(.1, 0, 0);
 
-        specdrawMe(gl, ographics.getGraphic("map1"), (float)((0-currChar.getLocation().getX())/(float)wid), (float)((0-currChar.getLocation().getY())/(float)hei));
-        specdrawMe(gl, ographics.getGraphic("map2"), (float)((1280-currChar.getLocation().getX())/(float)wid), (float)((0-currChar.getLocation().getY())/(float)hei));
-        specdrawMe(gl, ographics.getGraphic("map3"), (float)((2560-currChar.getLocation().getX())/(float)wid), (float)((0-currChar.getLocation().getY())/(float)hei));
-        specdrawMe(gl, ographics.getGraphic("map4"), (float)((0-currChar.getLocation().getX())/(float)wid), (float)((800-currChar.getLocation().getY())/(float)hei));
-        specdrawMe(gl, ographics.getGraphic("map5"), (float)((1280-currChar.getLocation().getX())/(float)wid), (float)((800-currChar.getLocation().getY())/(float)hei));
-        specdrawMe(gl, ographics.getGraphic("map6"), (float)((2560-currChar.getLocation().getX())/(float)wid), (float)((800-currChar.getLocation().getY())/(float)hei));
-        specdrawMe(gl, ographics.getGraphic("map7"), (float)((0-currChar.getLocation().getX())/(float)wid), (float)((1600-currChar.getLocation().getY())/(float)hei));
-        specdrawMe(gl, ographics.getGraphic("map8"), (float)((1280-currChar.getLocation().getX())/(float)wid), (float)((1600-currChar.getLocation().getY())/(float)hei));
-        specdrawMe(gl, ographics.getGraphic("map9"), (float)((2560-currChar.getLocation().getX())/(float)wid), (float)((1600-currChar.getLocation().getY())/(float)hei));
+        specdrawMe(gl, ographics.getGraphic(mapName + "1"), (float)((0-currChar.getLocation().getX())/(float)wid), (float)((0-currChar.getLocation().getY())/(float)hei));
+        specdrawMe(gl, ographics.getGraphic(mapName + "2"), (float)((1280-currChar.getLocation().getX())/(float)wid), (float)((0-currChar.getLocation().getY())/(float)hei));
+        specdrawMe(gl, ographics.getGraphic(mapName + "3"), (float)((2560-currChar.getLocation().getX())/(float)wid), (float)((0-currChar.getLocation().getY())/(float)hei));
+        specdrawMe(gl, ographics.getGraphic(mapName + "4"), (float)((0-currChar.getLocation().getX())/(float)wid), (float)((800-currChar.getLocation().getY())/(float)hei));
+        specdrawMe(gl, ographics.getGraphic(mapName + "5"), (float)((1280-currChar.getLocation().getX())/(float)wid), (float)((800-currChar.getLocation().getY())/(float)hei));
+        specdrawMe(gl, ographics.getGraphic(mapName + "6"), (float)((2560-currChar.getLocation().getX())/(float)wid), (float)((800-currChar.getLocation().getY())/(float)hei));
+        specdrawMe(gl, ographics.getGraphic(mapName + "7"), (float)((0-currChar.getLocation().getX())/(float)wid), (float)((1600-currChar.getLocation().getY())/(float)hei));
+        specdrawMe(gl, ographics.getGraphic(mapName + "8"), (float)((1280-currChar.getLocation().getX())/(float)wid), (float)((1600-currChar.getLocation().getY())/(float)hei));
+        specdrawMe(gl, ographics.getGraphic(mapName + "9"), (float)((2560-currChar.getLocation().getX())/(float)wid), (float)((1600-currChar.getLocation().getY())/(float)hei));
 
 	for(int i = 0; units != null && i < units.size();++i)
 	{
@@ -130,9 +131,9 @@ public class FreeRoamScreenViewPort extends SpecialImage{
 	}
     }
     
-    void setNewFRImage()
+    void setNewFRImage(String loc)
     {
-	
+	mapName = loc;
     }
 
     void drawDialogue( GLAutoDrawable drawable, TextRenderer textRenderer )
