@@ -38,7 +38,7 @@ public class View implements Tickable{
         if(screenManager.currentMode == ModeType.BATTLE){
             screenManager.battleScreenViewPort.updateEntities();
         }
-        if(screenManager.currentMode == ModeType.FREEROAM){
+        if(screenManager.currentMode == ModeType.FREEROAM || screenManager.currentMode == ModeType.CUTSCENE){
             screenManager.freeRoamScreenViewPort.updateEntities();
         }
     }

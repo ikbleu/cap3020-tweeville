@@ -15,7 +15,7 @@ import View.View;
  * @author Mr. Wilmot
  */
 public class Model implements ViewHelper, LeashedModel{
-    private ModeType mode;
+    ModeType mode;
     BattleModel battleModel;
     FreeRoamModel freeRoamModel;
     File battleModelMap;
@@ -32,23 +32,20 @@ public class Model implements ViewHelper, LeashedModel{
     
     public Model(){
         mode = ModeType.FREEROAM;
-        battleModelMap = new File("Images/BattleScreenColorMap.png");
-        battleModelFight = new File("ConfigFiles/BattleInput.txt");
         freeRoamModelInfo = new File ("ConfigFiles/FRInput.txt");
         freeRoamModelMap = new File ("Images/TestMap.png");
-        battleModel = new BattleModel(battleModelFight, battleModelMap);
+        //battleModel = new BattleModel(battleModelFight, battleModelMap);
         freeRoamModel = new FreeRoamModel(freeRoamModelInfo, freeRoamModelMap, this);
         clock = new Clock(60);
         register(freeRoamModel);
-        /*try{
-            ifs = new FileInputStream(new File("Images/AA.mp3"));
-            player = new Player(ifs);
-            player.play();
-            System.out.println("I can do things after i play too!");
-        }
-        catch(Exception c){
-            System.out.println("Oh nos!");
-        }*/
+    }
+
+    public void setNewBattle(String infoFile, String mapFile){
+        battleModelFight = new File(infoFile);
+        battleModelMap = new File(mapFile);
+        battleModel = new BattleModel(battleModelFight, battleModelMap, this);
+        setMode(ModeType.BATTLE);
+        register(battleModel.fightModel);
     }
 
     public void setNewFreeRoam(String infoFile, String mapFile){
@@ -82,10 +79,23 @@ public class Model implements ViewHelper, LeashedModel{
             controller.setMode(ModeType.FREEROAM);
             view.setMode(ModeType.FREEROAM);
         }
+        if(mode == ModeType.CUTSCENE){
+            controller.setMode(ModeType.CUTSCENE);
+            view.setMode(ModeType.CUTSCENE);
+        }
+        if(mode == ModeType.BATTLE){
+            controller.setMode(ModeType.BATTLE);
+            view.setMode(ModeType.BATTLE);
+        }
     }
 
     public void swapChar(){
-        freeRoamModel.swapChar();
+        if(mode == ModeType.FREEROAM){
+            freeRoamModel.swapChar();
+        }
+        if(mode == ModeType.BATTLE){
+            battleModel.fightModel.swapChar();
+        }
     }
 
     public void action(){
@@ -109,7 +119,17 @@ public class Model implements ViewHelper, LeashedModel{
     }
 
     public Character getCurrChar(){
-        return freeRoamModel.currentChar;
+        if(mode == ModeType.FREEROAM || mode == ModeType.CUTSCENE){
+            return freeRoamModel.currentChar;
+        }
+        if(mode == ModeType.BATTLE){
+            return battleModel.fightModel.currentChar;
+        }
+        return null;
+    }
+
+    public void attack(){
+        battleModel.fightModel.goodAttack(battleModel.fightModel.currentChar);
     }
 
     public void modeUpdate(ModeType mode){
@@ -121,7 +141,7 @@ public class Model implements ViewHelper, LeashedModel{
         if(mode == ModeType.BATTLE){
             battleModel.charMove(d);
         }
-        if(mode == ModeType.FREEROAM){
+        if(mode == ModeType.FREEROAM || mode == ModeType.CUTSCENE){
             freeRoamModel.charMove(d);
         }
     }
@@ -134,7 +154,7 @@ public class Model implements ViewHelper, LeashedModel{
         if(mode == ModeType.BATTLE){
             return battleModel.getUnits();
         }
-        if(mode == ModeType.FREEROAM){
+        if(mode == ModeType.FREEROAM || mode == ModeType.CUTSCENE){
             return freeRoamModel.getUnits();
         }
         return null;

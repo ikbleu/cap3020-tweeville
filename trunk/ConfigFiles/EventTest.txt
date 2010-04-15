@@ -1,0 +1,3 @@
+move Nast 2000 880
+dialogue ConfigFiles/DialogueTest.txt
+move Nast 2000 800

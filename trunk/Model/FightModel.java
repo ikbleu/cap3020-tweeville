@@ -10,27 +10,38 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.awt.Point;
 import java.util.List;
+import java.util.LinkedList;
 
 /**
  *
  * @author spock
  */
-public class FightModel {
+public class FightModel implements Tickable{
     File battle;
     Scanner s;
     ArrayList<Character> good;
     ArrayList<Character> enemy;
+    ArrayList<Character> damage;
     Character currentChar;
     int currCharIndex = 0;
     boolean readGood;
+    Model model;
+    int damageTime;
+
+    ArrayList<BattleEventer> damagePattern;
 
 
 
-    FightModel(File model, BattleMap map){
-        battle = model;
+    FightModel(File fmodel, BattleMap map, Model m){
+        this.model = m;
+        battle = fmodel;
         readGood = true;
         good = new ArrayList<Character>();
         enemy = new ArrayList<Character>();
+        damage = new ArrayList<Character>();
+        damagePattern = new ArrayList<BattleEventer>();
+
+        damageTime = 0;
         try{
             s = new Scanner(battle);
         }
@@ -39,52 +50,43 @@ public class FightModel {
             System.exit(0);
         }
         while(s.hasNext()){
-            String name = s.next();
-            System.out.println(name);
-            if(name.equals("evil")){
-                readGood = false;
-            }
-            else{
+            String type = s.next();
+            System.out.println(type);
+            if(type.equals("good")){
+                String name = s.next();
                 int locX = s.nextInt();
-                System.out.println(locX);
                 int locY = s.nextInt();
-                System.out.println(locY);
                 int cwidth = s.nextInt();
                 int cheight = s.nextInt();
-
-                if(readGood){
-                    good.add(new Character(name, locX, locY, cwidth, cheight, AllianceType.FRIENDLY, map));
-                }
-                else{
-                    enemy.add(new Character(name, locX, locY, cwidth, cheight, AllianceType.ENEMY, map));
-                }
+                good.add(new Character(name, locX, locY, cwidth, cheight, AllianceType.FRIENDLY, map));
+            }
+            if(type.equals("enemy")){
+                String name = s.next();
+                int locX = s.nextInt();
+                int locY = s.nextInt();
+                int cwidth = s.nextInt();
+                int cheight = s.nextInt();
+                enemy.add(new Character(name, locX, locY, cwidth, cheight, AllianceType.ENEMY, map));
+            }
+            if(type.equals("damage")){
+                String name = s.next();
+                int locX = s.nextInt();
+                int locY = s.nextInt();
+                int cwidth = s.nextInt();
+                int cheight = s.nextInt();
+                damage.add(new Character(name, locX, locY, cwidth, cheight, AllianceType.ENEMY, map));
+            }
+            if(type.equals("event")){
+                String file = s.next();
+                ArrayList<Character> yes = new ArrayList<Character>();
+                yes.addAll(enemy);
+                yes.addAll(damage);
+                damagePattern.add(new BattleEventer(file, model, yes));
             }
         }
         currentChar = good.get(0);
         currCharIndex = 0;
     }
-
-    /*void move(DirectionType direction){
-        ArrayList<Character> yes = new ArrayList<Character>();
-        yes.addAll(good);
-        yes.addAll(enemy);
-        currentChar.move(direction, yes, good, currentChar);
-    }
-
-    void swapChar(){
-        currCharIndex++;
-        if(currCharIndex>=good.size()){
-            currCharIndex = 0;
-        }
-        currentChar = good.get(currCharIndex);
-    }
-
-    List<Character> getUnits(){
-        ArrayList<Character> yes = new ArrayList<Character>();
-        yes.addAll(good);
-        yes.addAll(enemy);
-        return yes;
-    }*/
 
     void move(DirectionType direction){
         ArrayList<Character> yes = new ArrayList<Character>();
@@ -98,40 +100,163 @@ public class FightModel {
         if(currCharIndex>=good.size()){
             currCharIndex = 0;
         }
-        currentChar = good.get(currCharIndex);
+        if(good.size()!=0)
+            currentChar = good.get(currCharIndex);
     }
+
+    boolean specMove(DirectionType direction, Character c){
+        ArrayList<Character> yes = new ArrayList<Character>();
+        yes.addAll(good);
+        yes.addAll(enemy);
+        return c.move(direction, yes, good, c);
+    }
+
+    void goodAttack(Character c){
+        double cax = 0;
+        double cay = 0;
+        if(c.direction == DirectionType.EAST){
+            cax = c.centerX + c.bubble * 2;
+            cay = c.centerY;
+        }
+        else if(c.direction == DirectionType.WEST){
+            cax = c.centerX - c.bubble * 2;
+            cay = c.centerY;
+        }
+        else if(c.direction == DirectionType.NORTH){
+            cax = c.centerX;
+            cay = c.centerY - c.bubble * 2;
+        }
+        else if(c.direction == DirectionType.SOUTH){
+            cax = c.centerX;
+            cay = c.centerY + c.bubble * 2;
+        }
+        for(int i = 0; i < enemy.size(); ++i){
+            if(enemy.get(i).attackDistance(cax, cay)){
+                enemy.get(i).hp -= 5;
+                System.out.println(enemy.get(i).name + ": " + enemy.get(i).hp );
+            }
+        }
+    }
+
 
     public void onTick(){
 
+        for(int i = 0; i < damagePattern.size(); ++i){
+            damagePattern.get(i).tick();
+        }
+        
+        ArrayList<Character> yes = new ArrayList<Character>();
+        yes.addAll(good);
+        yes.addAll(enemy);
+
+        ++damageTime;
+
+        if(damageTime >= 5){
+            damageTime = 0;
+            for(int j = 0; j < damage.size(); ++j ){
+                for(int i = 0; i < good.size(); ++i){
+                    if(damage.get(j).talkDistance(good.get(i).centerX, good.get(i).centerY)){
+                        good.get(i).hp--;
+                        System.out.println(good.get(i).name + ": " + good.get(i).hp );
+                    }
+                }
+            }
+        }
+
+        LinkedList<Character> removeIf = new LinkedList<Character>();
+
+        for(int i = 0; i < good.size(); ++i){
+            if(good.get(i).hp <= 0){
+                removeIf.add(good.get(i));
+            }
+        }
+
+        for(int i = 0; i < removeIf.size(); ++i){
+            good.remove(removeIf.get(i));
+            if(good.size() == 0){
+                model.unregister(this);
+                model.setMode(ModeType.FREEROAM);
+            }
+            if(removeIf.get(i) == currentChar){
+               swapChar();
+            }
+        }
+
+        removeIf = new LinkedList<Character>();
+
+        for(int i = 0; i < enemy.size(); ++i){
+            if(enemy.get(i).hp <= 0){
+                removeIf.add(enemy.get(i));
+            }
+        }
+
+        for(int i = 0; i < removeIf.size(); ++i){
+            enemy.remove(removeIf.get(i));
+            if(enemy.size() == 0){
+                model.unregister(this);
+                model.setMode(ModeType.FREEROAM);
+            }
+        }
+
+
+        for(int i = 0; i < yes.size();++i){
+            yes.get(i).tickCheck();
+        }
+
+
+
+        if(good.size()!=0){
+            for(int i = 0; i < good.size() ; ++ i){
+                if(i!= currCharIndex){
+                    double x1 = good.get(i).centerX;
+                    double x2 = good.get(currCharIndex).centerX;
+                    double y1 = good.get(i).centerY;
+                    double y2 = good.get(currCharIndex).centerY;
+                    boolean moved = false;
+                    if ( Math.abs(x1 - x2) > Math.abs(y1 - y2)){
+                        if(x1 < x2){
+                            moved = good.get(i).move(DirectionType.EAST, yes, good, currentChar);
+                        }
+                        else{
+                            moved = good.get(i).move(DirectionType.WEST, yes, good, currentChar);
+                        }
+                    }
+                    if(!moved){
+                        if(y1 < y2){
+                            moved = good.get(i).move(DirectionType.SOUTH, yes, good, currentChar);
+                        }
+                        else{
+                            moved = good.get(i).move(DirectionType.NORTH, yes, good, currentChar);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     List<Character> getUnits(){
         ArrayList<Character> yes = new ArrayList<Character>();
         yes.addAll(good);
         yes.addAll(enemy);
-        for(int i = 0; i < good.size()-1; ++ i){
-            double x1 = good.get(currCharIndex + 1 + i).centerX;
-            double x2 = good.get(currCharIndex).centerX;
-            double y1 = good.get(currCharIndex + 1 + i).centerY;
-            double y2 = good.get(currCharIndex).centerY;
-            if ( Math.abs(x1 - x2) > Math.abs(y1 - y2)){
-                if(x1 < x2){
-                    good.get(currCharIndex + 1 + i).move(DirectionType.EAST, yes, good, currentChar);
-                }
-                else{
-                    good.get(currCharIndex + 1 + i).move(DirectionType.WEST, yes, good, currentChar);
-                }
-            }
-            else{
-                if(y1 < y2){
-                    good.get(currCharIndex + 1 + i).move(DirectionType.SOUTH, yes, good, currentChar);
-                }
-                else{
-                    good.get(currCharIndex + 1 + i).move(DirectionType.NORTH, yes, good, currentChar);
-                }
-            }
-        }
+        yes.addAll(damage);
         return yes;
     }
 
+    Character StringToChar(String name){
+        ArrayList<Character> yes = new ArrayList<Character>();
+        yes.addAll(enemy);
+        yes.addAll(damage);
+        System.out.println("StC");
+        for(int i = 0; i < yes.size();++i){
+            if(yes.get(i).name.equals(name)){
+                System.out.println(name);
+                return yes.get(i);
+            }
+        }
+        return null;
+    }
+    
+    
+
 }
+

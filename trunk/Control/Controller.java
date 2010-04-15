@@ -25,6 +25,7 @@ public class Controller extends GenAdapter {
     FreeRoamControl frc;
     FreeRoamMenuControl frmc;
     SplashControl sc;
+    CutSceneControl csc;
     GenAdapter current = new SplashControl();
     LeashedModel model;
     View view;
@@ -39,6 +40,7 @@ public class Controller extends GenAdapter {
         bc = new BattleControl(model);
         frc = new FreeRoamControl(model);
         dc = new DialogueControl(model);
+        csc = new CutSceneControl();
     }
     
     public void turnOn(){
@@ -54,18 +56,55 @@ public class Controller extends GenAdapter {
         currentMode = mode;
         if(mode == ModeType.DIALOGUE){
             current.turnOff();
+            if( current == frc ){
+                model.unregister(frc);
+            }
+            if( current == bc ){
+                model.unregister(bc);
+            }
             dc.turnOn();
             current = dc;
+            frc.reset();
+            bc.reset();
         }
         if(mode == ModeType.FREEROAM){
             current.turnOff();
+            if(current != frc){
+                model.register(frc);
+            }
+            if( current == bc ){
+                model.unregister(bc);
+            }
             frc.turnOn();
             current = frc;
+            frc.reset();
+            bc.reset();
         }
         if(mode == ModeType.BATTLE){
             current.turnOff();
+            if( current == frc ){
+                model.unregister(frc);
+            }
+            if( current != bc ){
+                model.register(bc);
+            }
             bc.turnOn();
             current = bc;
+            frc.reset();
+            bc.reset();
+        }
+        if(mode == ModeType.CUTSCENE){
+            current.turnOff();
+            if( current == frc ){
+                model.unregister(frc);
+            }
+            if( current == bc ){
+                model.unregister(bc);
+            }
+            csc.turnOn();
+            current = csc;
+            frc.reset();
+            bc.reset();
         }
     }
 
