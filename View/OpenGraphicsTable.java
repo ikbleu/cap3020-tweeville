@@ -34,6 +34,40 @@ public class OpenGraphicsTable {
 	    graphics.put( "colormap", TextureIO.newTexture(ImageIO.read(new File("Images/BattleScreenColorMap.png")), true));
 	    graphics.put( "DialogueBox", TextureIO.newTexture(ImageIO.read(new File("Images/DialogueBox.png")), true));
 
+            Texture fire = TextureIO.newTexture(ImageIO.read(new File("Images/ball.png")), true);
+            graphics.put( "Fire201", fire);
+            graphics.put( "Fire202", fire);
+            graphics.put( "Fire203", fire);
+            graphics.put( "Fire204", fire);
+            graphics.put( "Fire205", fire);
+            graphics.put( "Fire206", fire);
+            graphics.put( "Fire207", fire);
+            graphics.put( "Fire208", fire);
+            graphics.put( "Fire209", fire);
+            graphics.put( "Fire210", fire);
+
+            graphics.put( "Fire301", fire);
+            graphics.put( "Fire302", fire);
+            graphics.put( "Fire303", fire);
+            graphics.put( "Fire304", fire);
+            graphics.put( "Fire305", fire);
+            graphics.put( "Fire306", fire);
+            graphics.put( "Fire307", fire);
+            graphics.put( "Fire308", fire);
+            graphics.put( "Fire309", fire);
+            graphics.put( "Fire310", fire);
+
+            graphics.put( "Fire01", fire);
+            graphics.put( "Fire02", fire);
+            graphics.put( "Fire03", fire);
+            graphics.put( "Fire04", fire);
+            graphics.put( "Fire05", fire);
+            graphics.put( "Fire06", fire);
+            graphics.put( "Fire07", fire);
+            graphics.put( "Fire08", fire);
+            graphics.put( "Fire09", fire);
+            graphics.put( "Fire10", fire);
+
             graphics.put( "SplashScreen", TextureIO.newTexture(ImageIO.read(new File("Images/SplashScreen.png")), true));
             
             graphics.put( "map1", TextureIO.newTexture(ImageIO.read(new File("Images/TestMap/NW.png")), true));

@@ -1,0 +1,2 @@
+move Fire3 920 650
+move Fire3 920 200

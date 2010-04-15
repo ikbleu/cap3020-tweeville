@@ -17,6 +17,10 @@ class BattleControl extends GenAdapter implements Tickable {
     private boolean active = false;
     LeashedModel model;
 
+    static int counter = 0;
+    static boolean tester = false;
+    int keyRepeat = -1;
+
     BattleControl(LeashedModel model){
         active = false;
         this.model = model;
@@ -35,28 +39,43 @@ class BattleControl extends GenAdapter implements Tickable {
 
     @Override
     public void keyPressed(KeyEvent e){
-        if (e.getKeyCode() == KeyEvent.VK_W){
-            System.out.println("You pressed up!");
-            model.moveChar(DirectionType.NORTH);
+        if (e.getKeyCode() == KeyEvent.VK_W)
+	{
+	    if( moveKeysPressed < 2 && !anotherDirection[KeyEvent.VK_W] )
+	    {
+		anotherDirection[KeyEvent.VK_W] = true;
+		++moveKeysPressed;
+	    }
+	}
+	else if (e.getKeyCode() == KeyEvent.VK_S)
+	{
+	    if( moveKeysPressed < 2 && !anotherDirection[KeyEvent.VK_S] )
+	    {
+		anotherDirection[KeyEvent.VK_S] = true;
+		++moveKeysPressed;
+	    }
+        }
+	else if (e.getKeyCode() == KeyEvent.VK_D)
+	{
+	    if( moveKeysPressed < 2 && !anotherDirection[KeyEvent.VK_D] )
+	    {
+		anotherDirection[KeyEvent.VK_D] = true;
+		++moveKeysPressed;
+	    }
         }
 
-        else if (e.getKeyCode() == KeyEvent.VK_S){
-            System.out.println("You pressed down!");
-            model.moveChar(DirectionType.SOUTH);
-        }
-
-        else if (e.getKeyCode() == KeyEvent.VK_D){
-            System.out.println("You pressed right!");
-            model.moveChar(DirectionType.EAST);
-        }
-
-        else if (e.getKeyCode() == KeyEvent.VK_A){
-            System.out.println("You pressed left!");
-            model.moveChar(DirectionType.WEST);
+	else if (e.getKeyCode() == KeyEvent.VK_A)
+	{
+	    if( moveKeysPressed < 2 && !anotherDirection[KeyEvent.VK_A] )
+	    {
+		anotherDirection[KeyEvent.VK_A] = true;
+		++moveKeysPressed;
+	    }
         }
 
         else if (e.getKeyCode() == KeyEvent.VK_E){
-            System.out.println("You pressed the use melee button!");
+            model.attack();
+            System.out.println("You pressed the use attack button!");
         }
 
         else if (e.getKeyCode() == KeyEvent.VK_Q){
@@ -71,8 +90,91 @@ class BattleControl extends GenAdapter implements Tickable {
             System.out.println("You just escaped!");
         }
     }
+
+    @Override
+    public void keyReleased( KeyEvent e )
+    {
+	if (e.getKeyCode() == KeyEvent.VK_W)
+	{
+	   if( anotherDirection[KeyEvent.VK_W] )
+	   {
+		anotherDirection[KeyEvent.VK_W] = false;
+		--moveKeysPressed;
+	   }
+	}
+	else if( e.getKeyCode() == KeyEvent.VK_S)
+	{
+	    if( anotherDirection[KeyEvent.VK_S] )
+	    {
+		anotherDirection[KeyEvent.VK_S] = false;
+		--moveKeysPressed;
+	   }
+	}
+	else if( e.getKeyCode() == KeyEvent.VK_D)
+	{
+	    if( anotherDirection[KeyEvent.VK_D] )
+	    {
+		anotherDirection[KeyEvent.VK_D] = false;
+		--moveKeysPressed;
+	   }
+	}
+	else if( e.getKeyCode() == KeyEvent.VK_A)
+	{
+	    if( anotherDirection[KeyEvent.VK_A] )
+	    {
+		anotherDirection[KeyEvent.VK_A] = false;
+		--moveKeysPressed;
+	    }
+	}
+    }
+
+    public void reset(){
+        anotherDirection[KeyEvent.VK_W] = false;
+        anotherDirection[KeyEvent.VK_A] = false;
+        anotherDirection[KeyEvent.VK_S] = false;
+        anotherDirection[KeyEvent.VK_D] = false;
+        moveKeysPressed = 0;
+    }
+
     public void onTick()
     {
-
+	//System.out.println(moveKeysPressed); //test code
+	//movement keys
+	if( suppression() )
+	{
+	    if( anotherDirection[KeyEvent.VK_W] )
+	    {
+		    model.moveChar(DirectionType.NORTH);
+	    }
+	    if( anotherDirection[KeyEvent.VK_S] )
+	    {
+		    model.moveChar(DirectionType.SOUTH);
+	    }
+	    if( anotherDirection[KeyEvent.VK_D] )
+	    {
+		    model.moveChar(DirectionType.EAST);
+	    }
+	    if( anotherDirection[KeyEvent.VK_A] )
+	    {
+		    model.moveChar(DirectionType.WEST);
+	    }
+	}
     }
+    private int MIN_ENTRY = 40;
+    long prevTime = 0;
+    private KeyEvent prevKey = null;
+    boolean[] anotherDirection = new boolean[250];
+    int moveKeysPressed = 0; //when moveKeysPressed = 2, no more movement keys will be recorded
+
+    private boolean suppression( )
+    {
+	long currtime = System.currentTimeMillis();
+	if( currtime-prevTime>MIN_ENTRY )
+	{
+            prevTime=currtime;
+            return true;
+        }
+        return false;
+    }
+
 }

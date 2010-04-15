@@ -191,6 +191,15 @@ public class Character implements Viewable, Comparable{
         return false;
     }
 
+    boolean attackDistance(double x, double y){
+        double dist = Math.sqrt((this.centerX - x) * (this.centerX - x)
+                                + (this.centerY - y) * (this.centerY - y));
+        if( dist <= bubble*3.5){
+            return true;
+        }
+        return false;
+    }
+
     void setMelee(WeaponType melee){
         this.melee = melee;
     }

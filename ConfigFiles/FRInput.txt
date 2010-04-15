@@ -1,6 +1,9 @@
 human Gunderson 500 400 58 90
-human Nast 500 500 42 100
+human Gunderson 500 500 42 100
 human Gunderson 500 600 58 90
-npc Nast 800 600 42 100
+npc Nast 2000 1000 42 100
 dialogue Nast ConfigFiles/DialogueTest.txt
 trigger 900 1000 300 400 FreeRoam ConfigFiles/FRInput.txt Images/TestMap.png
+trigger 2000 2100 1100 1200 Event ConfigFiles/EventTest.txt None
+trigger 1800 2300 1500 2000 Battle ConfigFiles/BattleInput.txt Images/BattleScreenColorMap.png
+

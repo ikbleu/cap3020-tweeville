@@ -180,7 +180,7 @@ class ScreenManager extends JFrame{
             if(currentMode == ModeType.BATTLE){
                 battleScreenViewPort.render( drawable, textRenderer );
             }
-            if(currentMode == ModeType.FREEROAM){
+            if(currentMode == ModeType.FREEROAM || currentMode == ModeType.CUTSCENE){
                 freeRoamScreenViewPort.render( drawable, textRenderer, false );
             }
             if(currentMode == ModeType.DIALOGUE){

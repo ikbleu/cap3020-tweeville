@@ -20,10 +20,10 @@ public class BattleModel {
 
 
 
-    BattleModel(File battleInfo, File map){
+    BattleModel(File battleInfo, File map, Model model){
         
         battleMap = new BattleMap(map);
-        fightModel = new FightModel(battleInfo, battleMap);
+        fightModel = new FightModel(battleInfo, battleMap, model);
 
     }
 

@@ -1,0 +1,2 @@
+move Nast 600 690
+move Nast 600 110

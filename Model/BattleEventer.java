@@ -14,15 +14,17 @@ import java.util.ArrayList;
  *
  * @author spock
  */
-public class Eventer implements Tickable{
+public class BattleEventer{
     Eventee curr;
     int currIndex;
     Model m;
     ArrayList<Eventee> events;
     int tickWait;
+    ArrayList<Character> charz;
 
-    Eventer(String loadingfile, Model m){
+    BattleEventer(String loadingfile, Model m, ArrayList<Character> charz){
         File file = new File(loadingfile);
+        this.charz = charz;
         Scanner s;
         this.m = m;
         tickWait = 0;
@@ -37,47 +39,29 @@ public class Eventer implements Tickable{
                     double gy = s.nextDouble();
                     events.add(new Move(name, gx, gy));
                 }
-                else if(type.equals("dialogue")){
-                    String fName = s.next();
-                    events.add(new Dialogue(fName));
-                    System.out.println("HIHI");
-                }
             }
 
         }
         catch(Exception C){
-            System.out.println("Problem loading Eventer!");
+            System.out.println("Problem loading BattleEventer!");
             System.exit(0);
         }
 
         currIndex = 0;
         curr = events.get(0);
-        if(curr instanceof Dialogue){
-            m.setMode(ModeType.DIALOGUE);
-        }
     }
 
-    void start(){
-        m.register(this);
-    }
-
-
-    public void onTick(){
+    public void tick(){
         ++tickWait;
         if(curr.isComplete()){
             ++currIndex;
             System.out.println(currIndex);
             if(currIndex < events.size()){
                 curr = events.get(currIndex);
-                //m.setMode(ModeType.CUTSCENE);
-                if(curr instanceof Dialogue){
-                    m.setMode(ModeType.DIALOGUE);
-                }
             }
             else{
-                m.setMode(ModeType.FREEROAM);
-                m.freeRoamModel.eventOn = false;
-                m.unregister(this);
+                currIndex = 0;
+                curr = events.get(0);
             }
         }
         else{
@@ -88,20 +72,15 @@ public class Eventer implements Tickable{
         }
     }
 
-    public List<String> getDialogue(){
-        return ((Dialogue)curr).dHandler.getDialogue();
-    }
+    Character stringToChar(String name){
 
-    public int getDialogueSelection(){
-        return ((Dialogue)curr).dHandler.currSelection();
-    }
-
-    public void scroll(int di){
-        ((Dialogue)curr).dHandler.scroll(di);
-    }
-
-    public void next(){
-        ((Dialogue)curr).dHandler.next();
+        for(int i = 0; i < charz.size();++i){
+            if(charz.get(i).name.equals(name)){
+                System.out.println(name);
+                return charz.get(i);
+            }
+        }
+        return null;
     }
 
 
@@ -118,7 +97,7 @@ public class Eventer implements Tickable{
 
 
         Move(String cName, double goalX, double goalY){
-            this.c = m.freeRoamModel.StringToChar(cName);
+            this.c = stringToChar(cName);
             this.goalX = goalX;
             this.goalY = goalY;
         }
@@ -137,42 +116,21 @@ public class Eventer implements Tickable{
             double y2 = goalY;
             if ( Math.abs(x1 - x2) > Math.abs(y1 - y2)){
                 if(x1 < x2){
-                    m.freeRoamModel.specMove(DirectionType.EAST, c);
+                    m.battleModel.fightModel.specMove(DirectionType.EAST, c);
                 }
                 else{
-                    m.freeRoamModel.specMove(DirectionType.WEST, c);
+                    m.battleModel.fightModel.specMove(DirectionType.WEST, c);
                 }
             }
             else{
                 if(y1 < y2){
-                    m.freeRoamModel.specMove(DirectionType.SOUTH, c);
+                    m.battleModel.fightModel.specMove(DirectionType.SOUTH, c);
                 }
                 else{
-                    m.freeRoamModel.specMove(DirectionType.NORTH, c);
+                    m.battleModel.fightModel.specMove(DirectionType.NORTH, c);
                 }
             }
         }
     }
 
-    private class Dialogue extends Eventee{
-
-        DialogueHandler dHandler;
-
-        Dialogue(String file){
-            dHandler = new DialogueHandler(file);
-        }
-
-        boolean isComplete(){
-            if(dHandler.done()){
-                m.setMode(ModeType.CUTSCENE);
-                return true;
-            }
-            return dHandler.done();
-        }
-
-        void nextCommand(){
-            
-        }
-
-    }
 }

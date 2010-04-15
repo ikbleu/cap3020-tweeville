@@ -27,7 +27,7 @@ public class FreeRoamControl extends GenAdapter implements Tickable {
     FreeRoamControl(LeashedModel model){
         active = false;
         this.model = model;
-	model.chrisWantsToRegister( this );
+	//model.chrisWantsToRegister( this );
     }
 
     public void turnOn(){
@@ -129,6 +129,14 @@ public class FreeRoamControl extends GenAdapter implements Tickable {
 	}
     }
 
+    public void reset(){
+        anotherDirection[KeyEvent.VK_W] = false;
+        anotherDirection[KeyEvent.VK_A] = false;
+        anotherDirection[KeyEvent.VK_S] = false;
+        anotherDirection[KeyEvent.VK_D] = false;
+        moveKeysPressed = 0;
+    }
+
     public void onTick()
     {
 	//System.out.println(moveKeysPressed); //test code
@@ -153,7 +161,7 @@ public class FreeRoamControl extends GenAdapter implements Tickable {
 	    }
 	}
     }
-    private int MIN_ENTRY = 30;
+    private int MIN_ENTRY = 40;
     long prevTime = 0;
     private KeyEvent prevKey = null;
     boolean[] anotherDirection = new boolean[250];

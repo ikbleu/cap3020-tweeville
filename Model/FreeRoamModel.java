@@ -29,8 +29,12 @@ public class FreeRoamModel implements Tickable{
     ArrayList<TriggerBox> triggers;
     Model m;
 
+    Eventer currentEvent;
+
     DialogueHandler dHandler;
     boolean dialogueOn;
+
+    boolean eventOn;
 
     HashMap<String, DialogueHandler> dialogueSet;
 
@@ -41,6 +45,7 @@ public class FreeRoamModel implements Tickable{
         npcs = new ArrayList<Character>();
         triggers = new ArrayList<TriggerBox>();
         dialogueOn = false;
+        eventOn = false;
         dialogueSet = new HashMap<String, DialogueHandler>();
         //dHandler = new DialogueHandler("ConfigFiles/DialogueTest.txt");
         try{
@@ -88,11 +93,30 @@ public class FreeRoamModel implements Tickable{
         currCharIndex = 0;
     }
 
-    void charMove(DirectionType direction){
+    boolean charMove(DirectionType direction){
         ArrayList<Character> yes = new ArrayList<Character>();
         yes.addAll(controlled);
         yes.addAll(npcs);
-        currentChar.move(direction, yes, controlled, currentChar);
+        return currentChar.move(direction, yes, controlled, currentChar);
+    }
+
+    boolean specMove(DirectionType direction, Character c){
+        ArrayList<Character> yes = new ArrayList<Character>();
+        yes.addAll(controlled);
+        yes.addAll(npcs);
+        return c.move(direction, yes, controlled, c);
+    }
+
+    Character StringToChar(String name){
+        ArrayList<Character> yes = new ArrayList<Character>();
+        yes.addAll(controlled);
+        yes.addAll(npcs);
+        for(int i = 0; i < yes.size();++i){
+            if(yes.get(i).name.equals(name)){
+                return yes.get(i);
+            }
+        }
+        return null;
     }
 
     void swapChar(){
@@ -114,22 +138,34 @@ public class FreeRoamModel implements Tickable{
     }
 
     void scroll(int di){
+        if(eventOn){
+            currentEvent.scroll(di);
+        }
         if(dialogueOn){
             dHandler.scroll(di);
         }
     }
 
     void nextDialogue(){
+        if(eventOn){
+            currentEvent.next();
+        }
         if(dialogueOn){
             dHandler.next();
         }
     }
  
     List<String> getDialogue(){
+        if(eventOn){
+            return currentEvent.getDialogue();
+        }
         return dHandler.getDialogue();
     }
 
     int getDialogueSelection(){
+        if(eventOn){
+            return currentEvent.getDialogueSelection();
+        }
         return dHandler.currSelection();
     }
 
@@ -145,21 +181,32 @@ public class FreeRoamModel implements Tickable{
         for(int i = 0; i < yes.size();++i){
             yes.get(i).tickCheck();
         }
-
+        int triggerRemoval = -1;
         for(int i = 0; i < triggers.size(); ++i){
-            for(int j = 0; j < controlled.size(); ++j){
-                if(triggers.get(i).inside(controlled.get(j).centerX, controlled.get(j).centerY)){
-                    if(triggers.get(i).triggerType.equals("FreeRoam")){
-                        m.unregister(this);
-                        m.setNewFreeRoam(triggers.get(i).loadingInfoFile, triggers.get(i).loadingMapFile);
-                    }
-                    if(triggers.get(i).triggerType.equals("Event")){
-                        //move
-                        //dialogue
-                        Eventer e = new Eventer(triggers.get(i).loadingInfoFile, m);
-                    }
+            //for(int j = 0; j < controlled.size(); ++j){
+            if(triggers.get(i).inside(controlled.get(currCharIndex).centerX, controlled.get(currCharIndex).centerY)){
+                if(triggers.get(i).triggerType.equals("FreeRoam")){
+                    m.unregister(this);
+                    m.setNewFreeRoam(triggers.get(i).loadingInfoFile, triggers.get(i).loadingMapFile);
+                }
+                if(triggers.get(i).triggerType.equals("Event")){
+                    //move
+                    //dialogue
+                    currentEvent = new Eventer(triggers.get(i).loadingInfoFile, m);
+                    m.setMode(ModeType.CUTSCENE);
+                    currentEvent.start();
+                    eventOn = true;
+                    triggerRemoval = i;
+                }
+                if(triggers.get(i).triggerType.equals("Battle")){
+                    m.setNewBattle( triggers.get(i).loadingInfoFile, triggers.get(i).loadingMapFile);
+                    triggerRemoval = i;
                 }
             }
+            //}
+        }
+        if(triggerRemoval != -1){
+            triggers.remove(triggerRemoval);
         }
 
 
@@ -169,20 +216,21 @@ public class FreeRoamModel implements Tickable{
                 double x2 = controlled.get(currCharIndex).centerX;
                 double y1 = controlled.get(i).centerY;
                 double y2 = controlled.get(currCharIndex).centerY;
+                boolean moved = false;
                 if ( Math.abs(x1 - x2) > Math.abs(y1 - y2)){
                     if(x1 < x2){
-                        controlled.get(i).move(DirectionType.EAST, yes, controlled, currentChar);
+                        moved = controlled.get(i).move(DirectionType.EAST, yes, controlled, currentChar);
                     }
                     else{
-                        controlled.get(i).move(DirectionType.WEST, yes, controlled, currentChar);
+                        moved = controlled.get(i).move(DirectionType.WEST, yes, controlled, currentChar);
                     }
                 }
-                else{
+                if(!moved){
                     if(y1 < y2){
-                        controlled.get(i).move(DirectionType.SOUTH, yes, controlled, currentChar);
+                        moved = controlled.get(i).move(DirectionType.SOUTH, yes, controlled, currentChar);
                     }
                     else{
-                        controlled.get(i).move(DirectionType.NORTH, yes, controlled, currentChar);
+                        moved = controlled.get(i).move(DirectionType.NORTH, yes, controlled, currentChar);
                     }
                 }
             }
@@ -193,28 +241,6 @@ public class FreeRoamModel implements Tickable{
         ArrayList<Character> yes = new ArrayList<Character>();
         yes.addAll(controlled);
         yes.addAll(npcs);
-        /*for(int i = 0; i < controlled.size()-1; ++ i){
-            double x1 = controlled.get(currCharIndex + 1 + i).centerX;
-            double x2 = controlled.get(currCharIndex).centerX;
-            double y1 = controlled.get(currCharIndex + 1 + i).centerY;
-            double y2 = controlled.get(currCharIndex).centerY;
-            if ( Math.abs(x1 - x2) > Math.abs(y1 - y2)){
-                if(x1 < x2){
-                    controlled.get(currCharIndex + 1 + i).move(DirectionType.EAST, yes, controlled, currentChar);
-                }
-                else{
-                    controlled.get(currCharIndex + 1 + i).move(DirectionType.WEST, yes, controlled, currentChar);
-                }
-            }
-            else{
-                if(y1 < y2){
-                    controlled.get(currCharIndex + 1 + i).move(DirectionType.SOUTH, yes, controlled, currentChar);
-                }
-                else{
-                    controlled.get(currCharIndex + 1 + i).move(DirectionType.NORTH, yes, controlled, currentChar);
-                }
-            }
-        }*/
         return yes;
     }
 

@@ -1,0 +1,2 @@
+move Fire 700 650
+move Fire 700 200
