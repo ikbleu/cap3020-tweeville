@@ -20,18 +20,10 @@ public enum UnitStatus {
     SNORTH,
     WNORTH1,
     WNORTH2,
-    AEAST1,
-    AEAST2,
-    AEAST3,
-    AWEST1,
-    AWEST2,
-    AWEST3,
-    ANORTH1,
-    ANORTH2,
-    ANORTH3,
-    ASOUTH1,
-    ASOUTH2,
-    ASOUTH3
+    AEAST,
+    AWEST,
+    ANORTH,
+    ASOUTH
 
     
 }

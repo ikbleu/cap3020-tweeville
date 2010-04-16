@@ -120,18 +120,26 @@ public class FightModel implements Tickable{
         if(c.direction == DirectionType.EAST){
             cax = c.centerX + c.bubble * 2;
             cay = c.centerY;
+            c.setAttackMode();
+            model.view.actionMusic();
         }
         else if(c.direction == DirectionType.WEST){
             cax = c.centerX - c.bubble * 2;
             cay = c.centerY;
+            c.setAttackMode();
+            model.view.actionMusic();
         }
         else if(c.direction == DirectionType.NORTH){
             cax = c.centerX;
             cay = c.centerY - c.bubble * 2;
+            c.setAttackMode();
+            model.view.actionMusic();
         }
         else if(c.direction == DirectionType.SOUTH){
             cax = c.centerX;
             cay = c.centerY + c.bubble * 2;
+            c.setAttackMode();
+            model.view.actionMusic();
         }
         for(int i = 0; i < enemy.size(); ++i){
             if(enemy.get(i).attackDistance(cax, cay)){
