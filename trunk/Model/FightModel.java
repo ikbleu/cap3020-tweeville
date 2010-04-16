@@ -28,6 +28,8 @@ public class FightModel implements Tickable{
     Model model;
     int damageTime;
 
+    boolean endWaiting;
+
     ArrayList<BattleEventer> damagePattern;
 
 
@@ -40,6 +42,7 @@ public class FightModel implements Tickable{
         enemy = new ArrayList<Character>();
         damage = new ArrayList<Character>();
         damagePattern = new ArrayList<BattleEventer>();
+        endWaiting = false;
 
         damageTime = 0;
         try{
@@ -141,6 +144,14 @@ public class FightModel implements Tickable{
 
     public void onTick(){
 
+        if(endWaiting){
+            if(model.view.transitionDone()){
+                model.unregister(this);
+                model.setMode(ModeType.FREEROAM);
+                model.view.transitionIn();
+            }
+        }
+
         for(int i = 0; i < damagePattern.size(); ++i){
             damagePattern.get(i).tick();
         }
@@ -174,8 +185,10 @@ public class FightModel implements Tickable{
         for(int i = 0; i < removeIf.size(); ++i){
             good.remove(removeIf.get(i));
             if(good.size() == 0){
-                model.unregister(this);
-                model.setMode(ModeType.FREEROAM);
+                model.view.transitionOut();
+                endWaiting = true;
+                //model.unregister(this);
+                //model.setMode(ModeType.FREEROAM);
             }
             if(removeIf.get(i) == currentChar){
                swapChar();
@@ -193,8 +206,10 @@ public class FightModel implements Tickable{
         for(int i = 0; i < removeIf.size(); ++i){
             enemy.remove(removeIf.get(i));
             if(enemy.size() == 0){
-                model.unregister(this);
-                model.setMode(ModeType.FREEROAM);
+                model.view.transitionOut();
+                endWaiting = true;
+                //model.unregister(this);
+                //model.setMode(ModeType.FREEROAM);
             }
         }
 

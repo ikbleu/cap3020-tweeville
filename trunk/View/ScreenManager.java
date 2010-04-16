@@ -121,7 +121,7 @@ class ScreenManager extends JFrame{
         }
 
         listener = new GraphicListener();
-        GLCanvas canvas = new GLCanvas(new GLCapabilities());
+        canvas = new GLCanvas(new GLCapabilities());
         canvas.addGLEventListener(listener);
 
         getContentPane().add(canvas);
@@ -154,6 +154,43 @@ class ScreenManager extends JFrame{
         }*/
         //listener.updateBattleScreen(battleScreen.image());
         updateNum = 1;
+    }
+
+    public boolean transitionDone(){
+        if(currentMode == ModeType.BATTLE){
+            return battleScreenViewPort.transitionDone();
+        }
+        if(currentMode == ModeType.FREEROAM){
+            return freeRoamScreenViewPort.transitionDone();
+        }
+        return false;
+    }
+
+    public void transitionOut(){
+        if(currentMode == ModeType.BATTLE){
+            battleScreenViewPort.transitionOut();
+        }
+        if(currentMode == ModeType.FREEROAM){
+            freeRoamScreenViewPort.transitionOut();
+        }
+    }
+
+    public void transitionIn(){
+        if(currentMode == ModeType.BATTLE){
+            battleScreenViewPort.transitionIn();
+        }
+        if(currentMode == ModeType.FREEROAM){
+            freeRoamScreenViewPort.transitionIn();
+        }
+    }
+
+    public void transitionOutRealOff(){
+        if(currentMode == ModeType.BATTLE){
+            battleScreenViewPort.transitionOutRealOff();
+        }
+        if(currentMode == ModeType.FREEROAM){
+            freeRoamScreenViewPort.transitionOutRealOff();
+        }
     }
 
     public void addCKeyListener(KeyListener control){

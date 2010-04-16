@@ -143,6 +143,12 @@ public class FreeRoamControl extends GenAdapter implements Tickable {
 	//movement keys
 	if( suppression() )
 	{
+            if(moveKeysPressed>1){
+                model.setDia(true);
+            }
+            else{
+                model.setDia(false);
+            }
 	    if( anotherDirection[KeyEvent.VK_W] )
 	    {
 		    model.moveChar(DirectionType.NORTH, moveKeysPressed>1);

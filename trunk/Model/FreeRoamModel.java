@@ -36,6 +36,10 @@ public class FreeRoamModel implements Tickable{
 
     boolean eventOn;
 
+    boolean frTriggerWaiting;
+    boolean bTriggerWaiting;
+    TriggerBox waitingTrigger;
+
     HashMap<String, DialogueHandler> dialogueSet;
 
     FreeRoamModel(File freeRoamInfo, File map, Model model){
@@ -46,6 +50,11 @@ public class FreeRoamModel implements Tickable{
         triggers = new ArrayList<TriggerBox>();
         dialogueOn = false;
         eventOn = false;
+
+        frTriggerWaiting = false;
+        bTriggerWaiting = false;
+        waitingTrigger = null;
+
         dialogueSet = new HashMap<String, DialogueHandler>();
         //dHandler = new DialogueHandler("ConfigFiles/DialogueTest.txt");
         try{
@@ -171,6 +180,25 @@ public class FreeRoamModel implements Tickable{
     }
 
     public void onTick(){
+        if(frTriggerWaiting){
+            if(m.view.transitionDone()){
+                frTriggerWaiting = false;
+                m.unregister(this);
+                m.setNewFreeRoam(waitingTrigger.loadingInfoFile, waitingTrigger.loadingMapFile, waitingTrigger.viewInfo);
+            }
+        }
+        if(bTriggerWaiting){
+            if(m.view.transitionDone()){
+                bTriggerWaiting = false;
+                m.setNewBattle( waitingTrigger.loadingInfoFile, waitingTrigger.loadingMapFile, waitingTrigger.viewInfo);
+            }
+        }
+        /*if(frTriggerWaiting){
+            if(m.view.transitionDone()){
+                m.unregister(this);
+                m.setNewFreeRoam(waitingTrigger.loadingInfoFile, waitingTrigger.loadingMapFile, waitingTrigger.viewInfo);
+            }
+        }*/
         if(dialogueOn && dHandler.done()){
             dialogueOn = false;
             m.setMode(ModeType.FREEROAM);
@@ -187,8 +215,12 @@ public class FreeRoamModel implements Tickable{
             //for(int j = 0; j < controlled.size(); ++j){
             if(triggers.get(i).inside(controlled.get(currCharIndex).centerX, controlled.get(currCharIndex).centerY)){
                 if(triggers.get(i).triggerType.equals("FreeRoam")){
-                    m.unregister(this);
-                    m.setNewFreeRoam(triggers.get(i).loadingInfoFile, triggers.get(i).loadingMapFile, triggers.get(i).viewInfo);
+                    //m.unregister(this);
+                    //m.setNewFreeRoam(triggers.get(i).loadingInfoFile, triggers.get(i).loadingMapFile, triggers.get(i).viewInfo);
+                    frTriggerWaiting = true;
+                    waitingTrigger = triggers.get(i);
+                    m.view.transitionOut();
+                    triggerRemoval = i;
                 }
                 if(triggers.get(i).triggerType.equals("Event")){
                     //move
@@ -200,12 +232,16 @@ public class FreeRoamModel implements Tickable{
                     triggerRemoval = i;
                 }
                 if(triggers.get(i).triggerType.equals("Battle")){
-                    m.setNewBattle( triggers.get(i).loadingInfoFile, triggers.get(i).loadingMapFile, triggers.get(i).viewInfo);
+                    //m.setNewBattle( triggers.get(i).loadingInfoFile, triggers.get(i).loadingMapFile, triggers.get(i).viewInfo);
+                    bTriggerWaiting = true;
+                    waitingTrigger = triggers.get(i);
+                    m.view.transitionOut();
                     triggerRemoval = i;
                 }
             }
             //}
         }
+
         if(triggerRemoval != -1){
             triggers.remove(triggerRemoval);
         }
@@ -218,22 +254,31 @@ public class FreeRoamModel implements Tickable{
                 double y1 = controlled.get(i).centerY;
                 double y2 = controlled.get(currCharIndex).centerY;
                 boolean moved = false;
-                if ( Math.abs(x1 - x2) > Math.abs(y1 - y2)){
-                    if(x1 < x2){
-                        moved = controlled.get(i).move(DirectionType.EAST, yes, controlled, currentChar, false);
-                    }
-                    else{
-                        moved = controlled.get(i).move(DirectionType.WEST, yes, controlled, currentChar, false);
-                    }
-                }
-                if(!moved){
+                boolean tester = (x1-x2 + y1-y2>currentChar.bubble*2 && Math.abs((x1-x2)-(y1-y2))<currentChar.bubble) || (m.dia);
+                if(Math.abs(x1 - x2) <= Math.abs(y1 - y2)){
                     if(y1 < y2){
-                        moved = controlled.get(i).move(DirectionType.SOUTH, yes, controlled, currentChar, false);
+                        moved = controlled.get(i).move(DirectionType.SOUTH, yes, controlled, currentChar, tester);
                     }
                     else{
-                        moved = controlled.get(i).move(DirectionType.NORTH, yes, controlled, currentChar, false);
+                        moved = controlled.get(i).move(DirectionType.NORTH, yes, controlled, currentChar, tester);
                     }
                 }
+                if ( !moved){
+                    if(x1 < x2){
+                        moved = controlled.get(i).move(DirectionType.EAST, yes, controlled, currentChar, tester);
+                    }
+                    else{
+                        moved = controlled.get(i).move(DirectionType.WEST, yes, controlled, currentChar, tester);
+                    }
+                }
+                /*if(!moved){
+                    if(y1 < y2){
+                        moved = controlled.get(i).move(DirectionType.SOUTH, yes, controlled, currentChar, tester);
+                    }
+                    else{
+                        moved = controlled.get(i).move(DirectionType.NORTH, yes, controlled, currentChar, tester);
+                    }
+                }*/
             }
         }
     }

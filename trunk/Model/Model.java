@@ -23,6 +23,7 @@ public class Model implements ViewHelper, LeashedModel{
     File freeRoamModelMap;
     File freeRoamModelInfo;
     Clock clock;
+    boolean dia;
 
    
 
@@ -32,12 +33,17 @@ public class Model implements ViewHelper, LeashedModel{
     
     public Model(){
         mode = ModeType.FREEROAM;
-        freeRoamModelInfo = new File ("ConfigFiles/FRInput.txt");
-        freeRoamModelMap = new File ("Images/2ndFloorCorWalk.png");
+        freeRoamModelInfo = new File ("ConfigFiles/LibraryInput.txt");
+        freeRoamModelMap = new File ("Images/LibraryColorMap.png");
         //battleModel = new BattleModel(battleModelFight, battleModelMap);
         freeRoamModel = new FreeRoamModel(freeRoamModelInfo, freeRoamModelMap, this);
+        dia = false;
         clock = new Clock(60);
         register(freeRoamModel);
+    }
+
+    public void setDia(boolean d){
+        dia = d;
     }
 
     public void setNewBattle(String infoFile, String mapFile, String viewInfo){
@@ -47,6 +53,7 @@ public class Model implements ViewHelper, LeashedModel{
         setMode(ModeType.BATTLE);
         view.setBMap(viewInfo);
         register(battleModel.fightModel);
+        view.transitionOutRealOff();
     }
 
     public void setNewFreeRoam(String infoFile, String mapFile, String viewInfo){
@@ -55,6 +62,7 @@ public class Model implements ViewHelper, LeashedModel{
         freeRoamModel = new FreeRoamModel(freeRoamModelInfo, freeRoamModelMap, this);
         view.setFRMap(viewInfo);
         register(freeRoamModel);
+        view.transitionOutRealOff();
     }
 
     public void start(){

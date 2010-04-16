@@ -1,0 +1,4 @@
+human Gunderson 2384 1465 58 90
+human Nast 2384 1485 42 100
+human Toi 2384 1505 55 110
+trigger 1695 1792 231 275 FreeRoam ConfigFiles/FRInput.txt Images/2ndFloorCorWalk.PNG corridor
