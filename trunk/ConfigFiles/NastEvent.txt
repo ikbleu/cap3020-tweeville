@@ -1,2 +1,4 @@
-move Nast 600 690
-move Nast 600 110
+move Corn 600 200
+move Corn 600 650
+move Corn 1050 650
+move Corn 1050 200

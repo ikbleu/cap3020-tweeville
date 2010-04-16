@@ -18,15 +18,34 @@ public class Audio implements Runnable{
     FileInputStream ifs;
     Player player;
 
-    public void run() {
+    public Audio(String aName){
         try{
-            ifs = new FileInputStream(new File("Images/AA.mp3"));
+            ifs = new FileInputStream(new File(aName));
             player = new Player(ifs);
-            player.play();
-            System.out.println("I can do things after i play too!");
         }
         catch(Exception c){
-            System.out.println("Oh nos!");
+            System.out.println("Oh nos Audio fail!");
         }
+    }
+
+    public void run() {
+        try{
+            player.play();
+            if(!player.isComplete()){
+                player.close();
+                return;
+            }
+        }
+        catch(Exception c){
+            System.out.println("Oh nos Audio fail!");
+        }
+    }
+
+    public boolean isComplete(){
+        return player.isComplete();
+    }
+
+    public void stop(){
+        player.close();
     }
 }

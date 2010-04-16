@@ -77,4 +77,8 @@ public class View implements Tickable{
         screenManager.transitionOutRealOff();
     }
 
+    public void actionMusic(){
+        screenManager.startActionSound();
+    }
+
 }

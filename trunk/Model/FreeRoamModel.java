@@ -197,6 +197,7 @@ public class FreeRoamModel implements Tickable{
             if(m.view.transitionDone()){
                 bTriggerWaiting = false;
                 m.setNewBattle( waitingTrigger.loadingInfoFile, waitingTrigger.loadingMapFile, waitingTrigger.viewInfo);
+                m.view.startMusic();
             }
         }
         

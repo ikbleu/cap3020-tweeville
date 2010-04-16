@@ -71,7 +71,15 @@ class ScreenManager extends JFrame{
 
     Thread audioThread;
 
+    Thread actionThread;
+
     ViewHelper model;
+
+    Audio action;
+
+    Audio freeRoam;
+
+    Thread FRThread;
 
     private Texture riceTest;
     //private Texture battleScreen_tex;
@@ -84,14 +92,24 @@ class ScreenManager extends JFrame{
     public int dfWidth = 1280;
     public int dfHeight = 800;
 
+    boolean soundPlaying;
+
+    String battleMusic = "Images/battle.mp3";
+
     ScreenManager(String s, GenAdapter control, boolean fs, ViewHelper model){
         super(s);
 
         control = controller;
 
+        soundPlaying = false;
+
         scale = 1.0;
         panX = 0;
         panY = 0;
+
+        action = new Audio("Images/soundEffect.mp3");
+
+        freeRoam = new Audio("Images/soundEffect.mp3");
 
         currentMode = ModeType.SPLASH;
 
@@ -142,7 +160,22 @@ class ScreenManager extends JFrame{
     }
 
     void startMusic(){
-        audioThread.start();
+        if(audioThread.isAlive()){
+            audioThread.start();
+        }
+        else{
+            audioThread = new Thread(new Audio(battleMusic));
+        }
+    }
+
+    void startBSound(){
+        FRThread.start();
+    }
+
+    void startActionSound(){
+
+        actionThread = new Thread(action);
+        actionThread.start();
     }
 
     void updateBattleScreen(){
@@ -269,7 +302,7 @@ class ScreenManager extends JFrame{
                 freeRoamScreenViewPort = new FreeRoamScreenViewPort(model, gl, dfWidth, dfHeight, 1280, 800);
 		splashScreen = new SplashScreen( model, gl, dfWidth, dfHeight );
 
-                audioThread = new Thread(new Audio());
+                audioThread = new Thread(new Audio(battleMusic));
 
                 try{
                 }

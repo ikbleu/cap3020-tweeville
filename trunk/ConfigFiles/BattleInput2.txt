@@ -1,0 +1,8 @@
+good Nast 500 400 58 90
+good Gunderson 500 500 58 90
+good Toi 500 600 58 90
+enemy Turnip 600 350 80 81
+event ConfigFiles/FireEvent.txt
+event ConfigFiles/FireEvent2.txt
+event ConfigFiles/FireEvent3.txt
+event ConfigFiles/TurnipEvent.txt
