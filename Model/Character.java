@@ -252,6 +252,8 @@ public class Character implements Viewable, Comparable{
 
         moveCheck = false;
 
+
+
         if(checkCount == 5){
             checkCount = 0;
             if(direction == DirectionType.SOUTH){
