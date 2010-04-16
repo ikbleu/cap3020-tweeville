@@ -1,0 +1,4 @@
+move Hag 1748 1725
+move Hag 1748 463
+remove Hag
+dialogue ConfigFiles/NastSpeech.txt

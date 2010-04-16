@@ -112,6 +112,10 @@ public class FreeRoamModel implements Tickable{
         return currentChar.move(direction, yes, controlled, currentChar, b);
     }
 
+    void removeChar(Character c){
+        npcs.remove(c);
+    }
+
     boolean specMove(DirectionType direction, Character c){
         ArrayList<Character> yes = new ArrayList<Character>();
         yes.addAll(controlled);

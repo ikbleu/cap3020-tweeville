@@ -41,6 +41,10 @@ public class Eventer implements Tickable{
                     String fName = s.next();
                     events.add(new Dialogue(fName));
                 }
+                else if(type.equals("remove")){
+                    String cName = s.next();
+                    events.add(new Removal(cName));
+                }
             }
 
         }
@@ -154,6 +158,27 @@ public class Eventer implements Tickable{
                 }
             }
         }
+    }
+
+    private class Removal extends Eventee{
+
+        Character c;
+        boolean complete;
+
+        Removal(String name){
+            this.c = m.freeRoamModel.StringToChar(name);
+            complete = false;
+        }
+
+        boolean isComplete(){
+            return complete;
+        }
+
+        void nextCommand(){
+            m.freeRoamModel.removeChar(c);
+            complete = true;
+        }
+
     }
 
     private class Dialogue extends Eventee{
