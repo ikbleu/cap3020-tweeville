@@ -1,4 +1,9 @@
 human Gunderson 2384 1465 58 90
 human Nast 2384 1485 42 100
 human Toi 2384 1505 55 110
+npc Librarian 1313 949 42 100
+trigger 2295 2614 1596 1646 Event ConfigFiles/OldHagEvent.txt None None
+trigger 1700 1791 2176 2231 EventS ConfigFiles/DoorEvent.txt None None
+trigger 2920 3000 1670 1785 EventS ConfigFiles/EastDoorEvent.txt None None
+trigger 1120 1220 420 510 EventS ConfigFiles/OldHagDoorEvent.txt None None
 trigger 1695 1792 231 275 FreeRoam ConfigFiles/FRInput.txt Images/2ndFloorCorWalk.PNG corridor

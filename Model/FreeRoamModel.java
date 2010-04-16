@@ -27,6 +27,7 @@ public class FreeRoamModel implements Tickable{
     int currCharIndex = 0;
     boolean readGood;
     ArrayList<TriggerBox> triggers;
+    ArrayList<TriggerBox> returners;
     Model m;
 
     Eventer currentEvent;
@@ -48,6 +49,7 @@ public class FreeRoamModel implements Tickable{
         controlled = new ArrayList<Character>();
         npcs = new ArrayList<Character>();
         triggers = new ArrayList<TriggerBox>();
+        returners = new ArrayList<TriggerBox>();
         dialogueOn = false;
         eventOn = false;
 
@@ -193,12 +195,18 @@ public class FreeRoamModel implements Tickable{
                 m.setNewBattle( waitingTrigger.loadingInfoFile, waitingTrigger.loadingMapFile, waitingTrigger.viewInfo);
             }
         }
-        /*if(frTriggerWaiting){
-            if(m.view.transitionDone()){
-                m.unregister(this);
-                m.setNewFreeRoam(waitingTrigger.loadingInfoFile, waitingTrigger.loadingMapFile, waitingTrigger.viewInfo);
+        
+        int retRem = -1;
+        for(int i = 0; i < returners.size(); ++i){
+            if(!(returners.get(i).inside(controlled.get(currCharIndex).centerX, controlled.get(currCharIndex).centerY))){
+                triggers.add(returners.get(i));
+                retRem = i;
             }
-        }*/
+        }
+        if(retRem != -1){
+            returners.remove(retRem);
+        }
+
         if(dialogueOn && dHandler.done()){
             dialogueOn = false;
             m.setMode(ModeType.FREEROAM);
@@ -211,8 +219,8 @@ public class FreeRoamModel implements Tickable{
             yes.get(i).tickCheck();
         }
         int triggerRemoval = -1;
+
         for(int i = 0; i < triggers.size(); ++i){
-            //for(int j = 0; j < controlled.size(); ++j){
             if(triggers.get(i).inside(controlled.get(currCharIndex).centerX, controlled.get(currCharIndex).centerY)){
                 if(triggers.get(i).triggerType.equals("FreeRoam")){
                     //m.unregister(this);
@@ -222,9 +230,17 @@ public class FreeRoamModel implements Tickable{
                     m.view.transitionOut();
                     triggerRemoval = i;
                 }
-                if(triggers.get(i).triggerType.equals("Event")){
+                if(triggers.get(i).triggerType.equals("EventS")){
                     //move
                     //dialogue
+                    currentEvent = new Eventer(triggers.get(i).loadingInfoFile, m);
+                    m.setMode(ModeType.CUTSCENE);
+                    currentEvent.start();
+                    eventOn = true;
+                    returners.add(triggers.get(i));
+                    triggerRemoval = i;
+                }
+                if(triggers.get(i).triggerType.equals("Event")){
                     currentEvent = new Eventer(triggers.get(i).loadingInfoFile, m);
                     m.setMode(ModeType.CUTSCENE);
                     currentEvent.start();
@@ -232,14 +248,12 @@ public class FreeRoamModel implements Tickable{
                     triggerRemoval = i;
                 }
                 if(triggers.get(i).triggerType.equals("Battle")){
-                    //m.setNewBattle( triggers.get(i).loadingInfoFile, triggers.get(i).loadingMapFile, triggers.get(i).viewInfo);
                     bTriggerWaiting = true;
                     waitingTrigger = triggers.get(i);
                     m.view.transitionOut();
                     triggerRemoval = i;
                 }
             }
-            //}
         }
 
         if(triggerRemoval != -1){
