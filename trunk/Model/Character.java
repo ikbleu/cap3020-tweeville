@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author spock
  */
 public class Character implements Viewable, Comparable{
-    String name;
+    public String name;
     int locX;
     int locY;
     UnitStatus status;
@@ -25,7 +25,7 @@ public class Character implements Viewable, Comparable{
     GameMap map;
     int cwidth;
     int cheight;
-    int hp;
+    public int hp;
     int movementInc = 15;
     double centerX;
     double centerY;
@@ -240,6 +240,21 @@ public class Character implements Viewable, Comparable{
             return 0;
         }
         return -500;
+    }
+
+    public void setAttackMode(){
+        if(direction == DirectionType.SOUTH){
+            status = UnitStatus.ASOUTH;
+        }
+        else if(direction == DirectionType.WEST){
+            status = UnitStatus.AWEST;
+        }
+        else if(direction == DirectionType.NORTH){
+            status = UnitStatus.ANORTH;
+        }
+        else if(direction == DirectionType.EAST){
+            status = UnitStatus.AEAST;
+        }
     }
 
     public boolean tickCheck(){
