@@ -52,6 +52,16 @@ class BattleScreenViewPort extends SpecialImage
 
     String mapName;
 
+    boolean transitionIn;
+    double traninc;
+    boolean transitionOut;
+    double traninc2;
+    String bufferIn;
+
+    boolean superBlack;
+
+    boolean transitionOutReal;
+
     BattleScreenViewPort( ViewHelper model, GL gl, int wid, int hei )
     {
 	this.model = model;
@@ -60,9 +70,40 @@ class BattleScreenViewPort extends SpecialImage
         this.wid = wid;
         this.hei = hei;
         this.gl = gl;
+
+        transitionOut = false;
+        transitionIn = false;
+        traninc = 0;
+        traninc2 = 50;
+
+        superBlack = false;
+
         mapName = "BattleViewPort";
 
 	updateEntities();
+    }
+
+    public boolean transitionDone(){
+        /*if(!transitionOut){
+            transitionOutReal = false;
+        }*/
+        return !transitionOut;
+    }
+
+    public void transitionOutRealOff(){
+        transitionOutReal = false;
+    }
+
+    public void transitionIn(){
+        transitionIn = true;
+        superBlack = false;
+        traninc2 = 50;
+    }
+
+    public void transitionOut(){
+        transitionOut = true;
+        transitionOutReal = true;
+        traninc = 0;
     }
 
 
@@ -87,6 +128,98 @@ class BattleScreenViewPort extends SpecialImage
 	    specdrawMe(gl, ographics.getGraphic(units.get(i).getCharacter() + sanim.getStatus(units.get(i).getStatus())), (float)((units.get(i).getLocation().getX()-currChar.getLocation().getX())/(float)wid), (float)((units.get(i).getLocation().getY()-currChar.getLocation().getY())/(float)hei));
 	    //drawMe(gl, ographics.getGraphic(units.get(i).getCharacter()), (float)((units.get(i).getLocation().getX()-currChar.getLocation().getX())/(float)wid)+ .5F, (float)((units.get(i).getLocation().getY()-currChar.getLocation().getY())/(float)hei)+ .5F);
 	}
+
+        if(superBlack){
+            ographics.getGraphic("black").bind();
+
+            gl.glPushMatrix();
+
+                gl.glBegin(GL.GL_POLYGON);
+
+                    gl.glTexCoord2d(0.0, 0.0);
+                    gl.glVertex2d(0.0, 0.0);
+
+                    gl.glTexCoord2d(0.0, 1.0);
+                    gl.glVertex2d(0.0, 1.0);
+
+                    gl.glTexCoord2d(1.0, 1.0);
+                    gl.glVertex2d(1.0, 1.0);
+
+                    gl.glTexCoord2d(1.0, 0.0);
+                    gl.glVertex2d(1.0, 0.0);
+
+                 gl.glEnd();
+
+            gl.glPopMatrix();
+        }
+
+        if(transitionOutReal){
+            gl.glColor4d(/*traninc2/100.0*/1, /*traninc2/100.0*/1, /*traninc2/100.0*/1, traninc/50.0);
+
+            ographics.getGraphic("black").bind();
+
+            gl.glPushMatrix();
+
+                gl.glBegin(GL.GL_POLYGON);
+
+                    gl.glTexCoord2d(0.0, 0.0);
+                    gl.glVertex2d(0.0, 0.0);
+
+                    gl.glTexCoord2d(0.0, 1.0);
+                    gl.glVertex2d(0.0, 1.0);
+
+                    gl.glTexCoord2d(1.0, 1.0);
+                    gl.glVertex2d(1.0, 1.0);
+
+                    gl.glTexCoord2d(1.0, 0.0);
+                    gl.glVertex2d(1.0, 0.0);
+
+                 gl.glEnd();
+
+            gl.glPopMatrix();
+
+            if(traninc == 50){
+                superBlack = true;
+                transitionOut = false;
+            }
+            traninc+=1;
+
+            gl.glColor3d(1.0, 1.0, 1.0);
+        }
+
+        if(transitionIn){
+            gl.glColor4d(/*traninc2/100.0*/1, /*traninc2/100.0*/1, /*traninc2/100.0*/1, traninc2/50.0);
+
+            ographics.getGraphic("black").bind();
+
+            gl.glPushMatrix();
+
+                gl.glBegin(GL.GL_POLYGON);
+
+                    gl.glTexCoord2d(0.0, 0.0);
+                    gl.glVertex2d(0.0, 0.0);
+
+                    gl.glTexCoord2d(0.0, 1.0);
+                    gl.glVertex2d(0.0, 1.0);
+
+                    gl.glTexCoord2d(1.0, 1.0);
+                    gl.glVertex2d(1.0, 1.0);
+
+                    gl.glTexCoord2d(1.0, 0.0);
+                    gl.glVertex2d(1.0, 0.0);
+
+                 gl.glEnd();
+
+            gl.glPopMatrix();
+
+            if(traninc2 == 0){
+                transitionIn = false;
+            }
+            traninc2-=1;
+
+            gl.glColor3d(1.0, 1.0, 1.0);
+        }
+
     }
 
     void updateEntities()

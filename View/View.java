@@ -49,14 +49,32 @@ public class View implements Tickable{
 
     public void setFRMap(String loc){
         screenManager.freeRoamScreenViewPort.setNewFRImage(loc);
+        screenManager.freeRoamScreenViewPort.transitionIn();
     }
 
     public void setBMap(String loc){
         screenManager.battleScreenViewPort.setNewBImage(loc);
+        screenManager.battleScreenViewPort.transitionIn();
     }
 
     public void setMode(ModeType mode){
         screenManager.setMode(mode);
     }
-    
+
+    public boolean transitionDone(){
+        return screenManager.transitionDone();
+    }
+
+    public void transitionOut(){
+        screenManager.transitionOut();
+    }
+
+    public void transitionIn(){
+        screenManager.transitionIn();
+    }
+
+    public void transitionOutRealOff(){
+        screenManager.transitionOutRealOff();
+    }
+
 }

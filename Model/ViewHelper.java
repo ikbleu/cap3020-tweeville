@@ -21,4 +21,6 @@ public interface ViewHelper {
     public abstract ViewCooldown[][] getCoolDowns();
     public abstract List<String> getDialogue();
     public abstract int getDialogueSelection();
+    public abstract void register(Tickable t);
+    public abstract void unregister(Tickable t);
 }

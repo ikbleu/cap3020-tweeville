@@ -1,6 +1,6 @@
 human Gunderson 1197 1796 58 90
-human Gunderson 1197 1800 42 100
-human Gunderson 1197 1800 58 90
+human Nast 1197 1800 42 100
+human Toi 1197 1800 58 90
 npc Nast 2000 1400 42 100
 dialogue Nast ConfigFiles/DialogueTest.txt
 trigger 1200 1300 1550 1650 FreeRoam ConfigFiles/FRInput.txt Images/2ndFloorCorWalk.PNG corridor

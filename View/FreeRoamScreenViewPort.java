@@ -12,6 +12,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLCanvas;
@@ -64,6 +65,16 @@ public class FreeRoamScreenViewPort extends SpecialImage{
     boolean lineFlag2 = false;
     String mapName;
 
+    boolean transitionIn;
+    double traninc;
+    boolean transitionOut;
+    double traninc2;
+    String bufferIn;
+
+    boolean superBlack;
+
+    boolean transitionOutReal;
+
     FreeRoamScreenViewPort( ViewHelper model, GL gl, int wid, int hei, int iwid, int ihei )
     {
         this.wid = wid;
@@ -72,11 +83,40 @@ public class FreeRoamScreenViewPort extends SpecialImage{
 	imageWidth = 1280;
 	imageHeight = 800;
         this.gl = gl;
+        transitionOut = false;
+        transitionIn = false;
+        traninc = 0;
+        traninc2 = 50;
 
-        mapName = "corridor";
+        superBlack = false;
+
+        mapName = "library";
 
         updateEntities();
 
+    }
+
+    public boolean transitionDone(){
+        /*if(!transitionOut){
+            transitionOutReal = false;
+        }*/
+        return !transitionOut;
+    }
+
+    public void transitionOutRealOff(){
+        transitionOutReal = false;
+    }
+
+    public void transitionIn(){
+        transitionIn = true;
+        superBlack = false;
+        traninc2 = 50;
+    }
+
+    public void transitionOut(){
+        transitionOut = true;
+        transitionOutReal = true;
+        traninc = 0;
     }
 
     void render( GLAutoDrawable drawable, TextRenderer textRenderer, boolean dialogueMode )
@@ -129,6 +169,98 @@ public class FreeRoamScreenViewPort extends SpecialImage{
 		dialogueBoxIncY = 0.495f;
 	    }
 	}
+
+        if(superBlack){
+            ographics.getGraphic("black").bind();
+
+            gl.glPushMatrix();
+
+                gl.glBegin(GL.GL_POLYGON);
+
+                    gl.glTexCoord2d(0.0, 0.0);
+                    gl.glVertex2d(0.0, 0.0);
+
+                    gl.glTexCoord2d(0.0, 1.0);
+                    gl.glVertex2d(0.0, 1.0);
+
+                    gl.glTexCoord2d(1.0, 1.0);
+                    gl.glVertex2d(1.0, 1.0);
+
+                    gl.glTexCoord2d(1.0, 0.0);
+                    gl.glVertex2d(1.0, 0.0);
+
+                 gl.glEnd();
+
+            gl.glPopMatrix();
+        }
+
+        if(transitionOut){
+            gl.glColor4d(/*traninc2/100.0*/1, /*traninc2/100.0*/1, /*traninc2/100.0*/1, traninc/50.0);
+
+            ographics.getGraphic("black").bind();
+
+            gl.glPushMatrix();
+
+                gl.glBegin(GL.GL_POLYGON);
+
+                    gl.glTexCoord2d(0.0, 0.0);
+                    gl.glVertex2d(0.0, 0.0);
+
+                    gl.glTexCoord2d(0.0, 1.0);
+                    gl.glVertex2d(0.0, 1.0);
+
+                    gl.glTexCoord2d(1.0, 1.0);
+                    gl.glVertex2d(1.0, 1.0);
+
+                    gl.glTexCoord2d(1.0, 0.0);
+                    gl.glVertex2d(1.0, 0.0);
+
+                 gl.glEnd();
+
+            gl.glPopMatrix();
+
+            if(traninc == 50){
+                superBlack = true;
+                transitionOut = false;
+            }
+            traninc+=1;
+
+            gl.glColor3d(1.0, 1.0, 1.0);
+        }
+
+        if(transitionIn){
+            gl.glColor4d(/*traninc2/100.0*/1, /*traninc2/100.0*/1, /*traninc2/100.0*/1, traninc2/50.0);
+
+            ographics.getGraphic("black").bind();
+
+            gl.glPushMatrix();
+
+                gl.glBegin(GL.GL_POLYGON);
+
+                    gl.glTexCoord2d(0.0, 0.0);
+                    gl.glVertex2d(0.0, 0.0);
+
+                    gl.glTexCoord2d(0.0, 1.0);
+                    gl.glVertex2d(0.0, 1.0);
+
+                    gl.glTexCoord2d(1.0, 1.0);
+                    gl.glVertex2d(1.0, 1.0);
+
+                    gl.glTexCoord2d(1.0, 0.0);
+                    gl.glVertex2d(1.0, 0.0);
+
+                 gl.glEnd();
+
+            gl.glPopMatrix();
+
+            if(traninc2 == 0){
+                transitionIn = false;
+            }
+            traninc2-=1;
+
+            gl.glColor3d(1.0, 1.0, 1.0);
+        }
+
     }
     
     void setNewFRImage(String loc)

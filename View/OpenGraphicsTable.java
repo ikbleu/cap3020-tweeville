@@ -69,8 +69,9 @@ public class OpenGraphicsTable {
             graphics.put( "Fire10", fire);
 
             graphics.put( "SplashScreen", TextureIO.newTexture(ImageIO.read(new File("Images/SplashScreen.png")), true));
+            graphics.put( "black", TextureIO.newTexture(ImageIO.read(new File("Images/BlackImage.png")), true));
             
-            graphics.put( "map1", TextureIO.newTexture(ImageIO.read(new File("Images/TestMap/NW.png")), true));
+            /*graphics.put( "map1", TextureIO.newTexture(ImageIO.read(new File("Images/TestMap/NW.png")), true));
             graphics.put( "map2", TextureIO.newTexture(ImageIO.read(new File("Images/TestMap/N.png")), true));
             graphics.put( "map3", TextureIO.newTexture(ImageIO.read(new File("Images/TestMap/NE.png")), true));
             graphics.put( "map4", TextureIO.newTexture(ImageIO.read(new File("Images/TestMap/W.png")), true));
@@ -78,7 +79,7 @@ public class OpenGraphicsTable {
             graphics.put( "map6", TextureIO.newTexture(ImageIO.read(new File("Images/TestMap/E.png")), true));
             graphics.put( "map7", TextureIO.newTexture(ImageIO.read(new File("Images/TestMap/SW.png")), true));
             graphics.put( "map8", TextureIO.newTexture(ImageIO.read(new File("Images/TestMap/S.png")), true));
-            graphics.put( "map9", TextureIO.newTexture(ImageIO.read(new File("Images/TestMap/SE.png")), true));
+            graphics.put( "map9", TextureIO.newTexture(ImageIO.read(new File("Images/TestMap/SE.png")), true));*/
 
             graphics.put( "corridor1", TextureIO.newTexture(ImageIO.read(new File("Images/Corridor/NW.png")), true));
             graphics.put( "corridor2", TextureIO.newTexture(ImageIO.read(new File("Images/Corridor/N.png")), true));
@@ -89,6 +90,16 @@ public class OpenGraphicsTable {
             graphics.put( "corridor7", TextureIO.newTexture(ImageIO.read(new File("Images/Corridor/SW.png")), true));
             graphics.put( "corridor8", TextureIO.newTexture(ImageIO.read(new File("Images/Corridor/S.png")), true));
             graphics.put( "corridor9", TextureIO.newTexture(ImageIO.read(new File("Images/Corridor/SE.png")), true));
+
+            graphics.put( "library1", TextureIO.newTexture(ImageIO.read(new File("Images/Library/NW.png")), true));
+            graphics.put( "library2", TextureIO.newTexture(ImageIO.read(new File("Images/Library/N.png")), true));
+            graphics.put( "library3", TextureIO.newTexture(ImageIO.read(new File("Images/Library/NE.png")), true));
+            graphics.put( "library4", TextureIO.newTexture(ImageIO.read(new File("Images/Library/W.png")), true));
+            graphics.put( "library5", TextureIO.newTexture(ImageIO.read(new File("Images/Library/Center.png")), true));
+            graphics.put( "library6", TextureIO.newTexture(ImageIO.read(new File("Images/Library/E.png")), true));
+            graphics.put( "library7", TextureIO.newTexture(ImageIO.read(new File("Images/Library/SW.png")), true));
+            graphics.put( "library8", TextureIO.newTexture(ImageIO.read(new File("Images/Library/S.png")), true));
+            graphics.put( "library9", TextureIO.newTexture(ImageIO.read(new File("Images/Library/SE.png")), true));
 
             graphics.put( "Nast01", TextureIO.newTexture(ImageIO.read(new File("Images/Nast01.png")), true));
             graphics.put( "Nast02", TextureIO.newTexture(ImageIO.read(new File("Images/Nast02.png")), true));
@@ -111,6 +122,17 @@ public class OpenGraphicsTable {
             graphics.put( "Gunderson08", TextureIO.newTexture(ImageIO.read(new File("Images/Gunderson08.png")), true));
             graphics.put( "Gunderson09", TextureIO.newTexture(ImageIO.read(new File("Images/Gunderson09.png")), true));
             graphics.put( "Gunderson10", TextureIO.newTexture(ImageIO.read(new File("Images/Gunderson10.png")), true));
+
+            graphics.put( "Toi01", TextureIO.newTexture(ImageIO.read(new File("Images/Toi01.png")), true));
+            graphics.put( "Toi02", TextureIO.newTexture(ImageIO.read(new File("Images/Toi02.png")), true));
+            graphics.put( "Toi03", TextureIO.newTexture(ImageIO.read(new File("Images/Toi03.png")), true));
+            graphics.put( "Toi04", TextureIO.newTexture(ImageIO.read(new File("Images/Toi04.png")), true));
+            graphics.put( "Toi05", TextureIO.newTexture(ImageIO.read(new File("Images/Toi05.png")), true));
+            graphics.put( "Toi06", TextureIO.newTexture(ImageIO.read(new File("Images/Toi06.png")), true));
+            graphics.put( "Toi08", TextureIO.newTexture(ImageIO.read(new File("Images/Toi07.png")), true));
+            graphics.put( "Toi07", TextureIO.newTexture(ImageIO.read(new File("Images/Toi08.png")), true));
+            graphics.put( "Toi10", TextureIO.newTexture(ImageIO.read(new File("Images/Toi09.png")), true));
+            graphics.put( "Toi09", TextureIO.newTexture(ImageIO.read(new File("Images/Toi10.png")), true));
 
 
         }
