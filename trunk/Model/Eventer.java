@@ -40,7 +40,6 @@ public class Eventer implements Tickable{
                 else if(type.equals("dialogue")){
                     String fName = s.next();
                     events.add(new Dialogue(fName));
-                    System.out.println("HIHI");
                 }
             }
 
@@ -52,13 +51,16 @@ public class Eventer implements Tickable{
 
         currIndex = 0;
         curr = events.get(0);
-        if(curr instanceof Dialogue){
+        /*if(curr instanceof Dialogue){
             m.setMode(ModeType.DIALOGUE);
-        }
+        }*/
     }
 
     void start(){
         m.register(this);
+        if(curr instanceof Dialogue){
+            m.setMode(ModeType.DIALOGUE);
+        }
     }
 
 

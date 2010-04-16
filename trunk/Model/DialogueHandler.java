@@ -73,13 +73,6 @@ class DialogueHandler {
             currPart = 0;
             choice = 0;
 
-            System.out.println("Dialogue test!");
-            for(int i = 0; i < dialogues.size(); ++i){
-                System.out.println("Dialogue 1");
-                for(int j = 0; j < dialogues.get(i).size(); ++j){
-                    System.out.println(dialogues.get(i).get(j));
-                }
-            }
 
         }
         catch(Exception c){
