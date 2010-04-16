@@ -117,7 +117,7 @@ class BattleScreenViewPort extends SpecialImage
 	// drawing the BattleScreen's background (the border around the BattleScreenViewPort's)
 	//drawMe( gl, ographics.getGraphic( "BattleViewPort" ), 0, 0 );
 
-        specdrawMe(gl, ographics.getGraphic("BattleViewPort"), (float)((0-currChar.getLocation().getX())/(float)wid), (float)((0-currChar.getLocation().getY())/(float)hei));
+        specdrawMe(gl, ographics.getGraphic(mapName), (float)((0-currChar.getLocation().getX())/(float)wid), (float)((0-currChar.getLocation().getY())/(float)hei));
 
 	// drawing Nastie
 	//drawMe( gl, ographics.getGraphic( "NastieS" ), (((float)(units.get(0).getLocation().getX()))/((float)wid)), (((float)(units.get(0).getLocation().getY()))/((float)hei)));

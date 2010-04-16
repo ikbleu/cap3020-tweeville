@@ -1,11 +1,11 @@
-good Gunderson 500 400 58 90
-good Gunderson 500 500 42 100
-good Gunderson 500 600 58 90
-enemy Nast 600 600 42 100
+good Nast 200 400 58 90
+good Gunderson 200 500 58 90
+good Toi 200 600 58 90
+enemy Corn 600 350 80 81
 damage Fire 700 400 70 70
 damage Fire2 810 450 70 70
 damage Fire3 920 500 70 70
-event ConfigFiles/BattleEvent.txt
+event ConfigFiles/FireEvent.txt
 event ConfigFiles/FireEvent2.txt
 event ConfigFiles/FireEvent3.txt
 event ConfigFiles/NastEvent.txt

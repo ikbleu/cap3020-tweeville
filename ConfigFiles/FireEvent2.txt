@@ -1,2 +1,3 @@
 move Fire2 810 650
 move Fire2 810 200
+move Fire2 1000 450

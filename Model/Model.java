@@ -35,7 +35,6 @@ public class Model implements ViewHelper, LeashedModel{
         mode = ModeType.FREEROAM;
         freeRoamModelInfo = new File ("ConfigFiles/LibraryInput.txt");
         freeRoamModelMap = new File ("Images/LibraryColorMap.png");
-        //battleModel = new BattleModel(battleModelFight, battleModelMap);
         freeRoamModel = new FreeRoamModel(freeRoamModelInfo, freeRoamModelMap, this);
         dia = false;
         clock = new Clock(60);

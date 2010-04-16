@@ -30,6 +30,10 @@ class StatusAnimator {
             staTrans.put( UnitStatus.WWEST, "08");
             staTrans.put( UnitStatus.SEAST, "09");
             staTrans.put( UnitStatus.WEAST, "10");
+            staTrans.put( UnitStatus.AEAST, "11");
+            staTrans.put( UnitStatus.AWEST, "12");
+            staTrans.put( UnitStatus.ANORTH, "13");
+            staTrans.put( UnitStatus.ASOUTH, "14");
             
         }
         catch(Exception e){

@@ -54,7 +54,6 @@ public class FightModel implements Tickable{
         }
         while(s.hasNext()){
             String type = s.next();
-            System.out.println(type);
             if(type.equals("good")){
                 String name = s.next();
                 int locX = s.nextInt();
@@ -144,7 +143,6 @@ public class FightModel implements Tickable{
         for(int i = 0; i < enemy.size(); ++i){
             if(enemy.get(i).attackDistance(cax, cay)){
                 enemy.get(i).hp -= 5;
-                System.out.println(enemy.get(i).name + ": " + enemy.get(i).hp );
             }
         }
     }
@@ -170,13 +168,16 @@ public class FightModel implements Tickable{
 
         ++damageTime;
 
-        if(damageTime >= 5){
+        ArrayList<Character> no = new ArrayList<Character>();
+        no.addAll(damage);
+        no.addAll(enemy);
+
+        if(damageTime >= 2){
             damageTime = 0;
-            for(int j = 0; j < damage.size(); ++j ){
+            for(int j = 0; j < no.size(); ++j ){
                 for(int i = 0; i < good.size(); ++i){
-                    if(damage.get(j).talkDistance(good.get(i).centerX, good.get(i).centerY)){
+                    if(no.get(j).talkDistance(good.get(i).centerX, good.get(i).centerY)){
                         good.get(i).hp--;
-                        System.out.println(good.get(i).name + ": " + good.get(i).hp );
                     }
                 }
             }
@@ -195,8 +196,6 @@ public class FightModel implements Tickable{
             if(good.size() == 0){
                 model.view.transitionOut();
                 endWaiting = true;
-                //model.unregister(this);
-                //model.setMode(ModeType.FREEROAM);
             }
             if(removeIf.get(i) == currentChar){
                swapChar();
@@ -231,25 +230,27 @@ public class FightModel implements Tickable{
         if(good.size()!=0){
             for(int i = 0; i < good.size() ; ++ i){
                 if(i!= currCharIndex){
-                    double x1 = good.get(i).centerX;
-                    double x2 = good.get(currCharIndex).centerX;
-                    double y1 = good.get(i).centerY;
-                    double y2 = good.get(currCharIndex).centerY;
-                    boolean moved = false;
-                    if ( Math.abs(x1 - x2) > Math.abs(y1 - y2)){
-                        if(x1 < x2){
-                            moved = good.get(i).move(DirectionType.EAST, yes, good, currentChar, false);
+                    if(currCharIndex >= 0 && currCharIndex < good.size()){
+                        double x1 = good.get(i).centerX;
+                        double x2 = good.get(currCharIndex).centerX;
+                        double y1 = good.get(i).centerY;
+                        double y2 = good.get(currCharIndex).centerY;
+                        boolean moved = false;
+                        if ( Math.abs(x1 - x2) > Math.abs(y1 - y2)){
+                            if(x1 < x2){
+                                moved = good.get(i).move(DirectionType.EAST, yes, good, currentChar, false);
+                            }
+                            else{
+                                moved = good.get(i).move(DirectionType.WEST, yes, good, currentChar, false);
+                            }
                         }
-                        else{
-                            moved = good.get(i).move(DirectionType.WEST, yes, good, currentChar, false);
-                        }
-                    }
-                    if(!moved){
-                        if(y1 < y2){
-                            moved = good.get(i).move(DirectionType.SOUTH, yes, good, currentChar, false);
-                        }
-                        else{
-                            moved = good.get(i).move(DirectionType.NORTH, yes, good, currentChar, false);
+                        if(!moved){
+                            if(y1 < y2){
+                                moved = good.get(i).move(DirectionType.SOUTH, yes, good, currentChar, false);
+                            }
+                            else{
+                                moved = good.get(i).move(DirectionType.NORTH, yes, good, currentChar, false);
+                            }
                         }
                     }
                 }
@@ -269,10 +270,8 @@ public class FightModel implements Tickable{
         ArrayList<Character> yes = new ArrayList<Character>();
         yes.addAll(enemy);
         yes.addAll(damage);
-        System.out.println("StC");
         for(int i = 0; i < yes.size();++i){
             if(yes.get(i).name.equals(name)){
-                System.out.println(name);
                 return yes.get(i);
             }
         }

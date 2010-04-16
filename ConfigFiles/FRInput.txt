@@ -1,9 +1,8 @@
-human Gunderson 1197 1796 58 90
-human Nast 1197 1800 42 100
-human Toi 1197 1800 58 90
+human Gunderson 1197 1630 58 90
+human Nast 1197 1630 42 100
+human Toi 1197 1630 58 90
 npc Nast 2000 1400 42 100
 dialogue Nast ConfigFiles/DialogueTest.txt
-trigger 1200 1300 1550 1650 FreeRoam ConfigFiles/FRInput.txt Images/2ndFloorCorWalk.PNG corridor
-trigger 2000 2100 1100 1200 Event ConfigFiles/EventTest.txt None None
-trigger 1800 2300 1500 2000 Battle ConfigFiles/BattleInput.txt Images/BattleScreenColorMap.png battle
+trigger 1120 1220 1700 1800 FreeRoam ConfigFiles/LibraryInput2.txt Images/LibraryColorMap.png library
+trigger 1800 2300 1500 2000 Battle ConfigFiles/BattleInput.txt Images/BattleArenaWalk.png BattleArena
 
