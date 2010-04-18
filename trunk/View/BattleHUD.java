@@ -13,18 +13,59 @@ import java.awt.geom.Line2D;
 import java.awt.BasicStroke;
 
 import Model.ViewHelper;
+
+import java.util.List;
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import javax.media.opengl.GL;
+import javax.media.opengl.GLAutoDrawable;
+import javax.media.opengl.GLCanvas;
+import javax.media.opengl.GLCapabilities;
+import javax.media.opengl.GLEventListener;
+import javax.media.opengl.GLException;
+import javax.media.opengl.GLContext;
+import javax.media.opengl.GLDrawableFactory;
+import javax.swing.JFrame;
+import com.sun.opengl.util.FPSAnimator;
+import com.sun.opengl.util.ImageUtil;
+import com.sun.opengl.util.texture.Texture;
+import com.sun.opengl.util.texture.TextureIO;
+import com.sun.opengl.util.j2d.TextRenderer;
+import javax.media.opengl.GLAutoDrawable;
+
+import Model.Viewable;
+import java.util.LinkedList;
+import java.util.Collections;
+import Model.Character;
+import Model.UnitStatus;
+
+import Model.ViewHelper;
 /**
  *
  * @author spock
  */
 
 // The Elmer Fudd Hud.
-class BattleHUD extends SpecialImage {
+class BattleHUD extends SpecialImage
+{
     final static int WIDTH = 830;
     final static int HEIGHT = 115;
     Graphics2D g2 = null;
     RenderingHints hint = null;
     Font font;
+
+
+    int nastHP = 100;
+    int gundHP = 100;
+    int toitHP = 100;
+
+    GL gl;
+    int wid;
+    int hei;
+    int iwid;
+    int ihei;
 
     int health[] = { 100, 100, 100 };
     int melee[] = { 100, 100, 100 };
@@ -37,8 +78,14 @@ class BattleHUD extends SpecialImage {
 
     private ViewHelper model;
 
-    BattleHUD( ViewHelper model ){
+    BattleHUD( ViewHelper model, GL gl, int wid, int hei, int iwid, int ihei )
+    {
 	this.model = model;
+	this.gl = gl;
+	this.wid = wid;
+	this.hei = hei;
+	this.iwid = iwid;
+	this.ihei = ihei;
 
         imageBuffer = new BufferedImage( WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB );
         g2 = imageBuffer.createGraphics();
@@ -51,6 +98,151 @@ class BattleHUD extends SpecialImage {
             lines[i] = new Line2D.Double();
         }
         refreshImage();
+    }
+
+    void render( GLAutoDrawable drawable, TextRenderer textRenderer )
+    {
+		// hud bg
+	drawMe( gl, ographics.getGraphic( "BattleHUDBackground" ), 0.1875f, 0.8575f );
+
+    // left HUD section
+    // ------------------------------------------------------------------------
+
+	gl.glLineWidth(10.0f);
+
+	// character picture: left section
+	drawMe( gl, ographics.getGraphic( "TestHUD" ), 0.203125f, 0.87875f );
+
+	// HP bar capsule: left section
+	drawMe( gl, ographics.getGraphic( "BattleHUDBarCapsule" ), 0.2801125f, 0.90875f );
+
+	//
+
+	//charname +=
+	// go into model, change accessor to public if needed
+	List<Character> characters = model.getUnits();
+
+
+	for( int i = 0; i < characters.size(); ++i )
+	{
+	    if( characters.get(i).name.equals( "Nast" ))
+	    {
+		nastHP = characters.get(i).hp;
+	    }
+	    else if( characters.get(i).name.equals( "Gunderson" ))
+	    {
+		gundHP = characters.get(i).hp;
+	    }
+	    else if( characters.get(i).name.equals( "Toi"))
+	    {
+		toitHP = characters.get(i).hp;
+	    }
+	}
+
+	// drawing HP bar: left section
+	gl.glColor3f(0.0f, 0.75f, 0.0f);
+	gl.glPushMatrix();
+	gl.glBegin(GL.GL_LINES);
+	gl.glVertex2f(0.284375f, 0.91875f); //added .01 to line width
+	gl.glVertex2f(0.388906f - (float)((100 - nastHP)*0.00104531f), 0.91875f); //.000104531 increments
+	gl.glEnd();
+	gl.glPopMatrix();
+	gl.glColor3f(1.0f, 1.0f, 1.0f);
+
+	// HP bar capsule overlay: left section
+	drawMe( gl, ographics.getGraphic( "BattleBarCapsuleOverlay" ), 0.284375f, 0.911736f );
+
+	// drawing MC bar: left section
+	gl.glColor3f(0.0f, 0.75f, 0.0f);
+	gl.glPushMatrix();
+	gl.glBegin(GL.GL_LINES);
+	gl.glVertex2f(0.284375f, 0.9425f); //added .01 to line width
+	gl.glVertex2f(0.388906f, 0.9425f);
+	gl.glEnd();
+	gl.glPopMatrix();
+	gl.glColor3f(1.0f, 1.0f, 1.0f);
+
+	// drawing RC bar: left section
+	gl.glColor3f(0.0f, 0.75f, 0.0f);
+	gl.glPushMatrix();
+	gl.glBegin(GL.GL_LINES);
+	gl.glVertex2f(0.284375f, 0.96625f); //added .01 to line width
+	gl.glVertex2f(0.388906f, 0.96625f);
+	gl.glEnd();
+	gl.glPopMatrix();
+	gl.glColor3f(1.0f, 1.0f, 1.0f);
+
+	// middle hud picture
+	drawMe( gl, ographics.getGraphic( "TestHUD" ), 0.40859375f, 0.87875f );
+
+	// drawing HP bar: middle section
+	gl.glColor3f(0.75f, 0.0f, 0.0f);
+	gl.glPushMatrix();
+	gl.glBegin(GL.GL_LINES);
+	gl.glVertex2f(0.284375f + 0.264f, 0.91875f); //added .01 to line width
+	gl.glVertex2f(0.388906f + 0.264f - (float)(((float)(100 - gundHP))*0.00104531f), 0.91875f);
+	gl.glEnd();
+	gl.glPopMatrix();
+	gl.glColor3f(1.0f, 1.0f, 1.0f);
+
+	// HP bar capsule overlay: middle section
+	drawMe( gl, ographics.getGraphic( "BattleBarCapsuleOverlay" ), 0.284375f, 0.911736f );
+
+	// drawing MC bar: middle section
+	gl.glColor3f(0.75f, 0.0f, 0.0f);
+	gl.glPushMatrix();
+	gl.glBegin(GL.GL_LINES);
+	gl.glVertex2f(0.284375f + 0.264f, 0.9425f); //added .01 to line width
+	gl.glVertex2f(0.388906f + 0.264f, 0.9425f);
+	gl.glEnd();
+	gl.glPopMatrix();
+	gl.glColor3f(1.0f, 1.0f, 1.0f);
+
+	// drawing RC bar: middle section
+	gl.glColor3f(0.75f, 0.0f, 0.0f);
+	gl.glPushMatrix();
+	gl.glBegin(GL.GL_LINES);
+	gl.glVertex2f(0.284375f + 0.264f, 0.96625f); //added .01 to line width
+	gl.glVertex2f(0.388906f + 0.264f, 0.96625f);
+	gl.glEnd();
+	gl.glPopMatrix();
+	gl.glColor3f(1.0f, 1.0f, 1.0f);
+
+	// far right hud picture
+	drawMe( gl, ographics.getGraphic( "TestHUD" ), 0.6140625f, 0.87875f );
+
+	// drawing HP bar: right section
+	gl.glColor3f(0.0f, 0.0f, 0.75f);
+	gl.glPushMatrix();
+	gl.glBegin(GL.GL_LINES);
+	gl.glVertex2f(0.284375f + 0.224f + 0.284f, 0.91875f); //added .01 to line width
+	gl.glVertex2f(0.388906f + 0.244f + 0.284f - (float)((100 - toitHP)*0.00124531f), 0.91875f);
+	gl.glEnd();
+	gl.glPopMatrix();
+	gl.glColor3f(1.0f, 1.0f, 1.0f);
+
+	// HP bar capsule overlay: right section
+	drawMe( gl, ographics.getGraphic( "BattleBarCapsuleOverlay" ), 0.284375f, 0.911736f );
+
+	// drawing MC bar: right section
+	gl.glColor3f(0.0f, 0.0f, 0.75f);
+	gl.glPushMatrix();
+	gl.glBegin(GL.GL_LINES);
+	gl.glVertex2f(0.284375f + 0.224f + 0.284f, 0.9425f); //added .01 to line width
+	gl.glVertex2f(0.388906f + 0.244f + 0.284f, 0.9425f);
+	gl.glEnd();
+	gl.glPopMatrix();
+	gl.glColor3f(1.0f, 1.0f, 1.0f);
+
+	// drawing RC bar: right section
+	gl.glColor3f(0.0f, 0.0f, 0.75f);
+	gl.glPushMatrix();
+	gl.glBegin(GL.GL_LINES);
+	gl.glVertex2f(0.284375f + 0.224f + 0.284f, 0.96625f); //added .01 to line width
+	gl.glVertex2f(0.388906f + 0.244f + 0.284f, 0.96625f);
+	gl.glEnd();
+	gl.glPopMatrix();
+	gl.glColor3f(1.0f, 1.0f, 1.0f);
     }
 
     void refreshImage(){

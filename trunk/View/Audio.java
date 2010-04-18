@@ -32,7 +32,7 @@ public class Audio implements Runnable{
         try{
             player.play();
             if(!player.isComplete()){
-                player.close();
+                //player.close();
                 return;
             }
         }
