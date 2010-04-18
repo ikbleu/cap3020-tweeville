@@ -146,6 +146,7 @@ class ScreenManager extends JFrame{
 
         animator = new FPSAnimator(canvas, 65);
 
+	this.setResizable( false );
         setVisible(true);
         this.validate();
     }
@@ -174,7 +175,7 @@ class ScreenManager extends JFrame{
 
     void startActionSound(){
 
-        actionThread = new Thread(action);
+        actionThread = new Thread(new Audio("Images/soundEffect.mp3"));
         actionThread.start();
     }
 
@@ -249,6 +250,7 @@ class ScreenManager extends JFrame{
             //renderBattleScreen(gl);
             if(currentMode == ModeType.BATTLE){
                 battleScreenViewPort.render( drawable, textRenderer );
+		battleHUD.render( drawable, textRenderer );
             }
             if(currentMode == ModeType.FREEROAM || currentMode == ModeType.CUTSCENE){
                 freeRoamScreenViewPort.render( drawable, textRenderer, false );
@@ -301,6 +303,7 @@ class ScreenManager extends JFrame{
                 battleScreenViewPort = new BattleScreenViewPort(model, gl, dfWidth, dfHeight);
                 freeRoamScreenViewPort = new FreeRoamScreenViewPort(model, gl, dfWidth, dfHeight, 1280, 800);
 		splashScreen = new SplashScreen( model, gl, dfWidth, dfHeight );
+		battleHUD = new BattleHUD( model, gl, dfWidth, dfHeight, 1280, 800);
 
                 audioThread = new Thread(new Audio(battleMusic));
 
