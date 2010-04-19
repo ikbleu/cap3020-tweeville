@@ -1,0 +1,13 @@
+human Gunderson 1157 1630 58 90
+human Nast 1177 1630 42 100
+human Toi 1197 1630 58 90
+
+trigger 387 463 1227 1419 EventS ConfigFiles/DoorEvent.txt None None
+trigger 2445 2616 1881 1944 EventS ConfigFiles/DoorEvent.txt None None
+trigger 1740 1998 1999 2073 EventS ConfigFiles/DoorEvent.txt None None
+trigger 1797 1927 1177 1224 EventS ConfigFiles/ThroneDoorEvent.txt None None
+
+trigger 1110 1280 1890 1930 FreeRoam ConfigFiles/LibraryInput3.txt Images/LibraryColorMap.png library
+trigger 3250 3330 1250 1410 FreeRoam ConfigFiles/NastLab2.txt Images/2ndFloorNastRoomWalk.png lab
+trigger 2378 2622 1452 1690 Battle ConfigFiles/BattleInput.txt Images/BattleArenaWalk.png BattleArena
+trigger 1300 1564 1078 1356 Battle ConfigFiles/BattleInput.txt Images/BattleArenaWalk.png BattleArena

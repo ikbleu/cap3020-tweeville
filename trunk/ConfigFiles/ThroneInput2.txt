@@ -1,0 +1,9 @@
+human Gunderson 1950 2130 58 90
+human Nast 1930 2160 42 100
+human Toi 1970 2190 55 110
+npc King 1950 200 47 115
+dialogue King ConfigFiles/KingDialogue.txt
+trigger 1800 2150 2300 2370 FreeRoam ConfigFiles/FRInput2.txt Images/2ndFloorCorWalk.PNG corridor
+trigger 1972 2238 742 916 Battle ConfigFiles/BattleInput.txt Images/BattleArenaWalk.png BattleArena
+trigger 2196 2436 1532 1878 Battle ConfigFiles/BattleInput.txt Images/BattleArenaWalk.png BattleArena
+trigger 1076 1174 1036 1106 Battle ConfigFiles/BattleInput.txt Images/BattleArenaWalk.png BattleArena

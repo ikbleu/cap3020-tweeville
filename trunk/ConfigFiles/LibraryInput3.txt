@@ -1,0 +1,11 @@
+human Gunderson 1720 330 58 90
+human Nast 1740 340 42 100
+human Toi 1730 350 55 110
+npc NPC 1313 949 42 110
+
+dialogue NPC ConfigFiles/NPCDialogue2.txt
+
+trigger 1700 1791 2176 2231 EventS ConfigFiles/DoorEvent.txt None None
+trigger 2920 3000 1670 1785 EventS ConfigFiles/EastDoorEvent.txt None None
+trigger 1120 1220 420 510 EventS ConfigFiles/OldHagDoorEvent.txt None None
+trigger 1695 1792 231 275 FreeRoam ConfigFiles/FRInput4.txt Images/2ndFloorCorWalk.PNG corridor

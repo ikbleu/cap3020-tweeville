@@ -1,2 +1,2 @@
-- The door is locked. :::
-- dom dom dom... :::
+- The door is firmly locked. :::
+- Dom dom dom... :::

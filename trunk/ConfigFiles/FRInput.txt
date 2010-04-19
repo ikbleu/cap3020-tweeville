@@ -1,8 +1,20 @@
-human Gunderson 1197 1630 58 90
-human Nast 1197 1630 42 100
+human Gunderson 1157 1630 58 90
+human Nast 1177 1630 42 100
 human Toi 1197 1630 58 90
-npc Nast 2000 1400 42 100
-dialogue Nast ConfigFiles/DialogueTest.txt
-trigger 1120 1220 1700 1800 FreeRoam ConfigFiles/LibraryInput2.txt Images/LibraryColorMap.png library
-trigger 1800 2300 1500 2000 Battle ConfigFiles/BattleInput.txt Images/BattleArenaWalk.png BattleArena
+npc Guard1 1757 1130 46 120
+npc Guard2 1927 1130 46 120
 
+dialogue Nast ConfigFiles/DialogueTest.txt
+dialogue Guard1 ConfigFiles/GuardDialogue.txt
+dialogue Guard2 ConfigFiles/GuardDialogue.txt
+
+trigger 387 463 1227 1419 EventS ConfigFiles/LeftDoorEvent.txt None None
+trigger 3255 3330 1239 1416 EventS ConfigFiles/RightDoorEvent.txt None None
+trigger 2445 2616 1881 1944 EventS ConfigFiles/DoorEvent.txt None None
+trigger 1740 1998 1999 2073 EventS ConfigFiles/DoorEvent.txt None None
+
+trigger 1726 2002 1177 1318 Event ConfigFiles/GuardEvent.txt None None
+trigger 1110 1280 1890 1930 FreeRoam ConfigFiles/LibraryInput2.txt Images/LibraryColorMap.png library
+trigger 1800 1930 1180 1220 FreeRoam ConfigFiles/ThroneInput1.txt Images/2ndFloorThroneWalk.png throne
+trigger 1800 2300 1500 2000 Battle ConfigFiles/BattleInput.txt Images/BattleArenaWalk.png BattleArena
+trigger 750 1030 1100 1340 Battle ConfigFiles/BattleInput.txt Images/BattleArenaWalk.png BattleArena
