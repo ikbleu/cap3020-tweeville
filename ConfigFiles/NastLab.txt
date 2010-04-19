@@ -1,0 +1,8 @@
+human Gunderson 1620 1200 58 90
+human Nast 1640 1230 42 100
+human Toi 1620 1260 58 90
+npc Squal 2198 1000 50 48
+
+dialogue Squal ConfigFiles/SqualDialogue.txt
+trigger 2149 2439 1096 1200 Event ConfigFiles/SqualEvent.txt None None
+trigger 1395 1465 1220 1315 FreeRoam ConfigFiles/FRInput3.txt Images/2ndFloorCorWalk.PNG corridor

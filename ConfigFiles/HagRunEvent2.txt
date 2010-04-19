@@ -1,0 +1,3 @@
+dialogue ConfigFiles/KingHagSpeech.txt
+move Hag 1950 1100
+remove Hag

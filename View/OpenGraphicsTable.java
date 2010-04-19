@@ -121,7 +121,31 @@ public class OpenGraphicsTable {
             graphics.put( "library8", TextureIO.newTexture(ImageIO.read(new File("Images/Library/S.png")), true));
             graphics.put( "library9", TextureIO.newTexture(ImageIO.read(new File("Images/Library/SE.png")), true));
 
+            graphics.put( "throne1", TextureIO.newTexture(ImageIO.read(new File("Images/2ndFloorThroneRoom/NW.png")), true));
+            graphics.put( "throne2", TextureIO.newTexture(ImageIO.read(new File("Images/2ndFloorThroneRoom/N.png")), true));
+            graphics.put( "throne3", TextureIO.newTexture(ImageIO.read(new File("Images/2ndFloorThroneRoom/NE.png")), true));
+            graphics.put( "throne4", TextureIO.newTexture(ImageIO.read(new File("Images/2ndFloorThroneRoom/W.png")), true));
+            graphics.put( "throne5", TextureIO.newTexture(ImageIO.read(new File("Images/2ndFloorThroneRoom/Center.png")), true));
+            graphics.put( "throne6", TextureIO.newTexture(ImageIO.read(new File("Images/2ndFloorThroneRoom/E.png")), true));
+            graphics.put( "throne7", TextureIO.newTexture(ImageIO.read(new File("Images/2ndFloorThroneRoom/SW.png")), true));
+            graphics.put( "throne8", TextureIO.newTexture(ImageIO.read(new File("Images/2ndFloorThroneRoom/S.png")), true));
+            graphics.put( "throne9", TextureIO.newTexture(ImageIO.read(new File("Images/2ndFloorThroneRoom/SE.png")), true));
+
+            graphics.put( "lab1", TextureIO.newTexture(ImageIO.read(new File("Images/2ndFloorNastRoom/NW.png")), true));
+            graphics.put( "lab2", TextureIO.newTexture(ImageIO.read(new File("Images/2ndFloorNastRoom/N.png")), true));
+            graphics.put( "lab3", TextureIO.newTexture(ImageIO.read(new File("Images/2ndFloorNastRoom/NE.png")), true));
+            graphics.put( "lab4", TextureIO.newTexture(ImageIO.read(new File("Images/2ndFloorNastRoom/W.png")), true));
+            graphics.put( "lab5", TextureIO.newTexture(ImageIO.read(new File("Images/2ndFloorNastRoom/Center.png")), true));
+            graphics.put( "lab6", TextureIO.newTexture(ImageIO.read(new File("Images/2ndFloorNastRoom/E.png")), true));
+            graphics.put( "lab7", TextureIO.newTexture(ImageIO.read(new File("Images/2ndFloorNastRoom/SW.png")), true));
+            graphics.put( "lab8", TextureIO.newTexture(ImageIO.read(new File("Images/2ndFloorNastRoom/S.png")), true));
+            graphics.put( "lab9", TextureIO.newTexture(ImageIO.read(new File("Images/2ndFloorNastRoom/SE.png")), true));
+
             graphics.put( "NPC01", TextureIO.newTexture(ImageIO.read(new File("Images/NPC01.png")), true));
+            graphics.put( "Guard101", TextureIO.newTexture(ImageIO.read(new File("Images/NPC02.png")), true));
+            graphics.put( "Guard201", TextureIO.newTexture(ImageIO.read(new File("Images/NPC03.png")), true));
+            graphics.put( "King01", TextureIO.newTexture(ImageIO.read(new File("Images/King.png")), true));
+            graphics.put( "Squal01", TextureIO.newTexture(ImageIO.read(new File("Images/Squal.png")), true));
 
             graphics.put( "Nast01", TextureIO.newTexture(ImageIO.read(new File("Images/Nast01.png")), true));
             graphics.put( "Nast02", TextureIO.newTexture(ImageIO.read(new File("Images/Nast02.png")), true));
